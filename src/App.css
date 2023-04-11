@@ -1,0 +1,367 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Damion&display=swap');
+
+.App {
+  position: relative;
+  display: flex;
+  height: 100vh;
+}
+
+video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.typewriter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.desctypewriter {
+  position: absolute;
+  text-align: justify;
+  animation: fadeIn 0.5s forwards;
+  margin-top: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
+  z-index: 3;
+}
+
+.desctypewriterskills {
+  position: absolute;
+  text-align: justify;
+  animation: fadeIn 0.5s forwards;
+  margin-top: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 45%;
+  z-index: 3;
+}
+
+.cursor {
+  animation: blink 0.5s infinite;
+  color: #fff;
+  font-weight: normal;
+  font-family: 'Poppins';
+}
+
+.lines2 {
+  align-self: center;
+  width: 90%;
+  border-radius: 50px;
+  left: 5%;
+  height: 4px;
+  background: linear-gradient(90deg, rgb(64 64 64 / 42%) 12%, rgb(26 26 26 / 77%) 50%, rgb(64 64 64 / 42%) 84%);
+  color: darkgrey;
+  position: absolute;
+  opacity: 0;
+  top: 85%;
+}
+
+.lines1 {
+  align-self: center;
+  width: 90%;
+  border-radius: 50px;
+  left: 5%;
+  height: 4px;
+  background: linear-gradient(90deg, rgb(64 64 64 / 42%) 12%, rgb(26 26 26 / 77%) 50%, rgb(64 64 64 / 42%) 84%);
+  color: darkgrey;
+  position: absolute;
+  opacity: 0;
+  top: 17%;
+}
+
+.csharp {
+  display: flex;
+  text-align: left;
+  position: absolute;
+  align-self: center;
+  width: 35%;
+  border-radius: 50px;
+  left: 61%;
+  height: 3px;
+  background: linear-gradient(90deg, rgb(155 155 155 / 64%) 30%, rgba(0, 0, 128, 0.95) 39%);
+  animation: fadeIn 0.5s forwards;
+  opacity: 1;
+  top: 46%;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+}
+
+.htmlcss {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  position: absolute;
+  align-self: center;
+  width: 35%;
+  border-radius: 50px;
+  left: 61%;
+  height: 3px;
+  background: linear-gradient(90deg, rgb(155 155 155 / 64%) 15%, rgba(197, 107, 22, 0.95) 20%);
+  animation: fadeIn 0.5s forwards;
+  opacity: 1;
+  top: 39%;
+}
+
+.java {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  position: absolute;
+  align-self: center;
+  width: 35%;
+  border-radius: 50px;
+  left: 61%;
+  height: 3px;
+  background: linear-gradient(90deg, rgb(155 155 155 / 64%) 15%, rgba(184, 178, 11, 0.95) 20%);
+  animation: fadeIn 0.5s forwards;
+  opacity: 1;
+  top: 32%;
+}
+
+.python {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  position: absolute;
+  align-self: center;
+  width: 35%;
+  left: 61%;
+  height: 3px;
+  background: linear-gradient(90deg, rgb(155 155 155 / 64%) 1%, rgba(45, 194, 231, 0.95) 5%);
+  animation: fadeIn 0.5s forwards;
+  opacity: 1;
+  top: 25%;
+}
+
+h1 {
+  position: relative;
+  font-size: 2rem;
+  color: #fff;
+  font-weight: normal;
+  font-family: 'Poppins';
+  text-align: center;
+}
+
+.backbanner {
+  position: absolute;
+  align-self: center;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(180deg, rgb(58 58 58 / 0%) 0%, rgb(27 27 27 / 58%) 11%, rgba(14, 14, 14, 0.89) 50%, rgb(27 27 27 / 58%) 89%, rgb(59 59 59 / 0%) 100%);
+  backdrop-filter: blur(3px);
+  z-index: 1
+}
+
+.buttonscontainer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 9;
+}
+
+.backdropcontainer {
+  position: relative;
+  border: 0px solid rgba(0, 0, 0, 0.27);
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgb(12 12 12 / 99%) 12%, rgb(0 0 0 / 77%) 50%, rgb(12 12 12 / 99%) 84%);
+  backdrop-filter: blur(10px);
+  transition: transform 202ms ease-in-out;
+  font-weight: normal;
+  font-size: 18px;
+  font-family: 'Poppins';
+  text-align: center;
+  align-self: center;
+  color: white;
+  height: 0%;
+  width: 80%;
+  left: 10%;
+}
+
+.aboutmecontainer {
+  position: absolute;
+  animation: moveupdown 2.45s ease-in-out infinite;
+  height: 50px;
+  width: 314px;
+  opacity: 0%;
+  z-index: 10;
+}
+
+.projectscontainer {
+  position: absolute;
+  animation: moveupdown 2.5s ease-in-out infinite;
+  height: 50px;
+  width: 314px;
+  opacity: 0%;
+  z-index: 9;
+}
+
+.skillscontainer {
+  position: absolute;
+  animation: moveupdown 2.5s ease-in-out infinite;
+  height: 50px;
+  width: 314px;
+  opacity: 0%;
+  z-index: 9;
+}
+
+.contactcontainer {
+  position: absolute;
+  animation: moveupdown 2.5s ease-in-out infinite;
+  height: 50px;
+  width: 314px;
+  opacity: 0%;
+  z-index: 9;
+}
+
+/* ---------------------------------------------------------------- */
+
+.aboutmeswap {
+  position: absolute;
+  height: 50px;
+  width: 314px;
+  left: 42%;
+  top: 35%;
+}
+
+.projectsswap {
+  position: absolute;
+  height: 50px;
+  width: 314px;
+  left: 17%;
+  top: 55%;
+}
+
+.skillsswap {
+  position: absolute;
+  height: 50px;
+  width: 314px;
+  left: 42%;
+  top: 55%;
+}
+
+.contactswap {
+  position: absolute;
+  height: 50px;
+  width: 314px;
+  left: 67%;
+  top: 55%;
+}
+
+
+.projects {
+  position: relative;
+
+  border: 0px solid rgba(0, 0, 0, 0.27);
+  border-radius: 4px;
+  background: linear-gradient(45deg, rgba(173, 76, 144, 0.788) 12%, rgba(88, 56, 128, 0.582) 84%);
+  box-shadow: -2px 3px 6px 0px rgba(0, 0, 0, 1);
+  transition: transform 202ms ease-in-out;
+  font-weight: normal;
+  font-size: 30px;
+  font-family: 'Poppins';
+  letter-spacing: 4px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+}
+
+.aboutme {
+  position: relative;
+  border: 0px solid rgba(0, 0, 0, 0.27);
+  border-radius: 4px;
+  background: linear-gradient(45deg, rgba(145, 145, 145, 0.788) 12%, rgba(255, 255, 255, 0.233) 84%);
+  box-shadow: -2px 3px 6px 0px rgba(0, 0, 0, 1);
+  transition: transform 202ms ease-in-out;
+  font-weight: normal;
+  font-size: 30px;
+  font-family: 'Poppins';
+  letter-spacing: 4px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+}
+
+.skills {
+  position: relative;
+  border: 0px solid rgba(0, 0, 0, 0.27);
+  border-radius: 4px;
+  background: linear-gradient(45deg, rgba(173, 76, 144, 0.788) 12%, rgba(88, 56, 128, 0.582) 84%);
+  box-shadow: -2px 3px 6px 0px rgba(0, 0, 0, 1);
+  transition: transform 202ms ease-in-out;
+  font-weight: normal;
+  font-size: 30px;
+  font-family: 'Poppins';
+  letter-spacing: 4px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+}
+
+.contact {
+  position: relative;
+
+  border: 0px solid rgba(0, 0, 0, 0.27);
+  border-radius: 4px;
+  background: linear-gradient(45deg, rgba(173, 76, 144, 0.788) 12%, rgba(88, 56, 128, 0.582) 84%);
+  box-shadow: -2px 3px 6px 0px rgba(0, 0, 0, 1);
+  transition: transform 202ms ease-in-out;
+  font-weight: normal;
+  font-size: 30px;
+  font-family: 'Poppins';
+  letter-spacing: 4px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+}
+
+.red-cursor {
+  color: rgba(173, 173, 173, 0.637);
+  font-size: 35px;
+}
+
+.aboutme:hover,
+.projects:hover,
+.skills:hover,
+.contact:hover {
+  transform: translate(0px, -20px) scale(1.3, 1.3);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes moveupdown {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(9px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}

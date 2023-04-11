@@ -1,0 +1,10 @@
+{
+  version: 1,
+  mediaFileName: 'videoplayback.webm',
+  cutSegments: [
+    {
+      end: 516,
+      name: '',
+    },
+  ],
+}
