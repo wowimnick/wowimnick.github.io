@@ -9,17 +9,17 @@ export function swapElements(element1, element2) {
   anime({
     targets: element1,
     top: element2Position.top,
-    left: element2Position.left,
+    left: element2Position.left + 157,
     duration: 1000,
-    easing: 'easeInOutExpo'
+    easing: 'easeInOutExpo',
   });
 
   anime({
     targets: element2,
     top: element1Position.top,
-    left: element1Position.left,
+    left: element1Position.left + 157,
     duration: 1000,
-    easing: 'easeInOutExpo'
+    easing: 'easeInOutExpo',
   });
 }
 
@@ -36,20 +36,30 @@ export function onSelection(element2) {
       anime({
         targets: ".projectsswap",
         top: '10%',
-        left: '42%',
+        left: '50%',
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       anime({
         targets: ".aboutmeswap",
         top: '90%',
-        left: '17%',
+        left: '25%',
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       anime({
         targets: ".skillsswap",
@@ -57,7 +67,12 @@ export function onSelection(element2) {
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       anime({
         targets: ".contactswap",
@@ -65,7 +80,12 @@ export function onSelection(element2) {
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       break;
     case 'aboutmeswap':
@@ -75,7 +95,12 @@ export function onSelection(element2) {
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       anime({
         targets: ".projectsswap",
@@ -83,7 +108,12 @@ export function onSelection(element2) {
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       anime({
         targets: ".skillsswap",
@@ -91,7 +121,12 @@ export function onSelection(element2) {
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       anime({
         targets: ".contactswap",
@@ -99,7 +134,12 @@ export function onSelection(element2) {
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       break;
     case 'skillsswap':
@@ -107,20 +147,30 @@ export function onSelection(element2) {
       anime({
         targets: ".skillsswap",
         top: '10%',
-        left: '42%',
+        left: '50%',
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       anime({
         targets: ".aboutmeswap",
         top: '90%',
-        left: '42%',
+        left: '50%',
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       anime({
         targets: ".projectsswap",
@@ -128,7 +178,12 @@ export function onSelection(element2) {
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       anime({
         targets: ".contactswap",
@@ -136,27 +191,42 @@ export function onSelection(element2) {
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       break;
     case 'contactswap':
       anime({
         targets: ".contactswap",
         top: '10%',
-        left: '42%',
+        left: '50%',
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       anime({
         targets: ".aboutmeswap",
         top: '90%',
-        left: '67%',
+        left: '75%',
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       anime({
         targets: ".projectsswap",
@@ -164,7 +234,12 @@ export function onSelection(element2) {
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       anime({
         targets: ".skillsswap",
@@ -172,7 +247,12 @@ export function onSelection(element2) {
         easing: 'easeInOutExpo',
         duration: 1500,
         delay: 700,
-        complete: updateElementLocations
+        complete: function(anim) {
+          const element = anim.animatables[0].target;
+          const computedStyle = window.getComputedStyle(element);
+          element.style.left = computedStyle.getPropertyValue('left');
+          element.style.top = computedStyle.getPropertyValue('top');
+        }
       });
       break;
   }
@@ -233,7 +313,6 @@ export function runWriterAnimation() {
     easing: 'easeInOutExpo',
     duration: 1500,
     scale: 2,
-    complete: updateElementLocations
   });
 }
 export function runTopBarAnimation() {
@@ -243,7 +322,6 @@ export function runTopBarAnimation() {
     duration: 1500,
     easing: 'easeInOutExpo',
     height: '92.7%',
-    complete: updateElementLocations
   });
 }
 
@@ -251,9 +329,7 @@ export function runProjectsAnimation() {
   const screenHeight = window.innerHeight;
   anime({
     targets: ".projectscontainer",
-    translateY: screenHeight / 4.5,
     opacity: '100%',
-
     delay: 2000,
     easing: 'easeInOutExpo',
     duration: 1500,
@@ -264,9 +340,7 @@ export function runAboutMeAnimation() {
   const screenHeight = window.innerHeight;
   anime({
     targets: ".aboutmecontainer",
-    translateY: screenHeight / 2,
     opacity: '100%',
-
     delay: 2000,
     easing: 'easeInOutExpo',
     duration: 1500,
@@ -277,7 +351,6 @@ export function runSkillsAnimation() {
   const screenHeight = window.innerHeight;
   anime({
     targets: ".skillscontainer",
-    translateY: screenHeight / 2,
     opacity: '100%',
     delay: 2000,
     easing: 'easeInOutExpo',
@@ -289,7 +362,6 @@ export function runContactAnimation() {
   const screenHeight = window.innerHeight;
   anime({
     targets: ".contactcontainer",
-    translateY: screenHeight / 2,
     opacity: '100%',
     delay: 2000,
     easing: 'easeInOutExpo',
@@ -297,16 +369,3 @@ export function runContactAnimation() {
   });
 }
 
-
-
-function updateElementLocations() {
-  // get all elements whose locations need to be updated
-  const elements = document.querySelectorAll('.aboutmeswap, .projectsswap, .skillsswap, .contactswap');
-
-  // loop through each element and update its location
-  elements.forEach(element => {
-    const rect = element.getBoundingClientRect();
-    element.style.top = rect.top + 'px';
-    element.style.left = rect.left + 'px';
-  });
-}

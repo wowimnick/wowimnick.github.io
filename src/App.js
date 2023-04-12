@@ -61,6 +61,7 @@ function App() {
 
   return (
     <div className="App">
+      <BlurredBackground></BlurredBackground>
       <div className='buttonscontainer'>
         <div className='backdropcontainer'>
           <div className='lines1'></div>
@@ -118,19 +119,20 @@ function App() {
 
 
           </div><div className='contactmebox'>
-              <label for="name" style={{ display: 'block', marginbottom: '5px'}}>Name: </label>
-              <input type="text" id="name" name="name" style={{height: '1.5vh'}}></input> <br />
+          <label htmlFor="name" style={{ display: 'block', marginBottom: '5px' }}>Name: </label>
+  <input type="text" id="name" name="name" style={{ height: '1.5vh', width: '100%' }} /> <br />
 
-              <label for="subject" style={{ display: 'block', marginbottom: '5px' }}>Email: </label>
-              <input type="text" id="subject" name="subject" style={{height: '1.5vh'}}></input>
+  <label htmlFor="subject" style={{ display: 'block', marginBottom: '5px' }}>Email: </label>
+  <input type="text" id="subject" name="subject" style={{ height: '1.5vh', width: '100%' }} />
 
-              <label for="email" style={{ display: 'block', marginbottom: '5px' }}>Subject: </label>
-              <input type="text" id="email" name="email" style={{height: '1.5vh'}}></input>
-              
-              <label for="email" style={{ display: 'block', marginbottom: '5px' }}>Message: </label>
-              <textarea id="email" name="email" className='textarea' style={{height: '8vh', width:'40vh', fontFamily:'Arial, sans-serif'}}></textarea>
+  <label htmlFor="email" style={{ display: 'block', marginBottom: '5px' }}>Subject: </label>
+  <input type="text" id="email" name="email" style={{ height: '1.5vh', width: '100%' }} />
 
-              <input type="button" className='submitbutton' value="Submit" id="submitbutton" style={{ fontFamily: 'Damion', fontSize: '19px' }}></input>
+  <label htmlFor="message" style={{ display: 'block', marginBottom: '5px' }}>Message: </label>
+  <textarea id="message" name="message" className='textarea' style={{ height: '8vh', width: '100%', fontFamily: 'Arial, sans-serif' }}></textarea>
+
+  <input type="button" className='submitbutton' value="Submit" id="submitbutton" style={{ fontFamily: 'Damion', fontSize: '19px', marginTop: '10px' }}></input>
+
             </div></>)}
           {descriptors.showProjectsDesc && (<>
             <div className='desctypewriterflex'>
