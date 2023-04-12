@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { swapElements, onSelection, runContactAnimation, runSkillsAnimation, runAboutMeAnimation, runProjectsAnimation, runTopBarAnimation, runWriterAnimation } from "./animations";
-import sample from './videoplayback.mp4';
+import BlurredBackground from './background'
 import algo from './algo.gif'
 import sa from './sa.png'
 import snakie from './snakie.gif'
@@ -57,14 +57,10 @@ function App() {
       swapElements(document.querySelector(`.${previous}`), document.querySelector(`.${clickedbutton}`))
     }
   }, [previous, clickedbutton]);
-
+  
 
   return (
     <div className="App">
-      <video autoPlay muted loop className="video">
-        <source src={sample} type="video/mp4" />
-
-      </video>
       <div className='buttonscontainer'>
         <div className='backdropcontainer'>
           <div className='lines1'></div>
