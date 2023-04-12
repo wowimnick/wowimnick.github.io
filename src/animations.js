@@ -228,12 +228,12 @@ export function runWriterAnimation() {
   const screenHeight = window.innerHeight;
   anime({
     targets: "h1",
-    //translateX: -screenWidth / 3,
     translateY: -screenHeight / 3.3,
     delay: 3000,
     easing: 'easeInOutExpo',
     duration: 1500,
-    scale: 2
+    scale: 2,
+    complete: updateElementLocations
   });
 }
 export function runTopBarAnimation() {

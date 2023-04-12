@@ -4,6 +4,7 @@
 .App {
   position: relative;
   display: flex;
+  justify-content: center;
   height: 100vh;
 }
 
@@ -17,12 +18,84 @@ video {
   z-index: -1;
 }
 
+input[type="text"] {
+  border: 0.15em solid purple;
+  border-radius: 4px;
+  padding: 5px;
+  background-color: #f2f2f2;
+  height: 5%;
+  width: 25vh;
+}
+
+.textarea {
+  border: 0.15em solid purple;
+  border-radius: 4px;
+  padding: 5px;
+  background-color: #f2f2f2;
+  height: 5%;
+  width: 25vh;
+}
+
+.submitbutton {
+  cursor: pointer;
+  position: absolute;
+  background-color: #00ccff;
+  color: rgb(0, 0, 0);
+  width: 100px;
+  height: 30px;
+  border-radius: 2px;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.5;
+}
+
+.contactmebox {
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(46, 46, 46, 0.507) 12%, rgba(46, 46, 46, 0.705) 84%);
+  position: absolute;
+  text-align: justify;
+  animation: fadeIn 0.5s forwards;
+  top: 23%;
+  left: 75%;
+  transform: translateX(-50%);
+  padding: 2%;
+  width: 30%;
+  height: 34vh;
+  gap: 15%;
+  z-index: 11;
+}
+
+.desctypewriterflex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: absolute;
+  width: 100%;
+  animation: fadeIn 0.5s forwards;
+  margin-top: 10%;
+  z-index: 10;
+}
+
+.projectslist {
+  top: 50%;
+  animation: fadeIn 0.5s forwards;
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+}
+
+.sentimentanalysis, .algo, .snakie {
+  display: flex;
+  flex-direction: column;
+}
+
 .typewriter {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 3;
+  z-index: 11;
 }
 
 .desctypewriter {
@@ -32,7 +105,7 @@ video {
   margin-top: 10%;
   margin-left: 5%;
   margin-right: 5%;
-  z-index: 3;
+  z-index: 10;
 }
 
 .desctypewriterskills {
@@ -43,7 +116,21 @@ video {
   margin-left: 5%;
   margin-right: 5%;
   width: 45%;
-  z-index: 3;
+  z-index: 11;
+}
+
+.skillswork {
+  border-radius: 1px;
+  background: linear-gradient(90deg, rgb(64 64 64 / 42%) 12%, rgb(64 64 64 / 42%) 84%);
+  position: absolute;
+  text-align: justify;
+  animation: fadeIn 0.5s forwards;
+  top: 56%;
+  left: 61.5%;
+  padding: 2%;
+  width: 30%;
+  height: 20%;
+  z-index: 11;
 }
 
 .cursor {
@@ -153,8 +240,10 @@ h1 {
 }
 
 .backbanner {
-  position: absolute;
+  position: relative;
   align-self: center;
+  top:50%;
+  transform: translateY(-50%);
   width: 100%;
   height: 0%;
   background: linear-gradient(180deg, rgb(58 58 58 / 0%) 0%, rgb(27 27 27 / 58%) 11%, rgba(14, 14, 14, 0.89) 50%, rgb(27 27 27 / 58%) 89%, rgb(59 59 59 / 0%) 100%);
@@ -166,7 +255,7 @@ h1 {
   position: absolute;
   height: 100%;
   width: 100%;
-  z-index: 9;
+  z-index: 12;
 }
 
 .backdropcontainer {
@@ -181,10 +270,13 @@ h1 {
   font-family: 'Poppins';
   text-align: center;
   align-self: center;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
   color: white;
   height: 0%;
   width: 80%;
-  left: 10%;
+  z-index: 11;
 }
 
 .aboutmecontainer {
@@ -193,7 +285,8 @@ h1 {
   height: 50px;
   width: 314px;
   opacity: 0%;
-  z-index: 10;
+  z-index: 12;
+  pointer-events: auto;
 }
 
 .projectscontainer {
@@ -202,7 +295,8 @@ h1 {
   height: 50px;
   width: 314px;
   opacity: 0%;
-  z-index: 9;
+  z-index: 12;
+  pointer-events: auto;
 }
 
 .skillscontainer {
@@ -211,7 +305,8 @@ h1 {
   height: 50px;
   width: 314px;
   opacity: 0%;
-  z-index: 9;
+  z-index: 12;
+  pointer-events: auto;
 }
 
 .contactcontainer {
@@ -220,7 +315,8 @@ h1 {
   height: 50px;
   width: 314px;
   opacity: 0%;
-  z-index: 9;
+  z-index: 12;
+  pointer-events: auto;
 }
 
 /* ---------------------------------------------------------------- */
