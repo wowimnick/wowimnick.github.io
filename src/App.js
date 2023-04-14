@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { swapElements, onSelection, runContactAnimation, runSkillsAnimation, runAboutMeAnimation, runProjectsAnimation, runTopBarAnimation, runWriterAnimation } from "./animations";
-import BlurredBackground from './background'
 import algo from './algo.gif'
 import sa from './sa.png'
 import snakie from './snakie.gif'
 import { useDescriptions } from "./descriptions"
 import { Typewriter } from 'react-simple-typewriter'
+import GradientCanvas from './gradient';
 
 function App() {
   const [previous, setPrevious] = useState("");
@@ -61,7 +61,7 @@ function App() {
 
   return (
     <div className="App">
-      <BlurredBackground></BlurredBackground>
+      <GradientCanvas />
       <div className='buttonscontainer'>
         <div className='backdropcontainer'>
           <div className='lines1'></div>
