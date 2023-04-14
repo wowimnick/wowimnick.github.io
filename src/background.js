@@ -19,12 +19,12 @@ class BlurredBackground extends Component {
       .style('left', 0)
       .style('z-index', -2);
 
-    const bubbleCount = 5;
+    const bubbleCount = 15;
     const bubbleData = d3.range(bubbleCount).map(() => {
       return {
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 100 + 300,
+        radius: Math.random() * 100 + 400,
         gradientColor: d3.scaleLinear()
           .domain([0, 1])
           .range([
