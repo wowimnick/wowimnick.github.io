@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { swapElements, onSelection, runContactAnimation, runSkillsAnimation, runAboutMeAnimation, runProjectsAnimation, runTopBarAnimation, runWriterAnimation } from "./animations";
-import algo from './algo.gif'
+import algo from './algo.mp4'
 import sa from './sa.png'
-import snakie from './snakie.gif'
+import snakie from './snakie.mp4'
 import { useDescriptions } from "./descriptions"
 import { Typewriter } from 'react-simple-typewriter'
 import GradientCanvas from './gradient';
@@ -138,7 +138,7 @@ function App() {
             <div className='desctypewriterflex'>
               <p style={{ flex: 1 }}><br /><br />The sentiment analysis model is developed using the BiLSTM algorithm, trained and tested on the publicly available Stanford Sentiment Dataset.
                 <br /><br />This model achieved an accuracy of ~84% on the validation set.</p>
-              <p style={{ flex: 1 }}><br /><br />A reinforcement learning Snake game that implements an agent an lets it learn how to play.
+              <p style={{ flex: 1 }}><br /><br />A reinforcement learning Snake game that implements an agent and lets it learn how to play.
                 <br /><br />The model is capable of playing proficiantly after ~200 episodes.</p>
               <p style={{ flex: 1 }}><br /><br />Path finding using the A* Algorithm. You can draw the starting point, ending point, and walls that it will try to navigate around.</p>
             </div>
@@ -149,11 +149,17 @@ function App() {
               </div>
               <div className='snakie'>
                 <span style={{ fontFamily: 'Damion', fontSize: '22px' }}>Reinforcement Learning Agent</span>
-                <img src={snakie} width="400" height="300" style={{ objectFit: 'cover', borderRadius: '5px' }} />
+                <video width="400" height="300" autoPlay muted loop style={{objectFit: 'cover', borderRadius: '5px' }}>
+                  <source src={snakie} type="video/mp4" />
+                Your browser does not support the video tag.
+                </video>
               </div>
               <div className='algo'>
                 <span style={{ fontFamily: 'Damion', fontSize: '22px' }}>A* Pathfinding Algorithm</span>
-                <img src={algo} width="400" height="300" style={{ objectFit: 'cover', borderRadius: '5px' }} />
+                <video width="400" height="300" autoPlay muted loop style={{borderRadius: '5px' }}>
+                  <source src={algo} type="video/mp4" />
+                Your browser does not support the video tag.
+                </video>
               </div>
             </div></>)}
         </div>
