@@ -219,7 +219,7 @@ input[type="text"] {
   border-radius: 50px;
   left: 61%;
   height: 3px;
-  background: linear-gradient(90deg, rgb(155 155 155 / 64%) 30%, rgba(0, 0, 128, 0.95) 39%);
+  background: linear-gradient(90deg, rgb(155 155 155 / 64%) 30%, rgba(0, 0, 128, 0.95) 32%);
   animation: fadeIn 0.5s forwards;
   opacity: 1;
   top: 46%;
@@ -237,7 +237,7 @@ input[type="text"] {
   border-radius: 50px;
   left: 61%;
   height: 3px;
-  background: linear-gradient(90deg, rgb(155 155 155 / 64%) 15%, rgba(197, 107, 22, 0.95) 20%);
+  background: linear-gradient(90deg, rgb(155 155 155 / 64%) 19%, rgba(197, 107, 22, 0.95) 20%);
   animation: fadeIn 0.5s forwards;
   opacity: 1;
   top: 39%;
@@ -253,7 +253,7 @@ input[type="text"] {
   border-radius: 50px;
   left: 61%;
   height: 3px;
-  background: linear-gradient(90deg, rgb(155 155 155 / 64%) 15%, rgba(184, 178, 11, 0.95) 20%);
+  background: linear-gradient(90deg, rgb(155 155 155 / 64%) 15%, rgba(184, 178, 11, 0.95) 16%);
   animation: fadeIn 0.5s forwards;
   opacity: 1;
   top: 32%;
@@ -268,7 +268,7 @@ input[type="text"] {
   width: 35%;
   left: 61%;
   height: 3px;
-  background: linear-gradient(90deg, rgb(155 155 155 / 64%) 1%, rgba(45, 194, 231, 0.95) 5%);
+  background: linear-gradient(90deg, rgb(155 155 155 / 64%) 1%, rgba(45, 194, 231, 0.95) 2%);
   animation: fadeIn 0.5s forwards;
   opacity: 1;
   top: 25%;

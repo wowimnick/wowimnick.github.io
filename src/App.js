@@ -48,6 +48,8 @@ function App() {
     } else {
       isFirst = false;
     }
+    window.history.replaceState(null, null, sectionName.slice(0, -4));
+
   }
 
   useEffect(() => {
