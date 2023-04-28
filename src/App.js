@@ -1,19 +1,18 @@
-import { useEffect, useState } from 'react';
-import './App.css';
+import { useEffect, useState, useRef } from 'react';
 import { swapElements, onSelection, runContactAnimation, runSkillsAnimation, runAboutMeAnimation, runProjectsAnimation, runTopBarAnimation, runWriterAnimation } from "./animations";
+import './App.css';
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import algo from './algo.mp4'
 import sa from './sa.png'
+import poster1 from './postersnake.png'
 import snakie from './snakie.mp4'
-import { useDescriptions } from "./descriptions"
+import { InfiniteLoopSlider, Tag } from './scrollskills'
 import { Typewriter } from 'react-simple-typewriter'
 import GradientCanvas from './gradient';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function App() {
-  const [previous, setPrevious] = useState("");
-  const [clickedbutton, setClickedButton] = useState("");
-  const descriptors = useDescriptions();
-  var isFirst = false;
-
   useEffect(() => {
 
     runWriterAnimation();
@@ -28,96 +27,278 @@ function App() {
 
     setTimeout(() => {
       runAboutMeAnimation();
-    }, 2600);
+    }, 2300);
 
     setTimeout(() => {
       runSkillsAnimation();
-    }, 2900);
+    }, 2300);
 
     setTimeout(() => {
       runContactAnimation();
-    }, 3200);
+    }, 2300);
   }, []);
 
-  function showSection(sectionName) {
-    setClickedButton(sectionName);
-    if (!previous) {
-      isFirst = true;
-      onSelection(sectionName);
+  const COLORS = ['#bbf7d0', '#99f6e4', '#bfdbfe', '#ddd6fe', '#f5d0fe', '#fed7aa', '#fee2e2'];
+  const TAGS = ['HTML', 'CSS', 'JavaScript', 'React', 'Python', 'TensorFlow', 'Java', 'SQL', 'UI/UX', 'git', 'docker', 'backend', 'frontend', 'C#'];
+  const DURATION = 15000;
+  const ROWS = 5;
+  const TAGS_PER_ROW = 5;
 
-    } else {
-      isFirst = false;
-    }
-    window.history.replaceState(null, null, sectionName.slice(0, -4));
+  const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+  const shuffle = (arr) => [...arr].sort(() => .5 - Math.random());
 
-  }
+  // const navbarRef = useRef(null);
 
-  useEffect(() => {
-    setPrevious(clickedbutton);
-    if (clickedbutton && previous && clickedbutton !== previous) {
+  // window.addEventListener('scroll', () => {
+  //   const scrollPosition = window.scrollY;
+  //   if (scrollPosition > window.innerHeight - 200) {
+  //     try {
+  //       navbarRef.current.classList.add('visible');
+  //       navbarRef.current.classList.remove('hidden');
+  //     } catch {}
 
-      swapElements(document.querySelector(`.${previous}`), document.querySelector(`.${clickedbutton}`))
-    }
-  }, [previous, clickedbutton]);
-  
+  //   } else {
+  //     try {
+  //     navbarRef.current.classList.remove('visible');
+  //     navbarRef.current.classList.add('hidden');
+  //   } catch {}
+  //   }
+  // });
+
+  const scrollTo = (section) => {
+    scroller.scrollTo(section, {
+      duration: 800,
+      delay: 0,
+      smooth: 'easeInOutQuart'
+    });
+  };
 
   return (
     <div className="App">
-      <GradientCanvas />
-      <div className='buttonscontainer'>
-        <div className='backdropcontainer'>
+
+      {/* //<div className='navbar hidden' ref={navbarRef}>
+        <div className='navbaritem' style={{fontWeight: 'bold', fontSize: '3vh', flexGrow: 0.31, letterSpacing: '0.17em' }}>NICK</div>
+        <div className='navbaritem'>About Me</div>
+        <div className='navbaritem'>Portfolio</div>
+        <div className='navbaritem'>Skills</div>
+        <div className='navbaritem'>Contact</div>
+      </div> */}
+      <div className='rowmenucontainer'>
+        <div className='gradientcover'></div>
+        <GradientCanvas />
+        <div className='fadeout'></div>
+        <div className='typewriter'>
+          <h1>
+            <Typewriter
+              words={['Hi, Im Nick.', 'What would you like to see?']}
+              loop={1}
+              cursor
+              cursorStyle='|'
+              typeSpeed={50}
+              deleteSpeed={50}
+            />
+          </h1>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-evenly', alignitems: 'center', gap: '4vw', flexWrap: 'wrap' }}>
+          <div className='aboutmeswap'>
+            <div className='aboutmecontainer' onClick={() => { scrollTo('firstsection') }} >
+              <div className='aboutme'>
+                <span className='red-cursor'>|</span>
+                <Typewriter
+                  words={['', '', '', 'About Me']}
+                  loop={1}
+                  typeSpeed={70}
+                  deleteSpeed={50}
+                  delaySpeed={1600}
+                />
+                <span className='red-cursor'>|</span>
+              </div>
+            </div>
+          </div>
+          <div className='skillsswap'>
+            <div className='skillscontainer' onClick={() => { scrollTo('secondsection') }}>
+              <div className='skills'>
+                <span className='red-cursor'>|</span>
+                <Typewriter
+                  words={['', '', '', 'My Skills']}
+                  loop={1}
+                  typeSpeed={70}
+                  deleteSpeed={50}
+                  delaySpeed={1600}
+                />
+                <span className='red-cursor'>|</span>
+              </div>
+            </div>
+          </div>
+          <div className='projectsswap'>
+            <div className='projectscontainer' onClick={() => { scrollTo('thirdsection') }}>
+              <div className='projects'>
+                <span className='red-cursor'>|</span>
+                <Typewriter
+                  words={['', '', '', 'My Portfolio']}
+                  loop={1}
+                  typeSpeed={70}
+                  deleteSpeed={50}
+                  delaySpeed={1500} />
+                <span className='red-cursor'>|</span>
+              </div>
+            </div>
+          </div>
+          <div className='contactswap'>
+            <div className='contactcontainer' onClick={() => { scroll.scrollToBottom(); }}>
+              <div className='contact'>
+                <span className='red-cursor'>|</span>
+                <Typewriter
+                  words={['', '', '', 'Contact Me']}
+                  loop={1}
+                  typeSpeed={135}
+                  deleteSpeed={50}
+                  delaySpeed={1600}
+                />
+                <span className='red-cursor'>|</span>
+              </div>
+            </div>
+          </div>
+          <div class="arrow bounce"><i class="fa fa-angle-down fa-5x" aria-hidden="true"><FontAwesomeIcon icon={faAngleDown} /></i></div>
+        </div>
+      </div>
+      <div className='shapes' style={{ mixBlendMode: 'luminosity' }}></div>
+
+
+      <div className='firstsection'>
+        <div className='desctypewriter'>
+          <h2>Here's a bit about me:</h2>
+          <br />
+          I'm a Full-Stack Developer and Machine Learning enthusiast based in Toronto. My passion lies in building robust, scalable applications and using data to derive insights that drive business growth.
+          <br /><br />
+          I aquired my Bachelors in Computer Science from <a href="https://wgu.edu/" style={{ paddingBottom: "0.2em" }}>Western Governors University</a>. As a problem solver, I love tackling complex challenges and breaking them down into smaller, more manageable pieces. I'm constantly experimenting with new technologies and frameworks to stay up-to-date and provide the best solutions for my clients.
+          <br /><br />
+          In addition to my technical skills, I'm also a family person and enjoy spending time with my loved ones. When I'm not coding, you can find me hiking, reading about the latest advancements in AI, or playing some games with friends.
+          <br /><br />
+          I believe that collaboration is key to achieving great results, and I'm always looking for new opportunities to work with positive and ambitious people on exciting projects.
+          <br /><br /><br /><br />
+          <span style={{ color: '#4bc9f9' }}>Let's make something special.</span>
+        </div>
+      </div>
+      <div className='fillblackspace'></div>
+
+      <div className='secondsection' style={{ display: 'flex', justifyContent: 'space-evenly', alignitems: 'center', gap: '4vw', flexDirection: 'row' }}>
+        
+        <div className='desctypewriter' style={{ position: 'relative', mixBlendMode: 'hard-light', flex: 8 }}>
+          <h2>What I can do.</h2>
+          <br />
+          Having over 2 years of development experience in both back-end and front-end development, I have experience in a variety of programming languages, tools, and technologies, <br />like
+          <span style={{ color: 'white', fontFamily: 'Damion', fontSize: '22px' }}>
+            <Typewriter
+              words={[' Java', ' Python', ' C#', ' HTML & CSS', ' SQL', ' JavaScript', ' React.js', ' Django', ' Cloud Computing', ' Docker', ' Machine Learning', ' Git']}
+              loop={0}
+              typeSpeed={50}
+              deleteSpeed={30}
+              delaySpeed={1000} />
+          </span>.
+          <br /><br />
+          During my experience at Reeve Network I have successfully created ecommerce web applications which hooked into user management systems, and various management tools in Java which served to support the high amount of daily users.
+
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '6vh', flexDirection: 'column', flex: 6 }}>
+          <div className='python'><h2 style={{ fontSize: '2vh' }}>Python</h2></div>
+          <div className='java'><h2 style={{ fontSize: '2vh' }}>Java</h2></div>
+          <div className='htmlcss'><h2 style={{ fontSize: '1.6vh' }}>HTML & CSS</h2></div>
+          <div className='csharp'><h2 style={{ fontSize: '2vh' }}>C#</h2></div>
+        </div>
+        <div className='tag-list'>
+          {[...new Array(ROWS)].map((_, i) => (
+            <InfiniteLoopSlider key={i} duration={random(DURATION - 5000, DURATION + 5000)} reverse={i % 2}>
+              {shuffle(TAGS).slice(0, TAGS_PER_ROW).map(tag => (
+                <Tag text={tag} key={tag} />
+              ))}
+            </InfiniteLoopSlider>
+          ))}
+          <div className='fade' />
+          <div className='skillswork'>
+            <h2 style={{ fontSize: '2vh', fontWeight: '300', textAlign: 'left', fontFamily: 'Poppins' }}>Reeve Network, LLC
+              <br />
+              Software Engineer</h2><br />
+            <span style={{ fontSize: '16px', color: 'gray', mixBlendMode: 'color-burn' }}>2019 - 2021
+              <br /><br />
+              Developed java-based server applications for a large number of daily active users and incorporated APIs and libraries to interact with the server.</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div className='blackspace2'></div>
+      <div className='thirdsection' style={{ display: 'flex', alignitems: 'center', flexDirection: 'column' }}>
+        <div className='shapes2' style={{ mixBlendMode: 'luminosity' }}></div>
+        <h2>What i've made.</h2>
+        <div className='desctypewriter' style={{ display: 'flex', flexDirection: 'row', position: 'relative', gap: '4vw', flex: 1 }}>
+          <p style={{ width: '100%', textAlign: 'left' }}>The sentiment analysis model is developed using the BiLSTM algorithm, trained and tested on the publicly available Stanford Sentiment Dataset. This model achieved an accuracy of ~84% on the validation set.
+            <div className='sentimentanalysis'>
+              <span style={{ fontFamily: 'Damion', textAlign: 'center', fontSize: '22px' }}>Sentiment Analysis</span>
+              <img src={sa} width="100%" height="300" style={{ objectFit: 'cover', borderRadius: '5px' }} />
+            </div></p>
+          <p style={{ width: '100%', textAlign: 'left' }}>A reinforcement learning Snake game that implements an agent and lets it learn how to play. The model is capable of playing proficiantly after ~200 episodes.
+            <div className='snakie'>
+              <span style={{ fontFamily: 'Damion', textAlign: 'center', fontSize: '22px' }}>Reinforcement Learning Agent</span>
+              <video width="100%" height="300" muted loop style={{ objectFit: 'cover', borderRadius: '5px' }} autoPlay={!(/Mobi|Android/i.test(navigator.userAgent))} poster={poster1}>
+                <source src={snakie} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </p>
+          <p style={{ width: '100%', textAlign: 'left' }}>Path finding using the A* Algorithm. You can draw the starting point, ending point, and walls that it will try to navigate around.
+            <br /><br />
+            <div className='algo'>
+              <span style={{ fontFamily: 'Damion', textAlign: 'center', fontSize: '22px' }}>A* Pathfinding Algorithm</span>
+              <video width="100%" height="300" muted loop style={{ borderRadius: '5px' }} autoPlay={!(/Mobi|Android/i.test(navigator.userAgent))}>
+                <source src={algo} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </p>
+        </div>
+      </div>
+      <div className='blackspace3'></div>
+
+      <div className='fourthsection' style={{ display: 'flex', alignitems: 'center', flexDirection: 'column' }}>
+        <div className='bottomshapes' style={{ mixBlendMode: 'luminosity' }}></div>
+        <h2>Contact me.</h2>
+        <div className='desctypewriter' style={{ display: 'flex', flexDirection: 'row', position: 'relative', gap: '4vw', flex: 1 }}>
+          <p style={{ width: '100%', textAlign: 'left', flex:5 }}>
+            I'm interested in any potential opportunities, especially ambitious or large projects. However, if you have other request or question, don't hesitate to use the form. <br /><br /><br />
+            Fill in the form and I'll respond to all emails as quickly as possible. <br />If you do not receive a response back within a few days, please check your SPAM folder or filter.
+          </p>
+          <div className='contactmebox'>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: '5vw' }}>
+              <div>
+                <label htmlFor="name">Name: </label>
+                <input type="text" id="name" name="name" style={{ height: '1.5vh', width: '100%' }} /> <br />
+              </div>
+              <div>
+                <label htmlFor="subject">Email: </label>
+                <input type="text" id="subject" name="subject" style={{ height: '1.5vh', width: '100%' }} />
+              </div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '2vh' }}>
+            <div>
+            <label htmlFor="email">Subject: </label>
+            <br/>
+            <input type="text" id="email" name="email" style={{ height: '1.5vh', width: '50%' }} />
+              </div>
+              <div>
+            <label htmlFor="message">Message: </label>
+            <br/>
+            <textarea id="message" name="message" className='textarea' style={{ position: 'relative', height: '6vh', width: '98%', fontFamily: 'Arial, sans-serif' }}></textarea>
+            </div>
+            <input type="button" className='submitbutton' value="Submit" id="submitbutton" style={{ fontFamily: 'Questrial', fontSize: '19px', marginTop: '10px' }}></input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className='backdropcontainer'>
           <div className='lines1'></div>
           <div className='lines2'></div>
-
-          {descriptors.showAboutMeDesc && (
-            <div className='desctypewriter'>
-              <br /><br /><br />
-              I'm a Full-Stack Developer and Machine Learning enthusiast based in Toronto. My passion lies in building robust, scalable applications and using data to derive insights that drive business growth.
-              <br /><br />
-              I aquired my Bachelors in Computer Science from <a href="https://wgu.edu/" style={{ paddingBottom: "0.2em" }}>Western Governors University</a>. As a problem solver, I love tackling complex challenges and breaking them down into smaller, more manageable pieces. I'm constantly experimenting with new technologies and frameworks to stay up-to-date and provide the best solutions for my clients.
-              <br /><br />
-              In addition to my technical skills, I'm also a family person and enjoy spending time with my loved ones. When I'm not coding, you can find me hiking, reading about the latest advancements in AI, or playing some games with friends.
-              <br /><br />
-              I believe that collaboration is key to achieving great results, and I'm always looking for new opportunities to work with positive and ambitious people on exciting projects.
-              <br /><br /><br /><br />
-              <span style={{ color: '#4bc9f9' }}>Let's make something special.</span>
-            </div>)}
-
-          {descriptors.showSkillsDesc && (
-            <><div className='java'>Java</div>
-              <div className='csharp'>C#</div>
-              <div className='python'>Python</div>
-              <div className='htmlcss'>HTML & CSS</div>
-              <div className='desctypewriterskills'>
-                <br />
-                <br /><br />
-                Having over 2 years of development experience in both back-end and front-end development, I have experience in a variety of programming languages, tools, and technologies, like
-                <span style={{ color: 'indianred', fontFamily: 'Damion', fontSize: '22px' }}>
-                  <Typewriter
-                    words={[' Java', ' Python', ' C#', ' HTML & CSS', ' SQL', ' Java Script', ' ReactJS', ' Django', ' Cloud Computing', ' Docker', ' Machine Learning', ' Git']}
-                    loop={0}
-                    typeSpeed={50}
-                    deleteSpeed={30}
-                    delaySpeed={1000} />
-                </span>.
-                <br /><br />
-                During my experience at Reeve Network I have successfully created ecommerce web applications which hooked into user management systems, and various management tools in Java which served to support the high amount of daily users.
-              </div>
-              <div className='skillswork'>
-
-                Reeve Network, LLC
-                <br />
-                Software Engineer<br />
-                <span style={{ fontSize: '16px', color: 'gray' }}>2019 - 2021
-                  <br /><br />
-                  Developed java-based server applications for a large number of daily active users and incorporated APIs and libraries to interact with the server.</span>
-              </div>
-            </>)}
-          {descriptors.showContactMeDesc && (<><div className='desctypewriterskills' style={{ textAlign: 'left' }}>
-            <br /><br /><br />
-            I'm interested in any potential opportunities, especially ambitious or large projects. However, if you have other request or question, don't hesitate to use the form. <br /><br /><br /><br />
-            Fill in the form and I'll respond to all emails as quickly as possible. <br />If you do not receive a response back within a few days, please check your SPAM folder or filter.
-
 
 
           </div><div className='contactmebox'>
@@ -135,8 +316,7 @@ function App() {
 
   <input type="button" className='submitbutton' value="Submit" id="submitbutton" style={{ fontFamily: 'Damion', fontSize: '19px', marginTop: '10px' }}></input>
 
-            </div></>)}
-          {descriptors.showProjectsDesc && (<>
+            </div>
             <div className='desctypewriterflex'>
               <p style={{ flex: 1 }}><br /><br />The sentiment analysis model is developed using the BiLSTM algorithm, trained and tested on the publicly available Stanford Sentiment Dataset.
                 <br /><br />This model achieved an accuracy of ~84% on the validation set.</p>
@@ -145,104 +325,17 @@ function App() {
               <p style={{ flex: 1 }}><br /><br />Path finding using the A* Algorithm. You can draw the starting point, ending point, and walls that it will try to navigate around.</p>
             </div>
             <div className='projectslist'>
-              <div className='sentimentanalysis'>
-                <span style={{ fontFamily: 'Damion', fontSize: '22px' }}>Sentiment Analysis</span>
-                <img src={sa} width="400" height="300" style={{ objectFit: 'cover', borderRadius: '5px' }} />
-              </div>
-              <div className='snakie'>
-                <span style={{ fontFamily: 'Damion', fontSize: '22px' }}>Reinforcement Learning Agent</span>
-                <video width="400" height="300" autoPlay muted loop style={{objectFit: 'cover', borderRadius: '5px' }}>
-                  <source src={snakie} type="video/mp4" />
-                Your browser does not support the video tag.
-                </video>
-              </div>
-              <div className='algo'>
-                <span style={{ fontFamily: 'Damion', fontSize: '22px' }}>A* Pathfinding Algorithm</span>
-                <video width="400" height="300" autoPlay muted loop style={{borderRadius: '5px' }}>
-                  <source src={algo} type="video/mp4" />
-                Your browser does not support the video tag.
-                </video>
-              </div>
-            </div></>)}
+              
+              
+              
+            </div>
         </div>
         <div className='backbanner'>
 
         </div>
-        <div className="typewriter">
-          <h1>
-            <Typewriter
-              words={['Hi, Im Nick.', 'What would you like to see?']}
-              loop={1}
-              cursor
-              cursorStyle='|'
-              typeSpeed={70}
-              deleteSpeed={50}
-              delaySpeed={1500}
-            />
-            <br />
-          </h1>
-        </div>
+        
 
-        <div className='aboutmeswap'>
-          <div className='aboutmecontainer' onClick={() => { showSection("aboutmeswap"); descriptors.showAboutMe(isFirst); }} >
-            <div className='aboutme'>
-              <span className='red-cursor'>|</span>
-              <Typewriter
-                words={['', '', '', 'About Me']}
-                loop={1}
-                typeSpeed={70}
-                deleteSpeed={50}
-                delaySpeed={1600}
-              />
-              <span className='red-cursor'>|</span>
-            </div>
-          </div>
-        </div>
-        <div className='projectsswap'>
-          <div className='projectscontainer' onClick={() => { showSection("projectsswap"); descriptors.showProjects(isFirst) }}>
-            <div className='projects'>
-              <span className='red-cursor'>|</span>
-              <Typewriter
-                words={['', '', '', 'My Portfolio']}
-                loop={1}
-                typeSpeed={70}
-                deleteSpeed={50}
-                delaySpeed={1500} />
-              <span className='red-cursor'>|</span>
-            </div>
-          </div>
-        </div>
-        <div className='skillsswap'>
-          <div className='skillscontainer' onClick={() => { showSection("skillsswap"); descriptors.showSkills(isFirst) }}>
-            <div className='skills'>
-              <span className='red-cursor'>|</span>
-              <Typewriter
-                words={['', '', '', 'My Skills']}
-                loop={1}
-                typeSpeed={70}
-                deleteSpeed={50}
-                delaySpeed={1600}
-              />
-              <span className='red-cursor'>|</span>
-            </div>
-          </div>
-        </div>
-        <div className='contactswap'>
-          <div className='contactcontainer' onClick={() => { showSection("contactswap"); descriptors.showContactMe(isFirst) }}>
-            <div className='contact'>
-              <span className='red-cursor'>|</span>
-              <Typewriter
-                words={['', '', '', 'Contact Me']}
-                loop={1}
-                typeSpeed={135}
-                deleteSpeed={50}
-                delaySpeed={1600}
-              />
-              <span className='red-cursor'>|</span>
-            </div>
-          </div>
-        </div>
-      </div>
+          */}
     </div>
   );
 }
