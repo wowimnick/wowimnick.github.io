@@ -1,6 +1,8 @@
-import { useEffect, useState, useRef } from 'react';
-import { swapElements, onSelection, runContactAnimation, runSkillsAnimation, runAboutMeAnimation, runProjectsAnimation, runTopBarAnimation, runWriterAnimation } from "./animations";
+import { useEffect } from 'react';
+import { runContactAnimation, runSkillsAnimation, runAboutMeAnimation, runProjectsAnimation, runTopBarAnimation, runWriterAnimation } from "./animations";
 import './App.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import algo from './algo.mp4'
 import sa from './sa.png'
@@ -13,6 +15,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function App() {
+  AOS.init();
   useEffect(() => {
 
     runWriterAnimation();
@@ -162,11 +165,11 @@ function App() {
           <div class="arrow bounce"><i class="fa fa-angle-down fa-5x" aria-hidden="true"><FontAwesomeIcon icon={faAngleDown} /></i></div>
         </div>
       </div>
-      <div className='shapes' style={{ mixBlendMode: 'luminosity' }}></div>
+      <div className='shapes' data-aos="fade-up" data-aos-anchor-placement="top-center" style={{ mixBlendMode: 'luminosity' }}></div>
 
 
-      <div className='firstsection'>
-        <div className='desctypewriter'>
+      <div className='firstsection' data-aos="fade-up">
+        <div className='desctypewriter' data-aos="fade-up">
           <h2>Here's a bit about me:</h2>
           <br />
           I'm a Full-Stack Developer and Machine Learning enthusiast based in Toronto. My passion lies in building robust, scalable applications and using data to derive insights that drive business growth.
@@ -182,9 +185,9 @@ function App() {
       </div>
       <div className='fillblackspace'></div>
 
-      <div className='secondsection' style={{ display: 'flex', justifyContent: 'space-evenly', alignitems: 'center', gap: '4vw', flexDirection: 'row' }}>
-        
-        <div className='desctypewriter' style={{ position: 'relative', mixBlendMode: 'hard-light', flex: 8 }}>
+      <div className='secondsection' style={{ display: 'flex', justifyContent: 'space-evenly', alignitems: 'center', gap: '4vw', flexDirection: 'row' }} >
+
+        <div className='desctypewriter' data-aos="fade-right" style={{ position: 'relative', mixBlendMode: 'hard-light', flex: 8 }}>
           <h2>What I can do.</h2>
           <br />
           Having over 2 years of development experience in both back-end and front-end development, I have experience in a variety of programming languages, tools, and technologies, <br />like
@@ -201,12 +204,12 @@ function App() {
 
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '6vh', flexDirection: 'column', flex: 6 }}>
-          <div className='python'><h2 style={{ fontSize: '2vh' }}>Python</h2></div>
-          <div className='java'><h2 style={{ fontSize: '2vh' }}>Java</h2></div>
-          <div className='htmlcss'><h2 style={{ fontSize: '1.6vh' }}>HTML & CSS</h2></div>
-          <div className='csharp'><h2 style={{ fontSize: '2vh' }}>C#</h2></div>
+          <div data-aos="flip-left" className='python'><h2 style={{ fontSize: '2vh' }}>Python</h2></div>
+          <div data-aos="flip-left" className='java'><h2 style={{ fontSize: '2vh' }}>Java</h2></div>
+          <div data-aos="flip-left" className='htmlcss'><h2 style={{ fontSize: '1.6vh' }}>HTML & CSS</h2></div>
+          <div data-aos="flip-left" className='csharp'><h2 style={{ fontSize: '2vh' }}>C#</h2></div>
         </div>
-        <div className='tag-list'>
+        <div className='tag-list' data-aos="fade-left">
           {[...new Array(ROWS)].map((_, i) => (
             <InfiniteLoopSlider key={i} duration={random(DURATION - 5000, DURATION + 5000)} reverse={i % 2}>
               {shuffle(TAGS).slice(0, TAGS_PER_ROW).map(tag => (
@@ -215,7 +218,7 @@ function App() {
             </InfiniteLoopSlider>
           ))}
           <div className='fade' />
-          <div className='skillswork'>
+          <div className='skillswork' data-aos="fade-left">
             <h2 style={{ fontSize: '2vh', fontWeight: '300', textAlign: 'left', fontFamily: 'Poppins' }}>Reeve Network, LLC
               <br />
               Software Engineer</h2><br />
@@ -229,15 +232,15 @@ function App() {
 
       <div className='blackspace2'></div>
       <div className='thirdsection' style={{ display: 'flex', alignitems: 'center', flexDirection: 'column' }}>
-        <div className='shapes2' style={{ mixBlendMode: 'luminosity' }}></div>
+        <div className='shapes2' data-aos="fade-up" data-aos-anchor-placement="top-center" style={{ mixBlendMode: 'luminosity' }}></div>
         <h2>What i've made.</h2>
         <div className='desctypewriter' style={{ display: 'flex', flexDirection: 'row', position: 'relative', gap: '4vw', flex: 1 }}>
-          <p style={{ width: '100%', textAlign: 'left' }}>The sentiment analysis model is developed using the BiLSTM algorithm, trained and tested on the publicly available Stanford Sentiment Dataset. This model achieved an accuracy of ~84% on the validation set.
+          <p style={{ width: '100%', textAlign: 'left' }} data-aos="fade-out">The sentiment analysis model is developed using the BiLSTM algorithm, trained and tested on the publicly available Stanford Sentiment Dataset. This model achieved an accuracy of ~84% on the validation set.
             <div className='sentimentanalysis'>
               <span style={{ fontFamily: 'Damion', textAlign: 'center', fontSize: '22px' }}>Sentiment Analysis</span>
               <img src={sa} width="100%" height="300" style={{ objectFit: 'cover', borderRadius: '5px' }} />
             </div></p>
-          <p style={{ width: '100%', textAlign: 'left' }}>A reinforcement learning Snake game that implements an agent and lets it learn how to play. The model is capable of playing proficiantly after ~200 episodes.
+          <p style={{ width: '100%', textAlign: 'left' }} data-aos="fade-out">A reinforcement learning Snake game that implements an agent and lets it learn how to play. The model is capable of playing proficiantly after ~200 episodes.
             <div className='snakie'>
               <span style={{ fontFamily: 'Damion', textAlign: 'center', fontSize: '22px' }}>Reinforcement Learning Agent</span>
               <video width="100%" height="300" muted loop style={{ objectFit: 'cover', borderRadius: '5px' }} autoPlay={!(/Mobi|Android/i.test(navigator.userAgent))} poster={poster1}>
@@ -246,7 +249,7 @@ function App() {
               </video>
             </div>
           </p>
-          <p style={{ width: '100%', textAlign: 'left' }}>Path finding using the A* Algorithm. You can draw the starting point, ending point, and walls that it will try to navigate around.
+          <p style={{ width: '100%', textAlign: 'left' }} data-aos="fade-out">Path finding using the A* Algorithm. You can draw the starting point, ending point, and walls that it will try to navigate around.
             <br /><br />
             <div className='algo'>
               <span style={{ fontFamily: 'Damion', textAlign: 'center', fontSize: '22px' }}>A* Pathfinding Algorithm</span>
@@ -260,11 +263,11 @@ function App() {
       </div>
       <div className='blackspace3'></div>
 
-      <div className='fourthsection' style={{ display: 'flex', alignitems: 'center', flexDirection: 'column' }}>
+      <div className='fourthsection' data-aos="fade-in" style={{ display: 'flex', alignitems: 'center', flexDirection: 'column' }}>
         <div className='bottomshapes' style={{ mixBlendMode: 'luminosity' }}></div>
-        <h2>Contact me.</h2>
+        <h2 data-aos="fade-up">Contact me.</h2>
         <div className='desctypewriter' style={{ display: 'flex', flexDirection: 'row', position: 'relative', gap: '4vw', flex: 1 }}>
-          <p style={{ width: '100%', textAlign: 'left', flex:5 }}>
+          <p style={{ width: '100%', textAlign: 'left', flex: 5 }}>
             I'm interested in any potential opportunities, especially ambitious or large projects. However, if you have other request or question, don't hesitate to use the form. <br /><br /><br />
             Fill in the form and I'll respond to all emails as quickly as possible. <br />If you do not receive a response back within a few days, please check your SPAM folder or filter.
           </p>
@@ -280,64 +283,25 @@ function App() {
               </div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '2vh' }}>
-            <div>
-            <label htmlFor="email">Subject: </label>
-            <br/>
-            <input type="text" id="email" name="email" style={{ height: '1.5vh', width: '50%' }} />
+              <div>
+                <label htmlFor="email">Subject: </label>
+                <br />
+                <input type="text" id="email" name="email" style={{ height: '1.5vh', width: '50%' }} />
               </div>
               <div>
-            <label htmlFor="message">Message: </label>
-            <br/>
-            <textarea id="message" name="message" className='textarea' style={{ position: 'relative', height: '6vh', width: '98%', fontFamily: 'Arial, sans-serif' }}></textarea>
-            </div>
-            <input type="button" className='submitbutton' value="Submit" id="submitbutton" style={{ fontFamily: 'Questrial', fontSize: '19px', marginTop: '10px' }}></input>
+                <label htmlFor="message">Message: </label>
+                <br />
+                <textarea id="message" name="message" className='textarea' style={{ position: 'relative', height: '6vh', width: '98%', fontFamily: 'Arial, sans-serif' }}></textarea>
+              </div>
+              <input type="button" className='submitbutton' value="Submit" id="submitbutton" style={{ fontFamily: 'Questrial', fontSize: '19px', marginTop: '10px' }}></input>
             </div>
           </div>
         </div>
       </div>
-
-      {/* <div className='backdropcontainer'>
-          <div className='lines1'></div>
-          <div className='lines2'></div>
-
-
-          </div><div className='contactmebox'>
-          <label htmlFor="name" style={{ display: 'block', marginBottom: '5px' }}>Name: </label>
-  <input type="text" id="name" name="name" style={{ height: '1.5vh', width: '100%' }} /> <br />
-
-  <label htmlFor="subject" style={{ display: 'block', marginBottom: '5px' }}>Email: </label>
-  <input type="text" id="subject" name="subject" style={{ height: '1.5vh', width: '100%' }} />
-
-  <label htmlFor="email" style={{ display: 'block', marginBottom: '5px' }}>Subject: </label>
-  <input type="text" id="email" name="email" style={{ height: '1.5vh', width: '100%' }} />
-
-  <label htmlFor="message" style={{ display: 'block', marginBottom: '5px' }}>Message: </label>
-  <textarea id="message" name="message" className='textarea' style={{ height: '8vh', width: '100%', fontFamily: 'Arial, sans-serif' }}></textarea>
-
-  <input type="button" className='submitbutton' value="Submit" id="submitbutton" style={{ fontFamily: 'Damion', fontSize: '19px', marginTop: '10px' }}></input>
-
-            </div>
-            <div className='desctypewriterflex'>
-              <p style={{ flex: 1 }}><br /><br />The sentiment analysis model is developed using the BiLSTM algorithm, trained and tested on the publicly available Stanford Sentiment Dataset.
-                <br /><br />This model achieved an accuracy of ~84% on the validation set.</p>
-              <p style={{ flex: 1 }}><br /><br />A reinforcement learning Snake game that implements an agent and lets it learn how to play.
-                <br /><br />The model is capable of playing proficiantly after ~200 episodes.</p>
-              <p style={{ flex: 1 }}><br /><br />Path finding using the A* Algorithm. You can draw the starting point, ending point, and walls that it will try to navigate around.</p>
-            </div>
-            <div className='projectslist'>
-              
-              
-              
-            </div>
-        </div>
-        <div className='backbanner'>
-
-        </div>
-        
-
-          */}
     </div>
   );
 }
+
+
 
 export default App;

@@ -57,8 +57,8 @@
 
 #gradient-canvas {
   position: absolute;
-  width:100%;
-  height:100vh;
+  width: 100%;
+  height: 100vh;
   --gradient-color-1: #ef008f;
   --gradient-color-2: #6ec3f4;
   --gradient-color-3: #7038ff;
@@ -106,15 +106,15 @@
 .fillblackspace {
   position: absolute;
   background-image: url('./blackgaps.svg');
-  top: 169vh;
-  height: 32vh;
+  top: 184vh;
+  height: 17vh;
   width: 100%;
 }
 
 .blackspace2 {
   position: absolute;
   background-image: url('./2ndblackgap.svg');
-  top: 278vh;
+  top: 279vh;
   height: 17vh;
   width: 100%;
 }
@@ -152,10 +152,11 @@
   z-index: 17;
 }
 
-  
+
 @media (max-width: 1780px) {
   .fade {
-    background: linear-gradient(90deg, #00122000, transparent 10%, transparent 90%, #00122000) !important;;
+    background: linear-gradient(90deg, #00122000, transparent 10%, transparent 90%, #00122000) !important;
+    ;
   }
 }
 
@@ -191,8 +192,15 @@
   top: 295vh;
   height: 80vh;
   width: 100%;
-  overflow: auto;
+  overflow: hidden;
   z-index: 16;
+}
+
+@media (max-width: 1000px) {
+  .thirdsection {
+    overflow: auto !important;
+    ;
+  }
 }
 
 .fourthsection {
@@ -287,7 +295,9 @@ input[type="text"] {
   justify-content: space-around;
 }
 
-.sentimentanalysis, .algo, .snakie {
+.sentimentanalysis,
+.algo,
+.snakie {
   display: flex;
   flex-direction: column;
 }
@@ -501,7 +511,7 @@ h1 {
   height: 50px;
   width: 314px;
   z-index: 99;
-  }
+}
 
 .projectsswap {
   position: relative;
@@ -641,46 +651,69 @@ h1 {
 
 
 @-moz-keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     -moz-transform: translateY(0);
     transform: translateY(0);
   }
+
   40% {
     -moz-transform: translateY(-30px);
     transform: translateY(-30px);
   }
+
   60% {
     -moz-transform: translateY(-15px);
     transform: translateY(-15px);
   }
 }
+
 @-webkit-keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     -webkit-transform: translateY(0);
     transform: translateY(0);
   }
+
   40% {
     -webkit-transform: translateY(-30px);
     transform: translateY(-30px);
   }
+
   60% {
     -webkit-transform: translateY(-15px);
     transform: translateY(-15px);
   }
 }
+
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     -moz-transform: translateY(0);
     -ms-transform: translateY(0);
     -webkit-transform: translateY(0);
     transform: translateY(0);
   }
+
   40% {
     -moz-transform: translateY(-30px);
     -ms-transform: translateY(-30px);
     -webkit-transform: translateY(-30px);
     transform: translateY(-30px);
   }
+
   60% {
     -moz-transform: translateY(-15px);
     -ms-transform: translateY(-15px);
@@ -704,9 +737,9 @@ h1 {
   position: relative;
   padding: 1.5rem 0;
   overflow: hidden;
-  }
-  
-  .loop-slider .inner {
+}
+
+.loop-slider .inner {
   display: flex;
   width: fit-content;
   animation-name: loop;
@@ -714,9 +747,9 @@ h1 {
   animation-iteration-count: infinite;
   animation-direction: var(--direction);
   animation-duration: var(--duration);
-  }
-  
-  .tag {
+}
+
+.tag {
   display: flex;
   align-items: center;
   gap: 0 0.2rem;
@@ -727,17 +760,17 @@ h1 {
   padding: 0.7rem 1rem;
   margin-right: 1rem;
   box-shadow:
-  0 0.1rem 0.2rem rgb(0 0 0 / 20%),
-  0 0.1rem 0.5rem rgb(0 0 0 / 30%),
-  0 0.2rem 1.5rem rgb(0 0 0 / 40%);
-  }
-  
-  .tag span {
+    0 0.1rem 0.2rem rgb(0 0 0 / 20%),
+    0 0.1rem 0.5rem rgb(0 0 0 / 30%),
+    0 0.2rem 1.5rem rgb(0 0 0 / 40%);
+}
+
+.tag span {
   font-size: 1.2rem;
   color: #64748b;
-  }
+}
 
-  .fade {
+.fade {
   pointer-events: none;
   background: linear-gradient(90deg, #001220, transparent 10%, transparent 90%, #001220fa);
   position: absolute;
@@ -745,12 +778,13 @@ h1 {
   border: 3px solid transparent;
   border-image: linear-gradient(90deg, #001220, transparent 10%, transparent 90%, #001220fa) 1;
 }
-  
-  @keyframes loop {
+
+@keyframes loop {
   0% {
-  transform: translateX(0);
+    transform: translateX(0);
   }
+
   100% {
-  transform: translateX(-50%);
+    transform: translateX(-50%);
   }
-  }
+}
