@@ -5,6 +5,7 @@ import './App.css'
 export function runWriterAnimation() {
   const mq = window.matchMedia('(max-width: 768px)');
   const isMobile = mq.matches; 
+  const buttons = document.querySelector('.buttons');
   
   anime({
     targets: "h1",
@@ -13,6 +14,7 @@ export function runWriterAnimation() {
     duration: 1500,
     scale: isMobile ? 1.3 : 1.7, 
   });
+
   
   anime({
     targets: ".rowmenucontainer",
@@ -41,7 +43,7 @@ export function runTopBarAnimation() {
 
 export function runProjectsAnimation() {
   anime({
-    targets: ".projectscontainer",
+    targets: ".projects",
     opacity: '100%',
     delay: 2000,
     easing: 'easeInOutExpo',
@@ -51,7 +53,7 @@ export function runProjectsAnimation() {
 
 export function runAboutMeAnimation() {
   anime({
-    targets: ".aboutmecontainer",
+    targets: ".aboutme",
     opacity: '100%',
     delay: 2000,
     easing: 'easeInOutExpo',
@@ -61,7 +63,7 @@ export function runAboutMeAnimation() {
 
 export function runSkillsAnimation() {
   anime({
-    targets: ".skillscontainer",
+    targets: ".skills",
     opacity: '100%',
     delay: 2000,
     easing: 'easeInOutExpo',
@@ -71,7 +73,7 @@ export function runSkillsAnimation() {
 
 export function runContactAnimation() {
   anime({
-    targets: ".contactcontainer",
+    targets: ".contact",
     opacity: '100%',
     delay: 2000,
     easing: 'easeInOutExpo',

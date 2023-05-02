@@ -86,10 +86,10 @@ function App() {
         <div className='navbaritem'>Skills</div>
         <div className='navbaritem'>Contact</div>
       </div> */}
+
       <div className='rowmenucontainer'>
-        <div className='gradientcover'></div>
+        <div class="arrow bounce"><i class="fa fa-angle-down fa-5x" aria-hidden="true"><FontAwesomeIcon icon={faAngleDown} /></i></div>
         <GradientCanvas />
-        <div className='fadeout'></div>
         <div className='typewriter'>
           <h1>
             <Typewriter
@@ -102,72 +102,54 @@ function App() {
             />
           </h1>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-evenly', alignitems: 'center', gap: '4vw', flexWrap: 'wrap' }}>
-          <div className='aboutmeswap'>
-            <div className='aboutmecontainer' onClick={() => { scrollTo('firstsection') }} >
-              <div className='aboutme'>
-                <span className='red-cursor'>|</span>
-                <Typewriter
-                  words={['', '', '', 'About Me']}
-                  loop={1}
-                  typeSpeed={70}
-                  deleteSpeed={50}
-                  delaySpeed={1600}
-                />
-                <span className='red-cursor'>|</span>
-              </div>
-            </div>
+        <div className='buttons'>
+          <div className='aboutme' onClick={() => { scrollTo('firstsection') }}>
+            <span className='red-cursor'>|</span>
+            <Typewriter
+              words={['', '', '', 'About Me']}
+              loop={1}
+              typeSpeed={70}
+              deleteSpeed={50}
+              delaySpeed={1600}
+            />
+            <span className='red-cursor'>|</span>
           </div>
-          <div className='skillsswap'>
-            <div className='skillscontainer' onClick={() => { scrollTo('secondsection') }}>
-              <div className='skills'>
-                <span className='red-cursor'>|</span>
-                <Typewriter
-                  words={['', '', '', 'My Skills']}
-                  loop={1}
-                  typeSpeed={70}
-                  deleteSpeed={50}
-                  delaySpeed={1600}
-                />
-                <span className='red-cursor'>|</span>
-              </div>
-            </div>
+          <div className='skills' onClick={() => { scrollTo('secondsection') }}>
+            <span className='red-cursor'>|</span>
+            <Typewriter
+              words={['', '', '', 'My Skills']}
+              loop={1}
+              typeSpeed={70}
+              deleteSpeed={50}
+              delaySpeed={1600}
+            />
+            <span className='red-cursor'>|</span>
           </div>
-          <div className='projectsswap'>
-            <div className='projectscontainer' onClick={() => { scrollTo('thirdsection') }}>
-              <div className='projects'>
-                <span className='red-cursor'>|</span>
-                <Typewriter
-                  words={['', '', '', 'My Portfolio']}
-                  loop={1}
-                  typeSpeed={70}
-                  deleteSpeed={50}
-                  delaySpeed={1500} />
-                <span className='red-cursor'>|</span>
-              </div>
-            </div>
+          <div className='projects' onClick={() => { scrollTo('thirdsection') }}>
+            <span className='red-cursor'>|</span>
+            <Typewriter
+              words={['', '', '', 'My Portfolio']}
+              loop={1}
+              typeSpeed={70}
+              deleteSpeed={50}
+              delaySpeed={1500} />
+            <span className='red-cursor'>|</span>
           </div>
-          <div className='contactswap'>
-            <div className='contactcontainer' onClick={() => { scroll.scrollToBottom(); }}>
-              <div className='contact'>
-                <span className='red-cursor'>|</span>
-                <Typewriter
-                  words={['', '', '', 'Contact Me']}
-                  loop={1}
-                  typeSpeed={135}
-                  deleteSpeed={50}
-                  delaySpeed={1600}
-                />
-                <span className='red-cursor'>|</span>
-              </div>
-            </div>
+          <div className='contact' onClick={() => { scroll.scrollToBottom() }}>
+            <span className='red-cursor'>|</span>
+            <Typewriter
+              words={['', '', '', 'Contact Me']}
+              loop={1}
+              typeSpeed={135}
+              deleteSpeed={50}
+              delaySpeed={1600}
+            />
+            <span className='red-cursor'>|</span>
           </div>
-          <div class="arrow bounce"><i class="fa fa-angle-down fa-5x" aria-hidden="true"><FontAwesomeIcon icon={faAngleDown} /></i></div>
+
         </div>
       </div>
       <div className='shapes' data-aos="fade-up" data-aos-anchor-placement="top-center" style={{ mixBlendMode: 'luminosity' }}></div>
-
-
       <div className='firstsection' data-aos="fade-up">
         <div className='desctypewriter' data-aos="fade-up">
           <h2>Here's a bit about me:</h2>
@@ -238,25 +220,25 @@ function App() {
           <p style={{ width: '100%', textAlign: 'left' }} data-aos="fade-out">The sentiment analysis model is developed using the BiLSTM algorithm, trained and tested on the publicly available Stanford Sentiment Dataset. This model achieved an accuracy of ~84% on the validation set.
             <div className='sentimentanalysis'>
               <span style={{ fontFamily: 'Damion', textAlign: 'center', fontSize: '22px' }}>Sentiment Analysis</span>
-              <img src={sa} width="100%" height="300" style={{ objectFit: 'cover', borderRadius: '5px' }} />
+              <a href="https://github.com/wowimnick/Sentiment-Analysis"><img src={sa} width="100%" height="300" style={{ objectFit: 'cover', borderRadius: '5px', border: '2px white solid' }} /></a>
             </div></p>
           <p style={{ width: '100%', textAlign: 'left' }} data-aos="fade-out">A reinforcement learning Snake game that implements an agent and lets it learn how to play. The model is capable of playing proficiantly after ~200 episodes.
             <div className='snakie'>
               <span style={{ fontFamily: 'Damion', textAlign: 'center', fontSize: '22px' }}>Reinforcement Learning Agent</span>
-              <video width="100%" height="300" muted loop style={{ objectFit: 'cover', borderRadius: '5px' }} autoPlay={!(/Mobi|Android/i.test(navigator.userAgent))} poster={poster1}>
+              <a href="https://github.com/wowimnick/SnakeAI"><video width="100%" height="300" muted loop style={{ objectFit: 'cover', borderRadius: '5px', border: '2px white solid' }} autoPlay={!(/Mobi|Android/i.test(navigator.userAgent))} poster={poster1}>
                 <source src={snakie} type="video/mp4" />
                 Your browser does not support the video tag.
-              </video>
+              </video></a>
             </div>
           </p>
           <p style={{ width: '100%', textAlign: 'left' }} data-aos="fade-out">Path finding using the A* Algorithm. You can draw the starting point, ending point, and walls that it will try to navigate around.
             <br /><br />
             <div className='algo'>
               <span style={{ fontFamily: 'Damion', textAlign: 'center', fontSize: '22px' }}>A* Pathfinding Algorithm</span>
-              <video width="100%" height="300" muted loop style={{ borderRadius: '5px' }} autoPlay={!(/Mobi|Android/i.test(navigator.userAgent))}>
+              <a href="https://github.com/wowimnick/A-Star-Pathfinding"><video width="100%" height="300" muted loop style={{ borderRadius: '5px', border: '2px white solid' }} autoPlay={!(/Mobi|Android/i.test(navigator.userAgent))}>
                 <source src={algo} type="video/mp4" />
                 Your browser does not support the video tag.
-              </video>
+              </video></a>
             </div>
           </p>
         </div>
