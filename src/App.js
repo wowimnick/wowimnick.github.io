@@ -165,7 +165,6 @@ function App() {
           <span style={{ color: '#4bc9f9' }}>Let's make something special.</span>
         </div>
       </div>
-      <div className='fillblackspace'></div>
 
       <div className='secondsection' style={{ display: 'flex', justifyContent: 'space-evenly', alignitems: 'center', gap: '4vw', flexDirection: 'row' }} >
 
@@ -211,8 +210,6 @@ function App() {
         </div>
       </div>
 
-
-      <div className='blackspace2'></div>
       <div className='thirdsection' style={{ display: 'flex', alignitems: 'center', flexDirection: 'column' }}>
         <div className='shapes2' data-aos="fade-up" data-aos-anchor-placement="top-center" style={{ mixBlendMode: 'luminosity' }}></div>
         <h2>What i've made.</h2>
@@ -243,7 +240,6 @@ function App() {
           </p>
         </div>
       </div>
-      <div className='blackspace3'></div>
 
       <div className='fourthsection' data-aos="fade-in" style={{ display: 'flex', alignitems: 'center', flexDirection: 'column' }}>
         <div className='bottomshapes' style={{ mixBlendMode: 'luminosity' }}></div>

@@ -7,8 +7,8 @@
 .App {
   position: relative;
   display: flex;
-  background-color: #000000;
-  height: 450vh;
+  background-color: #191b1c;
+  height: 406vh;
 }
 
 .navbar {
@@ -60,12 +60,13 @@
 #gradient-canvas {
   position: absolute;
   width: 100%;
-  height: 105vh;
+  height: 115vh;
   animation: fadeIn 3s forwards;
   --gradient-color-1: #ef008f;
   --gradient-color-2: #6ec3f4;
   --gradient-color-3: #7038ff;
   --gradient-color-4: #e2e2e2;
+  border-bottom: white 2px solid;
   z-index: 1;
 }
 
@@ -112,7 +113,7 @@
 .shapes {
   position: absolute;
   background-image: url('./shapes.svg');
-  top: 170vh;
+  top: 160vh;
   height: 30vh;
   width: 100%;
   z-index: 100;
@@ -144,10 +145,11 @@
 
 .firstsection {
   position: absolute;
-  border-radius: 10px;
   box-sizing: border-box;
   background-image: url('./layered-waves.svg');
-  top: 105vh;
+  border-top: #3e3e3e 2px solid;
+  border-bottom: #3e3e3e 2px solid;
+  top: 107vh;
   height: 80vh;
   width: 100%;
   overflow: auto;
@@ -156,10 +158,11 @@
 
 .secondsection {
   position: absolute;
-  border-radius: 10px;
   box-sizing: border-box;
   background-image: url('./layered-waves2.svg');
-  top: 200vh;
+  border-top: #3e3e3e 2px solid;
+  border-bottom: #3e3e3e 2px solid;
+  top: 190vh;
   height: 80vh;
   width: 100%;
   overflow: auto;
@@ -169,10 +172,11 @@
 
 .thirdsection {
   position: absolute;
-  border-radius: 10px;
   box-sizing: border-box;
   background-image: url('./layered-waves3.svg');
-  top: 295vh;
+  border-top: #3e3e3e 2px solid;
+  border-bottom: #3e3e3e 2px solid;
+  top: 273vh;
   height: 80vh;
   width: 100%;
   overflow: hidden;
@@ -190,8 +194,9 @@
   position: absolute;
   box-sizing: border-box;
   background-image: url('./bottomwave.svg');
+  border-top: white 2px solid;
   background-color: #0a0a0a;
-  top: 400vh;
+  top: 356vh;
   height: 50vh;
   width: 100%;
   overflow: hidden;
@@ -324,7 +329,6 @@ input[type="text"] {
 
 ::-webkit-scrollbar-thumb {
   background-color: #555;
-  border-radius: 4px;
   border: 1.5px solid #646464;
 }
 
