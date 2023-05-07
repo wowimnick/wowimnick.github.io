@@ -14,8 +14,6 @@ export function runWriterAnimation() {
     duration: 1500,
     scale: isMobile ? 1.3 : 1.7, 
   });
-
-  
   anime({
     targets: ".rowmenucontainer",
     delay: 4300,

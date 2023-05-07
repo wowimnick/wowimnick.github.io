@@ -13,6 +13,7 @@ import { Typewriter } from 'react-simple-typewriter'
 import GradientCanvas from './gradient';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tilt from "react-parallax-tilt";
 
 function App() {
   AOS.init();
@@ -154,7 +155,7 @@ function App() {
         <div className='desctypewriter' data-aos="fade-up">
           <h2>Here's a bit about me:</h2>
           <br />
-          I'm a Full-Stack Developer and Machine Learning enthusiast based in Toronto. My passion lies in building robust, scalable applications and using data to derive insights that drive business growth.
+          I'm a Full-Stack Developer based in Toronto. My passion lies in building robust, scalable applications and using data to derive insights that drive business growth.
           <br /><br />
           I aquired my Bachelors in Computer Science from <a href="https://wgu.edu/" style={{ paddingBottom: "0.2em" }}>Western Governors University</a>. As a problem solver, I love tackling complex challenges and breaking them down into smaller, more manageable pieces. I'm constantly experimenting with new technologies and frameworks to stay up-to-date and provide the best solutions for my clients.
           <br /><br />
@@ -166,7 +167,7 @@ function App() {
         </div>
       </div>
 
-      <div className='secondsection' style={{ display: 'flex', justifyContent: 'space-evenly', alignitems: 'center', gap: '4vw', flexDirection: 'row' }} >
+      <div className='secondsection' style={{ display: 'flex', justifyContent: 'space-evenly', alignitems: 'center', flexDirection: 'row' }} >
 
         <div className='desctypewriter' data-aos="fade-right" style={{ position: 'relative', mixBlendMode: 'hard-light', flex: 8 }}>
           <h2>What I can do.</h2>
@@ -215,34 +216,47 @@ function App() {
         <h2>What i've made.</h2>
         <div className='desctypewriter' style={{ display: 'flex', flexDirection: 'row', position: 'relative', gap: '4vw', flex: 1 }}>
           <p style={{ width: '100%', textAlign: 'left' }} data-aos="fade-out">The sentiment analysis model is developed using the BiLSTM algorithm, trained and tested on the publicly available Stanford Sentiment Dataset. This model achieved an accuracy of ~84% on the validation set.
-            <div className='sentimentanalysis'>
+          <Tilt glareEnable={false} tiltMaxAngleX={4} 
+        tiltMaxAngleY={4} perspective={1000} 
+        glareColor={"rgb(255,0,0)"}>
+          <div className='sentimentanalysis'>
               <span style={{ fontFamily: 'Damion', textAlign: 'center', fontSize: '22px' }}>Sentiment Analysis</span>
-              <a href="https://github.com/wowimnick/Sentiment-Analysis"><img src={sa} width="100%" height="300" style={{ objectFit: 'cover', borderRadius: '5px', border: '2px white solid' }} /></a>
-            </div></p>
+              <a href="https://github.com/wowimnick/Sentiment-Analysis"><img src={sa} width="100%" height="300" style={{ objectFit: 'cover', borderRadius: '5px', border: '1px white solid' }} /></a>
+            </div>
+            </Tilt>
+            
+            </p>
           <p style={{ width: '100%', textAlign: 'left' }} data-aos="fade-out">A reinforcement learning Snake game that implements an agent and lets it learn how to play. The model is capable of playing proficiantly after ~200 episodes.
+          <Tilt glareEnable={false} tiltMaxAngleX={4} 
+        tiltMaxAngleY={4} perspective={1000} 
+        glareColor={"rgb(255,0,0)"}>
             <div className='snakie'>
               <span style={{ fontFamily: 'Damion', textAlign: 'center', fontSize: '22px' }}>Reinforcement Learning Agent</span>
-              <a href="https://github.com/wowimnick/SnakeAI"><video width="100%" height="300" muted loop style={{ objectFit: 'cover', borderRadius: '5px', border: '2px white solid' }} autoPlay={!(/Mobi|Android/i.test(navigator.userAgent))} poster={poster1}>
+              <a href="https://github.com/wowimnick/SnakeAI"><video width="100%" height="300" muted loop style={{ objectFit: 'cover', borderRadius: '5px', border: '1px white solid' }} autoPlay={!(/Mobi|Android/i.test(navigator.userAgent))} poster={poster1}>
                 <source src={snakie} type="video/mp4" />
                 Your browser does not support the video tag.
               </video></a>
             </div>
+            </Tilt>
           </p>
           <p style={{ width: '100%', textAlign: 'left' }} data-aos="fade-out">Path finding using the A* Algorithm. You can draw the starting point, ending point, and walls that it will try to navigate around.
             <br /><br />
+            <Tilt glareEnable={false} tiltMaxAngleX={4} 
+        tiltMaxAngleY={4} perspective={1000} 
+        glareColor={"rgb(255,0,0)"}>
             <div className='algo'>
               <span style={{ fontFamily: 'Damion', textAlign: 'center', fontSize: '22px' }}>A* Pathfinding Algorithm</span>
-              <a href="https://github.com/wowimnick/A-Star-Pathfinding"><video width="100%" height="300" muted loop style={{ borderRadius: '5px', border: '2px white solid' }} autoPlay={!(/Mobi|Android/i.test(navigator.userAgent))}>
+              <a href="https://github.com/wowimnick/A-Star-Pathfinding"><video width="100%" height="300" muted loop style={{ borderRadius: '5px', border: '1px white solid' }} autoPlay={!(/Mobi|Android/i.test(navigator.userAgent))}>
                 <source src={algo} type="video/mp4" />
                 Your browser does not support the video tag.
               </video></a>
             </div>
+            </Tilt>
           </p>
         </div>
       </div>
 
       <div className='fourthsection' data-aos="fade-in" style={{ display: 'flex', alignitems: 'center', flexDirection: 'column' }}>
-        <div className='bottomshapes' style={{ mixBlendMode: 'luminosity' }}></div>
         <h2 data-aos="fade-up">Contact me.</h2>
         <div className='desctypewriter' style={{ display: 'flex', flexDirection: 'row', position: 'relative', gap: '4vw', flex: 1 }}>
           <p style={{ width: '100%', textAlign: 'left', flex: 5 }}>
