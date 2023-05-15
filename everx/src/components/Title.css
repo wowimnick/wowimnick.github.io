@@ -1,0 +1,130 @@
+@import url("https://fonts.cdnfonts.com/css/stella-nova");
+
+
+.Title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  position: relative;
+  align-items: center;
+  color: #ffffff;
+  font-family: "Stella Nova", sans-serif;
+  height: 100vh;
+  left: 50%;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  transform: translate(-50%, 0%);
+  z-index: 5;
+  font-size: 4rem;
+  gap: 5vw;
+  }
+
+  .SubTitle {
+    font-family: sans-serif;
+    color: rgb(201, 0, 201);
+    font-weight: bold;
+    font-size: 1.35rem;
+  }
+
+  .Line {
+    position: relative;
+    height: 4px;
+    width: 25px;
+    margin-right: 0.5vw;
+    bottom: 6px;
+  }
+
+  .Right {
+    display: flex;
+    background-color: rgba(201, 0, 201, 0);
+    height: 100vh;
+    width: 50vw;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease-in;
+  }
+
+  h1.maintitle {
+    font-size: 3.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .Right {
+      position: absolute;
+      display: none;
+    }
+    h1.maintitle {
+      margin-bottom: 10vh;
+      font-size: 3rem;
+      color: transparent;
+      background-image: 
+        repeating-linear-gradient(
+          90deg, 
+          rgba(255,0,0,1) 0%, 
+          rgba(95,21,242,1) 70%, 
+          rgba(186,12,248,1) 80%, 
+          rgba(255,0,0,1) 110% /* duplicate of first color stop */
+        );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 6s linear infinite; /* twice the time it takes to move from 0 to 100% */
+    }
+  }
+
+  .Image {
+    position: relative;
+    left: 2%;
+    height: 60vh;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid white;
+    box-shadow: 10px 10px 50px 0px rgba(35, 1, 63, 0.75);
+    animation: infinite moveupdown 8s ease-in-out;
+    z-index: 2;
+  }
+
+  .Button {
+    position: absolute;
+    margin-top: 2vh;
+    background-color: rgba(201, 0, 201, 0);
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-family: "Stella Nova", sans-serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 2;
+  }
+
+  .Button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgba(0, 0, 0, 0.733);
+    transition: 0.3s;
+  }
+
+  @keyframes moveupdown {
+    0% {
+      transform: rotate3d(0, -3, 0.5, -10deg) translateY(0);
+    }
+  
+    50% {
+      transform: perspective(600px) rotate3D(0, -3, 0, 10deg) translateY(9px);
+    }
+  
+    100% {
+      transform: rotate3d(0, -3, 0.5, -10deg) translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }

@@ -1,0 +1,66 @@
+.reset {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40vh;
+    z-index: 2;
+    color: white;
+    background: rgba(24, 24, 24, 0.884);
+    top: -1vh;
+    transition: all .2s ease-out;
+  }
+  .reset__container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #2c2c2ce5;
+    border: 1px solid rgba(66, 66, 66, 0.486);
+    width: 25vw;
+    border-radius: 5px;
+    padding: 30px;
+    transition: all .2s ease-out;
+  }
+  .reset__textBox {
+    font-family: "Stella Nova", sans-serif;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    background-color:rgb(15, 15, 15);
+    border: none;
+    transition: all .2s ease-out;
+    color: white;
+  }
+  .reset__btn {
+    font-family: 'Outfit', sans-serif;
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background: rgba(173,76,144,.788);
+    transition: all .2s ease-out;
+  }
+
+  .exit {
+    position: relative;
+    background: none;
+    border-radius: 50px;
+    border: none;
+    width: fit-content;
+    top: -1.3vh;
+    left: 24vw;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    transition: all .2s ease-out;
+  }
+
+  .reset div {
+    margin-top: 7px;
+  }

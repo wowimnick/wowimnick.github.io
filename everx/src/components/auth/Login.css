@@ -1,0 +1,119 @@
+@import url("https://fonts.cdnfonts.com/css/stella-nova");
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+
+.login {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15vh;
+    z-index: 2;
+    overflow: scroll;
+    color: white;
+  }
+  .login__container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #1a1a1a00;
+    width: 25vw;
+    border-radius: 5px;
+    padding: 30px;
+  }
+  .login__textBox {
+    font-family: "Stella Nova", sans-serif;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    background-color:rgb(15, 15, 15);
+    border: none;
+    transition: all .2s ease-out;
+    color: white;
+  }
+  .login__btn {
+    font-family: 'Outfit', sans-serif;
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background: rgba(173,76,144,.788);
+    transition: all .2s ease-out;
+  }
+
+  .reset__btn {
+    font-family: 'Outfit', sans-serif;
+    align-self: center;
+    width: 40%;
+    background: rgba(15, 15, 15, 0.493);
+    color: white;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all .2s ease-out;
+  }
+
+  @media (max-width: 1000px) {
+    .login__btn, .login__textBox {
+      align-self: center;
+      width: 200px;
+    }
+    .reset__btn {
+      width: 95px;
+    }
+  }
+
+  .login__google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5vw;
+    background: rgba(15, 15, 15, 0.493);
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    align-self: center;
+    width: 12vw;
+    cursor: pointer;
+    transition: all .2s ease-out;
+  }
+
+  .reset__btnlink {
+    text-decoration: none;
+    color: white;
+  }
+
+  .login__google:hover .reset__btn:hover{
+    background: rgba(15, 15, 15, 0.87);
+    transition: all .2s ease-in reverse;
+  }
+
+  .login__btn:hover {
+    background: rgba(15, 15, 15, 0.349);
+    transition: all .2s ease-in reverse;
+  }
+
+  .login__textBox:hover {
+    background: rgba(15, 15, 15, 0.507);
+    transition: all .2s ease-in reverse;
+  }
+
+  @media (max-width: 1050px) {
+    .login__google {
+      width: 120px;
+    }
+  }
+
+  h1 {
+    font-family: "Stella Nova", sans-serif;
+    font-size: 2.5rem;
+    flex: 0.20;
+  }
+
+  .logo {
+    width: 1.2rem;
+  }
+
+  .login div {
+    margin-top: 7px;
+  }

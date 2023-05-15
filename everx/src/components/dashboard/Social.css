@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+
+Footer.socials {
+  background-color: transparent;
+  color: #070044;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: 1rem;
+  z-index: 5;
+}
+
+.Navbar.socials {
+  color: black;
+}
+
+.socials {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  background-image: none;
+  background-size: cover;
+  background: #000;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.5s forwards;
+  overflow-x: hidden;
+  z-index: 2;
+}
+
+.socials__container {
+    width: 800px;
+    height: 95%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 1%;
+    margin-bottom: 5%;
+    color: white;
+    background-color: #dcdcdc00;
+    padding: 34px;
+    z-index: 3;
+  }
+
+  .socials__textBox {
+    font-family: "Stella Nova", sans-serif;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    background-color:rgb(15, 15, 15);
+    border: 1px rgba(255, 255, 255, 0.144) solid;
+    transition: all .2s ease-out;
+    color: white;
+  }
+
+  .social {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    font-family: 'Outfit', sans-serif;
+    width: 93%;
+    margin: 10px;
+  }
+
+  .return {
+    font-family: 'Outfit', sans-serif;
+    background: #49494962;
+    align-self: flex-start;
+    width: 100px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    transition: all .2s ease-out;
+  }
+
+  .return:hover {
+    background: #0700446c;
+  }
+
+  @media (max-width: 1050px) {
+    .socials__container {
+      width: 90%;
+    }
+  }
+
+  .social__icon {
+    height: 35px;
+    margin-right: 10px;
+  }
+
+  h1.socials__title {
+    font-family: 'Outfit', sans-serif;
+    margin-top: 5%;
+    color: transparent;
+    background-image: 
+      repeating-linear-gradient(
+        90deg, 
+        rgba(255,0,0,1) 0%, 
+        rgba(95,21,242,1) 70%, 
+        rgba(186,12,248,1) 80%, 
+        rgba(255,0,0,1) 110% /* duplicate of first color stop */
+      );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 6s linear infinite; /* twice the time it takes to move from 0 to 100% */
+  }
+
+  
+  
+  @keyframes shine {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 200% 0; /* move to 200% to show the duplicate color stop */
+    }
+  }
+
+  h2.socials__subtitle{
+    font-family: 'Outfit', sans-serif;
+    font-size: 25px;
+  }
+

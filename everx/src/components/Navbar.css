@@ -1,0 +1,54 @@
+@import url("https://fonts.cdnfonts.com/css/stella-nova");
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Stella Nova', sans-serif;
+  position: fixed;
+  left: 0;
+  inset: 0 0 auto 0;
+  transition: color 0.3s;
+  z-index: 10;
+  color: #fff;
+  right: 0;
+  padding: 1.5rem;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  z-index: 5;
+  font-size: 2.25rem;
+  height: 6vh;
+}
+
+.NavbarItem {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Questrial', sans-serif;
+  font-weight: bold;
+  color: #fcfcfc;
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 5px;
+  z-index: 2;
+  margin-left: 1rem;
+  width: 7rem;
+  height: 2.5rem;
+  font-size: 2vh;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.NavbarItem:hover {
+  transition: all .2s ease reverse;
+  letter-spacing: 2px;
+  background: white;
+  color: #000000;
+}
+
+.NavbarItem:first-child {
+  margin-left: 0;
+}

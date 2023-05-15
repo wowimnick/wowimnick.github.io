@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/everx/static/css/main.db1e3190.css",
+    "main.js": "/everx/static/js/main.28a4ae7a.js",
+    "static/js/787.8675c87a.chunk.js": "/everx/static/js/787.8675c87a.chunk.js",
+    "static/media/googlelogo.png": "/everx/static/media/googlelogo.3ea98e44cf83ee6602a5.png",
+    "static/media/dashbg.png": "/everx/static/media/dashbg.0ecf79f45e4a84c766f6.png",
+    "static/media/listpic.png": "/everx/static/media/listpic.14a0746e57b77e9bd818.png",
+    "static/media/bg.jpg": "/everx/static/media/bg.689ca7e3d79d99087146.jpg",
+    "index.html": "/everx/index.html",
+    "main.db1e3190.css.map": "/everx/static/css/main.db1e3190.css.map",
+    "main.28a4ae7a.js.map": "/everx/static/js/main.28a4ae7a.js.map",
+    "787.8675c87a.chunk.js.map": "/everx/static/js/787.8675c87a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.db1e3190.css",
+    "static/js/main.28a4ae7a.js"
+  ]
+}
