@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './FourthSection.css';
 
 const FourthSection = () => {
+  useEffect(() => {
+    const submitButton = document.getElementById("submitbutton");
+
+    const handleFocus = () => {
+      submitButton.value = "✅";
+      submitButton.style.background = "rgb(4, 129, 42)";
+    };
+
+    submitButton.addEventListener("focus", handleFocus);
+
+    return () => {
+      submitButton.removeEventListener("focus", handleFocus);
+    };
+  }, []);
   return (
     <div className='fourthsection' data-aos="fade-in" style={{ display: 'flex', alignitems: 'center', flexDirection: 'column' }}>
         <div className='desctypewriter' style={{ display: 'flex', flexDirection: 'row', gap: '4vw', position: 'relative'}}>
@@ -18,7 +32,7 @@ const FourthSection = () => {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column'}}>
                 <input type="text" id="email" className='textBox' placeholder="subject" />
-                <textarea id="message" className='textBox' placeholder="name" style={{ height: '6vh', width: '95%'}}></textarea>
+                <textarea id="message" className='textBox' placeholder="message" style={{ height: '6vh', width: '95%'}}></textarea>
               <input type="button" className='submitbutton' value="Submit" id="submitbutton" />
             </div>
           </div>

@@ -30,9 +30,20 @@
     color: white;
     cursor: pointer;
     background: rgba(173,76,144,.788);
-    transition: all .2s ease-out;
+    transition: all .2s ease-out reverse;
   }
-  
+  .textBox:hover {
+    background: rgb(20, 20, 20);
+  }
+  .submitbutton:hover {
+    background: rgb(207, 87, 171);
+  }
+
+  #submitbutton:focus {
+    background: rgb(4, 129, 42);
+    transition: all .2s ease-out ;
+  }
+
   .contactmebox {
     border-radius: 10px;
     padding: 10px;
