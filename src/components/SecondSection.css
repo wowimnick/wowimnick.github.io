@@ -1,0 +1,115 @@
+.secondsection {
+    position: relative;
+    box-sizing: border-box;
+    background: radial-gradient(circle farthest-side at left center, #84004F 0%, #000000 57%);
+    border: 1px solid #1e1e1e;
+    border-radius: 150px;
+    height: 80vh;
+    overflow: hidden;
+    width: 100%;
+    padding-right: 3vw;
+    z-index: 16;
+  }
+
+  .skillswork {
+    border-radius: 4px;
+    background: linear-gradient(90deg, rgb(64 64 64 / 42%) 12%, rgb(64 64 64 / 42%) 84%);
+    animation: fadeIn 0.5s forwards;
+    overflow: auto;
+    margin-top: 2vh;
+    padding: 2%;
+    z-index: 11;
+  }
+
+  .csharp {
+    display: flex;
+    text-align: left;
+    align-self: center;
+    width: 65%;
+    border-radius: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, rgb(155 155 155 / 64%) 30%, rgba(0, 0, 128, 0.95) 32%);
+    animation: fadeIn 0.5s forwards;
+    opacity: 1;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  
+  .htmlcss {
+    background: linear-gradient(90deg, rgb(155 155 155 / 64%) 19%, rgba(197, 107, 22, 0.95) 20%);
+  }
+  
+  .java {
+    background: linear-gradient(90deg, rgb(155 155 155 / 64%) 15%, rgba(184, 178, 11, 0.95) 16%);
+  }
+  
+  .python {
+    background: linear-gradient(90deg, rgb(155 155 155 / 64%) 1%, rgba(45, 194, 231, 0.95) 2%);
+  }
+
+
+  .bounce {
+    -moz-animation: bounce 2s infinite;
+    -webkit-animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
+  }
+  
+  .tag-list {
+    width: 30em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem 0;
+    position: relative;
+    padding: 1.5rem 0;
+    overflow: hidden;
+  }
+  
+  .loop-slider .inner {
+    display: flex;
+    width: fit-content;
+    animation-name: loop;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: var(--direction);
+    animation-duration: var(--duration);
+  }
+  
+  .tag {
+    display: flex;
+    align-items: center;
+    gap: 0 0.2rem;
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    background-color: #c90ce262;
+    border-radius: 0.4rem;
+    padding: 0.7rem 1rem;
+    margin-right: 1rem;
+    box-shadow:
+      0 0.1rem 0.2rem rgb(0 0 0 / 20%),
+      0 0.1rem 0.5rem rgb(0 0 0 / 30%),
+      0 0.2rem 1.5rem rgb(0 0 0 / 40%);
+  }
+  
+  .tag span {
+    font-size: 1.2rem;
+    color: #64748b;
+  }
+  
+  .fade {
+    pointer-events: none;
+    background: linear-gradient(90deg, #000000, transparent 10%, transparent 90%, #020303fa);
+    position: absolute;
+    inset: 0;
+    border-image: linear-gradient(90deg, #001220, transparent 10%, transparent 90%, #000000fa) 1;
+  }
+  
+  @keyframes loop {
+    0% {
+      transform: translateX(0);
+    }
+  
+    100% {
+      transform: translateX(-50%);
+    }
+  }

@@ -1,0 +1,10 @@
+h1.h3 {
+    font-size: 3rem;
+  }
+
+  .cursor {
+    animation: blink 0.5s infinite;
+    color: #fff;
+    font-weight: normal;
+    font-family: 'Poppins';
+  }

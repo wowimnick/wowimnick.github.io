@@ -1,0 +1,48 @@
+.fourthsection {
+    position: relative;
+    box-sizing: border-box;
+    background: linear-gradient(0deg, #84004f, transparent 10%, transparent 90%, #00000000);
+    border-top: rgb(117, 117, 117) 1px solid;
+    border-radius: 10px;
+    background-color: #0a0a0a6e;
+    overflow: hidden;
+    height: 50vh;
+    width: 103%;
+    z-index: 16;
+  }
+  .textarea {
+    border: 0.15em solid purple;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: #f2f2f2;
+    height: 5%;
+    width: 25vh;
+  }
+  .submitbutton {
+    font-family: 'Outfit', sans-serif;
+    padding: 10px;
+    font-size: 1.2rem;
+    width: 50%;
+    align-self: center;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background: rgba(173,76,144,.788);
+    transition: all .2s ease-out;
+  }
+  
+  .contactmebox {
+    border-radius: 10px;
+    padding: 10px;
+    top: 10%;
+    height: fit-content;
+    background: linear-gradient(90deg, rgba(46, 46, 46, 0.507) 12%, rgba(46, 46, 46, 0.705) 84%);
+    position: relative;
+    text-align: justify;
+    animation: fadeIn 0.5s forwards;
+    padding: 1vh;
+    font-size: 1.8vh;
+    z-index: 11;
+  }

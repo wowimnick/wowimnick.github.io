@@ -1,0 +1,46 @@
+.thirdsection {
+    position: relative;
+    box-sizing: border-box;
+    background-image: radial-gradient(#ef008f8f , #000000ec 70%);
+    padding: 20px;
+    padding-right: 20px;
+    border: 1px solid #1e1e1e;
+    border-radius: 150px;
+    overflow: hidden;
+    height: fit-content;
+    width: 100%;
+    z-index: 16;
+}
+
+.shapes2 {
+    position: absolute;
+    background-image: url('../resources/shapes2.svg');
+    height: 80vh;
+    width: 100%;
+    z-index: 17;
+  }
+
+.work {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    gap: 1vw;
+}
+
+.sentimentanalysis,
+.everx,
+.snakie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(15, 15, 15, 0.884);
+  border: 1px rgba(163, 163, 163, 0.719) solid;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+@media (max-width: 1292px) {
+    .work {
+      flex-direction: column;
+    }
+  }

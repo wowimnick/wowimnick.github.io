@@ -1,0 +1,51 @@
+.Navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Stella Nova', sans-serif;
+    position: fixed;
+    left: 0;
+    inset: 0 0 auto 0;
+    transition: color 0.3s;
+    z-index: 10;
+    color: #fff;
+    right: 0;
+    padding: 0.2rem;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    z-index: 20;
+    font-size: 2.25rem;
+    height: 6vh;
+  }
+  
+  .NavbarItem {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
+    color: #fcfcfc;
+    background: transparent;
+    text-decoration: none;
+    border: 1px solid white;
+    border-radius: 5px;
+    z-index: 2;
+    margin-left: 1rem;
+    width: 7rem;
+    height: 2.5rem;
+    font-size: 2vh;
+    cursor: pointer;
+    transition: all 0.4s ease ;
+  }
+
+  .NavbarItem:hover {
+    background: #fcfcfc;
+    color: #000;
+    letter-spacing: 1px;
+    transition: all 0.4s ease reverse;
+  }
+  
+  .NavbarItem:first-child {
+    margin-left: 0;
+  }
