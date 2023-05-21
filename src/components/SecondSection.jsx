@@ -1,6 +1,8 @@
 import React from 'react';
 import './SecondSection.css';
 import { Typewriter } from 'react-simple-typewriter'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { InfiniteLoopSlider, Tag } from '../scrollskills'
 
 const SecondSection = () => {
@@ -22,7 +24,7 @@ const SecondSection = () => {
           <br />
           <p>
           Having over 2 years of development experience in both back-end and front-end development, I have experience in a variety of programming languages, tools, and technologies, <br />like
-          <span style={{ color: 'white', fontFamily: 'Damion', fontSize: '22px' }}>
+          <span className='rainbow' style={{ fontFamily: 'Outfit', fontWeight:'bold', fontSize:'20px' }}>
             <Typewriter
               words={[' Java', ' Python', ' C#', ' HTML & CSS', ' SQL', ' JavaScript', ' React.js', ' Django', ' Cloud Computing', ' Docker', ' Machine Learning', ' Git']}
               loop={0}
@@ -31,7 +33,8 @@ const SecondSection = () => {
               delaySpeed={1000} />
           </span>.
           <br /><br />
-          During my experience at Reeve Network I have successfully created ecommerce web applications which hooked into user management systems, and various management tools in Java which served to support the high amount of daily users.
+          <span className='hidetext'> During my experience at Reeve Network I have successfully created ecommerce web applications which hooked into user management systems, and various management tools in Java which served to support the high amount of daily users.
+          </span>
           </p>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '6vh', flexDirection: 'column', flex: 6 }}>
@@ -50,12 +53,16 @@ const SecondSection = () => {
           ))}
           <div className='fade' />
           <div className='skillswork' data-aos="fade-left">
-            <h2 style={{ fontSize: '2vh', fontWeight: '300', textAlign: 'left', fontFamily: 'Poppins' }}>Reeve Network, LLC
-              <br />
-              Software Engineer</h2><br />
-            <span style={{ fontSize: '16px', color: 'gray', mixBlendMode: 'color-burn' }}>2019 - 2021
+            <h2 style={{ fontSize: '2vh', fontWeight: '300', textAlign: 'left', fontFamily: 'Outfit' }}>
+              Reeve Network, LLC <br />
+              Full Stack Developer</h2><br />
+            <span style={{ fontSize: '16px', color: 'lightgray', mixBlendMode: 'color-burn' }}>2020 - 2022
               <br /><br />
-              Developed java-based server applications for a large number of daily active users and incorporated APIs and libraries to interact with the server.</span>
+              • Contributed to the development of a custom e-commerce platform using React, enabling the sale of digital products and services, and designed a forum page to enhance user engagement and community interaction. <br /><br />
+              • Developed java-based server applications for upwards of 2000 daily active users and incorporated APIs and libraries, such as Spigot, to access server data and interact with the server. <br /><br />
+              • Utilized advanced techniques in NLP using TensorFlow ML models to identify and remove any content that violated community guidelines, resulting in a more respectful and appropriate environment for all users. <br /><br />
+              • Worked with other developers to design and implement scalable, fault-tolerant server architectures using containerization technologies such as Docker and Kubernetes, resulting in increased system reliability and performance.
+              </span>
           </div>
         </div>
       </div>

@@ -39,11 +39,6 @@
     background: rgb(207, 87, 171);
   }
 
-  #submitbutton:focus {
-    background: rgb(4, 129, 42);
-    transition: all .2s ease-out ;
-  }
-
   .contactmebox {
     border-radius: 10px;
     padding: 10px;
@@ -56,4 +51,15 @@
     padding: 1vh;
     font-size: 1.8vh;
     z-index: 11;
+  }
+
+  @media (max-width: 1666px) {
+    .hide {
+      display: none !important;
+    }
+  
+    .contactmebox {
+      left: 50%;
+      transform: translate(-50%, 0px);
+    }
   }

@@ -3,7 +3,7 @@
     box-sizing: border-box;
     background: radial-gradient(circle farthest-side at left center, #84004F 0%, #000000 57%);
     border: 1px solid #1e1e1e;
-    border-radius: 150px;
+    border-radius: 20px;
     height: 80vh;
     overflow: hidden;
     width: 100%;
@@ -11,14 +11,34 @@
     z-index: 16;
   }
 
+  .rainbow {
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: shine 2s linear infinite;
+    animation: shine 2s linear infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: repeating-linear-gradient(90deg,rgb(61, 61, 61),#6b6b6b 70%,#ffffff7e 80%,rgb(61, 61, 61) 110%);
+    background-size: 200% auto;
+    color: transparent;
+    font-family: 'Outfit','sans-serif';
+    margin-top: 5%;
+  }
+
   .skillswork {
-    border-radius: 4px;
+    border-radius: 5px;
     background: linear-gradient(90deg, rgb(64 64 64 / 42%) 12%, rgb(64 64 64 / 42%) 84%);
     animation: fadeIn 0.5s forwards;
     overflow: auto;
     margin-top: 2vh;
+    height: 220px;
     padding: 2%;
     z-index: 11;
+  }
+
+  .skillswork::-webkit-scrollbar {
+    width: 8px;
+    background: transparent; /* make scrollbar transparent */
+    border-radius: 5px;
   }
 
   .csharp {
@@ -81,7 +101,7 @@
     gap: 0 0.2rem;
     color: #e2e8f0;
     font-size: 0.9rem;
-    background-color: #c90ce262;
+    background-color: #ffffff33;
     border-radius: 0.4rem;
     padding: 0.7rem 1rem;
     margin-right: 1rem;
@@ -102,6 +122,12 @@
     position: absolute;
     inset: 0;
     border-image: linear-gradient(90deg, #001220, transparent 10%, transparent 90%, #000000fa) 1;
+  }
+
+  @media (max-width: 1211px) {
+    .hidetext {
+      display: none;
+    }
   }
   
   @keyframes loop {

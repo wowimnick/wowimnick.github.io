@@ -146,6 +146,8 @@ p {
   }
 }
 
+
+
 @media (max-width: 526px) {
   .textBox {
     width: 30vw;
@@ -173,18 +175,6 @@ h2 {
   font-family: 'Poppins';
   z-index: 17;
 }
-
-@media (max-width: 1666px) {
-  .hide {
-    display: none !important;
-  }
-
-  .contactmebox {
-    left: 50%;
-    transform: translate(-50%, 0px);
-  }
-}
-
 
 @media (max-width: 800px) {
   .tag-list {
@@ -316,5 +306,14 @@ h2 {
     -ms-transform: translateY(-15px);
     -webkit-transform: translateY(-15px);
     transform: translateY(-15px);
+  }
+}
+
+@keyframes shine {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 200% 0; /* move to 200% to show the duplicate color stop */
   }
 }

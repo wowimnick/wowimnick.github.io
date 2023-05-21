@@ -5,7 +5,9 @@
     padding: 20px;
     padding-right: 20px;
     border: 1px solid #1e1e1e;
-    border-radius: 150px;
+    border-radius: 20px;
+    border-bottom-left-radius: 140px;
+    border-bottom-right-radius: 140px;
     overflow: hidden;
     height: fit-content;
     width: 100%;
@@ -35,8 +37,16 @@
   align-items: center;
   background: rgba(15, 15, 15, 0.884);
   border: 1px rgba(163, 163, 163, 0.719) solid;
+  transition: all 0.2s ease-out !important;
   border-radius: 20px;
   padding: 20px;
+}
+
+.sentimentanalysis:hover, .everx:hover, .snakie:hover {
+  border: 1px rgb(255, 255, 255) solid !important;
+  background: rgba(20, 20, 20, 0.884) !important;
+  transition: all 0.2s ease-out  !important;
+  scale: 1.020;
 }
 
 @media (max-width: 1292px) {
