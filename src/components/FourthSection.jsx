@@ -27,13 +27,13 @@ const FourthSection = () => {
       return;
     }
   
-    /*emailjs.sendForm('service_hpeadoj', 'template_doikkmo', form.current, 'mxhVfavVsSqczEg8r')
+    emailjs.sendForm('service_hpeadoj', 'template_doikkmo', form.current, 'mxhVfavVsSqczEg8r')
       .then((result) => {
           console.log(result.text);
       }, (error) => {
           console.log(error.text);
       });
-      form.current.reset();*/
+      form.current.reset();
   
     const element = document.querySelector('#submitbutton');
     const { top, bottom, left, right } = element.getBoundingClientRect();
