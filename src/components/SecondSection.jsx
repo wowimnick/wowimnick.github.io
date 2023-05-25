@@ -23,7 +23,7 @@ const SecondSection = () => {
           <h2>What I can do.</h2>
           <br />
           <p>
-          Having over 2 years of development experience in both back-end and front-end development, I have experience in a variety of programming languages, tools, and technologies, <br />like
+          Having over 3 years of development experience in both back-end and front-end development, I have experience in a variety of programming languages, tools, and technologies, <br />like
           <span className='rainbow' style={{ fontFamily: 'Outfit', fontWeight:'bold', fontSize:'20px' }}>
             <Typewriter
               words={[' Java', ' Python', ' C#', ' HTML & CSS', ' SQL', ' JavaScript', ' React.js', ' Django', ' Cloud Computing', ' Docker', ' Machine Learning', ' Git']}
@@ -56,7 +56,7 @@ const SecondSection = () => {
             <h2 style={{ fontSize: '2vh', fontWeight: '300', textAlign: 'left', fontFamily: 'Outfit' }}>
               Reeve Network, LLC <br />
               Full Stack Developer</h2><br />
-            <span style={{ fontSize: '16px', color: 'lightgray', mixBlendMode: 'color-burn' }}>2020 - 2022
+            <span style={{ fontSize: '16px', color: 'lightgray', mixBlendMode: 'color-burn' }}>Sep 2019 - Jul 2022
               <br /><br />
               • Contributed to the development of a custom e-commerce platform using React, enabling the sale of digital products and services, and designed a forum page to enhance user engagement and community interaction. <br /><br />
               • Developed java-based server applications for upwards of 2000 daily active users and incorporated APIs and libraries, such as Spigot, to access server data and interact with the server. <br /><br />
