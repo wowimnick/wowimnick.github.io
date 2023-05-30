@@ -1,8 +1,7 @@
 .secondsection {
     position: relative;
     box-sizing: border-box;
-    background: radial-gradient(circle farthest-side at left center, #84004F 0%, #000000 57%);
-    border: 1px solid #1e1e1e;
+    background: radial-gradient(circle farthest-side at right center, #84004F 0%, #090909 57%);
     border-radius: 20px;
     height: 80vh;
     overflow: hidden;
@@ -17,7 +16,7 @@
     animation: shine 2s linear infinite;
     -webkit-background-clip: text;
     background-clip: text;
-    background-image: repeating-linear-gradient(90deg,rgb(61, 61, 61),#6b6b6b 70%,#ffffff7e 80%,rgb(61, 61, 61) 110%);
+    background-image: repeating-linear-gradient(90deg,rgb(255, 255, 255),#adadad 70%,#c4c4c47e 80%,rgb(255, 255, 255) 110%);
     background-size: 200% auto;
     color: transparent;
     font-family: 'Outfit','sans-serif';
@@ -31,6 +30,7 @@
     overflow: auto;
     margin-top: 2vh;
     height: 220px;
+    width: 29em;
     padding: 2%;
     z-index: 11;
   }
@@ -47,8 +47,8 @@
     align-self: center;
     width: 65%;
     border-radius: 50px;
-    height: 3px;
-    background: linear-gradient(90deg, rgb(155 155 155 / 64%) 30%, rgba(0, 0, 128, 0.95) 32%);
+    height: 5px;
+    background: linear-gradient(90deg, rgb(155 155 155 / 64%) 25%, rgba(0, 0, 128, 0.95) 26%);
     animation: fadeIn 0.5s forwards;
     opacity: 1;
     flex-direction: column-reverse;
@@ -75,6 +75,9 @@
   }
   
   .tag-list {
+    margin-top: 7%;
+    border: #3f2033 solid 3px;
+    border-radius: 25px;
     width: 30em;
     display: flex;
     flex-direction: column;
@@ -113,15 +116,15 @@
   
   .tag span {
     font-size: 1.2rem;
-    color: #64748b;
+    color: #5f5f5f;
   }
   
   .fade {
     pointer-events: none;
-    background: linear-gradient(90deg, #000000, transparent 10%, transparent 90%, #020303fa);
+    background: linear-gradient(90deg, #090909, transparent 10%, transparent 90%, #090909);
     position: absolute;
     inset: 0;
-    border-image: linear-gradient(90deg, #001220, transparent 10%, transparent 90%, #000000fa) 1;
+    border-image: linear-gradient(90deg, #090909, transparent 10%, transparent 90%, #090909) 1;
   }
 
   @media (max-width: 1211px) {

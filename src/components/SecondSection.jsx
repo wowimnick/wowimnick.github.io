@@ -19,8 +19,8 @@ const SecondSection = () => {
   return (
     <div className='secondsection' style={{ display: 'flex', justifyContent: 'space-evenly', alignitems: 'center', flexDirection: 'row' }} >
 
-        <div className='desctypewriter' data-aos="fade-right" style={{ position: 'relative', mixBlendMode: 'hard-light', flex: 8 }}>
-          <h2>What I can do.</h2>
+        <div className='desctypewriter' data-aos="fade-right" style={{ position: 'relative', flex: 8 }}>
+          <h2>What I can do 🛠️</h2>
           <br />
           <p>
           Having over 3 years of development experience in both back-end and front-end development, I have experience in a variety of programming languages, tools, and technologies, <br />like
@@ -38,11 +38,12 @@ const SecondSection = () => {
           </p>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '6vh', flexDirection: 'column', flex: 6 }}>
-          <div data-aos="flip-left" className='csharp python'><h2 style={{ fontSize: '2vh' }}>Python</h2></div>
-          <div data-aos="flip-left" className='csharp java'><h2 style={{ fontSize: '2vh' }}>Java</h2></div>
-          <div data-aos="flip-left" className='csharp htmlcss'><h2 style={{ fontSize: '1.6vh' }}>HTML & CSS</h2></div>
-          <div data-aos="flip-left" className='csharp'><h2 style={{ fontSize: '2vh' }}>C#</h2></div>
+          <div data-aos="flip-left" className='csharp python'><h2 style={{ fontSize: '2vh', background: 'none' }}>Python</h2></div>
+          <div data-aos="flip-left" className='csharp java'><h2 style={{ fontSize: '2vh', background: 'none' }}>Java</h2></div>
+          <div data-aos="flip-left" className='csharp htmlcss'><h2 style={{ fontSize: '2vh', background: 'none' }}>HTML & CSS</h2></div>
+          <div data-aos="flip-left" className='csharp'><h2 style={{ fontSize: '2vh', background: 'none' }}>C#</h2></div>
         </div>
+        <div>
         <div className='tag-list' data-aos="fade-left">
           {[...new Array(ROWS)].map((_, i) => (
             <InfiniteLoopSlider key={i} duration={random(DURATION - 5000, DURATION + 5000)} reverse={i % 2}>
@@ -51,9 +52,9 @@ const SecondSection = () => {
               ))}
             </InfiniteLoopSlider>
           ))}
-          <div className='fade' />
-          <div className='skillswork' data-aos="fade-left">
-            <h2 style={{ fontSize: '2vh', fontWeight: '300', textAlign: 'left', fontFamily: 'Outfit' }}>
+        </div>
+        <div className='skillswork' data-aos="fade-left">
+            <h2 style={{ fontSize: '2vh', fontWeight: '300', textAlign: 'left', fontFamily: 'Outfit', background: 'none' }}>
               Reeve Network, LLC <br />
               Full Stack Developer</h2><br />
             <span style={{ fontSize: '16px', color: 'lightgray', mixBlendMode: 'color-burn' }}>Sep 2019 - Jul 2022
@@ -64,7 +65,7 @@ const SecondSection = () => {
               • Worked with other developers to design and implement scalable, fault-tolerant server architectures using containerization technologies such as Docker and Kubernetes, resulting in increased system reliability and performance.
               </span>
           </div>
-        </div>
+          </div>
       </div>
   );
 };

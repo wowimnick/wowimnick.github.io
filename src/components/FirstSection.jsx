@@ -4,7 +4,7 @@ import './FirstSection.css';
 const FirstSection = () => {
   return (
     <div className='firstsection' data-aos="fade-up">
-          <h2>Here's a bit about me:</h2>
+          <h2>Here's a bit about me 👽</h2>
           <p>
           <br />
           I'm a Toronto-based Full-Stack Developer with a strong passion for crafting robust, scalable applications and leveraging data to fuel business growth.
