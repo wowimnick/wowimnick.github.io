@@ -3,7 +3,7 @@ import './FirstSection.css';
 
 const FirstSection = () => {
   return (
-    <div className='firstsection' data-aos="fade-up">
+    <div className='firstsection' data-aos="zoom-out-up">
           <h2>Here's a bit about me 👽</h2>
           <p>
           <br />

@@ -1,13 +1,13 @@
 .thirdsection {
     position: relative;
     box-sizing: border-box;
-    background-image: radial-gradient(#ef008f8f , #090909 70%);
+    background-image: radial-gradient(#ef008f8f , #09090900 70%);
     padding: 20px;
     padding-right: 20px;
     border-radius: 20px;
     border-bottom-left-radius: 140px;
     border-bottom-right-radius: 140px;
-    overflow: hidden;
+    overflow: visible;
     height: fit-content;
     width: 100%;
     z-index: 16;
@@ -16,15 +16,6 @@
 .desctypewriter.work .image-description {
   word-wrap: break-word;
 }
-
-.shapes2 {
-    position: absolute;
-    background-image: url('../resources/shapes2.svg');
-    height: 95%;
-    background-repeat: repeat;
-    width: 100%;
-    z-index: 17;
-  }
 
 .work {
     display: flex;
@@ -43,22 +34,22 @@
   width: fit-content;
   flex-direction: column;
   align-items: center;
-  background: rgba(15, 15, 15, 0.884);
-  border: 1px rgba(163, 163, 163, 0.719) solid;
+  background: rgba(15, 15, 15, 0.932);
+  border: 1px rgb(163 163 163 / 25%) solid;
   transition: all 0.2s ease-out !important;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 20px;
 }
 
 .sentimentanalysis:hover, .everx:hover, .snakie:hover {
-  border: 1px rgb(255, 255, 255) solid !important;
+  border: 1px rgba(255, 255, 255, 0.527) solid !important;
   background: rgba(20, 20, 20, 0.884) !important;
   transition: all 0.2s ease-out  !important;
   scale: 1.020;
 }
 
 .tilt {
-  width: 70%;
+  width: 60%;
 }
 
 @media (max-width: 1292px) {

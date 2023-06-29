@@ -1,8 +1,6 @@
 .fourthsection {
     position: relative;
-    box-sizing: border-box;
-    background: linear-gradient(0deg, #84004f, transparent 10%, transparent 90%, #00000000);
-    border-top: rgb(117, 117, 117) 1px solid;
+    border: rgb(117, 117, 117) 1px solid;
     border-radius: 10px;
     background-color: #0a0a0a6e;
     overflow: hidden;
@@ -52,7 +50,7 @@
     font-size: 1.8vh;
     z-index: 11;
   }
-
+ 
   @media (max-width: 1666px) {
     .hide {
       display: none !important;

@@ -5,7 +5,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@700&family=Roboto&display=swap');
 
 .App {
-  background-color: #000000;
+  background-color: #0c0c0c;
+  background-image: url('resources/bg.png');
+  background-size: cover;
+  background-attachment: fixed;
   height: fit-content;
   overflow: hidden;
 }
@@ -33,7 +36,7 @@
   --gradient-color-2: #dd0189;
   --gradient-color-3: #000000;
   --gradient-color-4: #000000;
-  border: 2px solid #ffffff56;
+  border: 2px solid #ffffff15;
   z-index: 1;
 }
 
@@ -42,46 +45,6 @@
   color: white;
   top: 85vh;
   z-index: 2;
-}
-
-.topblackspace {
-  position: absolute;
-  background-image: url('./resources/topblackgap.svg');
-  top: 75vh;
-  height: 30vh;
-  width: 100%;
-}
-
-.fillblackspace {
-  position: absolute;
-  background-image: url('./resources/blackgaps.svg');
-  top: 184vh;
-  height: 17vh;
-  width: 100%;
-}
-
-.blackspace2 {
-  position: absolute;
-  background-image: url('./resources/2ndblackgap.svg');
-  top: 279vh;
-  height: 17vh;
-  width: 100%;
-}
-
-.blackspace3 {
-  position: absolute;
-  background-image: url('./resources/blackgapsbottom.svg');
-  top: 375vh;
-  height: 15vh;
-  width: 100%;
-}
-
-.shapes {
-  position: absolute;
-  background-image: url('./resources/shapes.svg');
-  height: 30vh;
-  width: 100%;
-  z-index: 15;
 }
 
 @media (max-width: 1156px) {
@@ -96,17 +59,16 @@
   flex-direction: column;
   align-items: center;
   gap: 200px;
-  top: 9vh;
+  top: 12vh;
   padding: 100px;
-  padding-bottom: 0px;
+  padding-bottom: 20px;
   margin-left: 20px;
   margin-right: 20px;
-  border-start-start-radius: 50px;
-  border-start-end-radius: 50px;
-  background: #1a1a1a5b;
+  margin-bottom: 150px;
+  border-radius: 15px;
+  background: #0a0a0abe;
   box-shadow: 0px 0px 25px 0px #da0187;
-  border: 2px dashed #ffffff56;
-  border-bottom: 1px solid #000;
+  border: 2px dashed #da018767;
   overflow: hidden;
 }
 
@@ -138,12 +100,9 @@ p {
   }
 
   .sections {
-    margin: 0;
+    margin-left: 0;
+    margin-right: 0;
     padding: 0;
-  }
-
-  .App {
-    height: fit-content;
   }
 }
 

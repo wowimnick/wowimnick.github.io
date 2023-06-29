@@ -1,7 +1,7 @@
 .secondsection {
     position: relative;
     box-sizing: border-box;
-    background: radial-gradient(circle farthest-side at right center, #84004F 0%, #090909 57%);
+    background: radial-gradient(circle farthest-side at right center, #84004F 0%, #09090900 57%);
     border-radius: 20px;
     height: 80vh;
     overflow: hidden;

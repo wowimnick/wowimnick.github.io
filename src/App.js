@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import './App.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -14,16 +13,14 @@ import ButtonsHolder from './components/ButtonsHolder';
 import Title from './components/Title';
 
 function App() {
+  
   AOS.init();
   
-
   return (
     <div className="App">
-
       <Navbar />
-
       <div className='rowmenucontainer'>
-        <div class="arrow bounce"><i class="fa fa-angle-down fa-5x" aria-hidden="true"><FontAwesomeIcon icon={faAngleDown} /></i></div>
+        <div className="arrow bounce"><i className="fa fa-angle-down fa-5x" aria-hidden="true"><FontAwesomeIcon icon={faAngleDown} /></i></div>
         <GradientCanvas />
         <Title />
         <ButtonsHolder />

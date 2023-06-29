@@ -7,6 +7,7 @@
     width: 65%;
     padding: 60px;
     z-index: 14;
+    scroll-snap-align: start;
   }
 
   @media (max-width: 1156px) {

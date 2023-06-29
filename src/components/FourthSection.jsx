@@ -56,13 +56,16 @@ const FourthSection = () => {
     }, 3000);
   };
   return (
-    <div className='fourthsection' data-aos="fade-in" style={{ display: 'flex', alignitems: 'center', flexDirection: 'column' }}>
+    <div className='fourthsection' data-aos="zoom-out-up" style={{ display: 'flex', alignitems: 'center', flexDirection: 'column' }}>
         <div className='desctypewriter' style={{ display: 'flex', flexDirection: 'row', gap: '4vw', position: 'relative'}}>
-          <p className='hide' style={{fontSize:'unset'}}>
+          <div className='hide' >
           <h2 data-aos="fade-up">Contact me. 🤝</h2>
+          <p style={{fontSize:'unset'}}>
+          
             I'm interested in any potential opportunities, especially ambitious or large projects. However, if you have other request or question, don't hesitate to use the form. <br /><br /><br />
             Fill in the form and I'll respond to all emails as quickly as possible. <br />If you do not receive a response back within a few days, please check your SPAM folder or filter.
           </p>
+          </div>
           <div className='contactmebox'>
             <form onSubmit={sendEmail} ref={form}>
             <h3>Get in touch.</h3>

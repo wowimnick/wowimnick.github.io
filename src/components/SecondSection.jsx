@@ -1,25 +1,20 @@
 import React from 'react';
-import './SecondSection.css';
 import { Typewriter } from 'react-simple-typewriter'
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { InfiniteLoopSlider, Tag } from '../scrollskills'
+import './SecondSection.css';
+
+const TAGS = ['HTML', 'CSS', 'JavaScript', 'React', 'Python', 'TensorFlow', 'Java', 'SQL', 'UI/UX', 'git', 'docker', 'backend', 'frontend', 'C#'];
+const DURATION = 15000;
+const ROWS = 5;
+const TAGS_PER_ROW = 5;
+const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+const shuffle = (arr) => [...arr].sort(() => .5 - Math.random());
 
 const SecondSection = () => {
-
-    const COLORS = ['#bbf7d0', '#99f6e4', '#bfdbfe', '#ddd6fe', '#f5d0fe', '#fed7aa', '#fee2e2'];
-    const TAGS = ['HTML', 'CSS', 'JavaScript', 'React', 'Python', 'TensorFlow', 'Java', 'SQL', 'UI/UX', 'git', 'docker', 'backend', 'frontend', 'C#'];
-    const DURATION = 15000;
-    const ROWS = 5;
-    const TAGS_PER_ROW = 5;
-  
-    const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
-    const shuffle = (arr) => [...arr].sort(() => .5 - Math.random());
-
   return (
     <div className='secondsection' style={{ display: 'flex', justifyContent: 'space-evenly', alignitems: 'center', flexDirection: 'row' }} >
 
-        <div className='desctypewriter' data-aos="fade-right" style={{ position: 'relative', flex: 8 }}>
+        <div className='desctypewriter' data-aos="zoom-out-right" style={{ position: 'relative', flex: 8 }}>
           <h2>What I can do 🛠️</h2>
           <br />
           <p>
