@@ -3,7 +3,6 @@
     box-sizing: border-box;
     background-image: radial-gradient(#ef008f8f , #09090900 70%);
     padding: 20px;
-    padding-right: 20px;
     border-radius: 20px;
     border-bottom-left-radius: 140px;
     border-bottom-right-radius: 140px;
@@ -15,6 +14,7 @@
 
 .desctypewriter.work .image-description {
   word-wrap: break-word;
+  overflow: visible;
 }
 
 .work {
@@ -50,6 +50,12 @@
 
 .tilt {
   width: 60%;
+}
+
+@media (max-width: 600px) {
+  .thirdsection {
+    padding: 0px;
+  }
 }
 
 @media (max-width: 1292px) {

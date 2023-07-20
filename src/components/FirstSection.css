@@ -10,6 +10,13 @@
     scroll-snap-align: start;
   }
 
+  @media (max-width: 600px) {
+    .firstsection {
+      padding: 14px;
+      text-align: center;
+    }
+  }
+
   @media (max-width: 1156px) {
     .firstsection {
       width: 100%;

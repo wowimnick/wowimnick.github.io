@@ -14,7 +14,7 @@ const SecondSection = () => {
   return (
     <div className='secondsection' style={{ display: 'flex', justifyContent: 'space-evenly', alignitems: 'center', flexDirection: 'row' }} >
 
-        <div className='desctypewriter' data-aos="zoom-out-right" style={{ position: 'relative', flex: 8 }}>
+        <div className='desctypewriter' data-aos="zoom-out-up" style={{ position: 'relative', flex: 8 }}>
           <h2>What I can do 🛠️</h2>
           <br />
           <p>
