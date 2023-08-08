@@ -8,7 +8,7 @@
     inset: 0 0 auto 0;
     transition: color 0.3s;
     z-index: 10;
-    color: #fff;
+    color: #000;
     right: 0;
     padding: 0.2rem;
     padding-left: 5vw;
@@ -26,16 +26,16 @@
     justify-content: center;
     font-family: 'Outfit', sans-serif;
     font-weight: bold;
-    color: #fcfcfc;
+    color: #000;
     background: transparent;
     text-decoration: none;
-    border: 1px solid white;
+    border: 1px solid black;
     border-radius: 5px;
     z-index: 2;
     margin-left: 1rem;
     width: 7rem;
     height: 2.5rem;
-    font-size: 2vh;
+    font-size: 20px;
     cursor: pointer;
     transition: all 0.4s ease ;
   }

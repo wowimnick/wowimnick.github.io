@@ -1,14 +1,35 @@
 .secondsection {
     position: relative;
     box-sizing: border-box;
-    background: radial-gradient(circle farthest-side at right center, #84004F 0%, #09090900 57%);
-    border-radius: 20px;
-    height: 80vh;
+    align-self: center;
+    background: radial-gradient(ellipse at left, #3b4a75 0%, #ffffff 100%);
+    height: fit-content;
     overflow: visible;
-    width: 100%;
-    padding-right: 3vw;
+    padding: 3vw;
     z-index: 16;
   }
+
+.secondsection::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  box-shadow: inset 0px 3px 3px 0px #0000008f;
+}
+
+.secondsection::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  box-shadow: inset 0px -3px 3px 0px #0000008f;
+}
 
   .rainbow {
     -webkit-text-fill-color: transparent;
@@ -25,48 +46,30 @@
 
   .skillswork {
     border-radius: 5px;
-    background: linear-gradient(90deg, rgb(64 64 64 / 42%) 12%, rgb(64 64 64 / 42%) 84%);
+    background: rgba(185, 185, 185, 0.76);
     animation: fadeIn 0.5s forwards;
-    overflow: auto;
-    margin-top: 2vh;
+    overflow: scroll;
+    margin-top: 5vh;
     height: 220px;
     width: 29em;
     padding: 2%;
     z-index: 11;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
   }
 
-  .skillswork::-webkit-scrollbar {
-    width: 8px;
-    background: transparent; /* make scrollbar transparent */
-    border-radius: 5px;
+    /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
   }
-
-  .csharp {
-    display: flex;
-    text-align: left;
-    align-self: center;
-    width: 65%;
-    border-radius: 50px;
-    height: 5px;
-    background: linear-gradient(90deg, rgb(155 155 155 / 64%) 25%, rgba(0, 0, 128, 0.95) 26%);
-    animation: fadeIn 0.5s forwards;
-    opacity: 1;
-    flex-direction: column-reverse;
-    align-items: flex-start;
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
   }
-  
-  .htmlcss {
-    background: linear-gradient(90deg, rgb(155 155 155 / 64%) 19%, rgba(197, 107, 22, 0.95) 20%);
+  ::-webkit-scrollbar-thumb {
+    background: #888;
   }
-  
-  .java {
-    background: linear-gradient(90deg, rgb(155 155 155 / 64%) 15%, rgba(184, 178, 11, 0.95) 16%);
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
-  
-  .python {
-    background: linear-gradient(90deg, rgb(155 155 155 / 64%) 1%, rgba(45, 194, 231, 0.95) 2%);
-  }
-
 
   .bounce {
     -moz-animation: bounce 2s infinite;
@@ -74,62 +77,19 @@
     animation: bounce 2s infinite;
   }
   
-  .tag-list {
-    margin-top: 7%;
-    border: #3f2033 solid 3px;
-    border-radius: 25px;
-    width: 30em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2rem 0;
-    position: relative;
-    padding: 1.5rem 0;
-    overflow: hidden;
-  }
-  
-  .loop-slider .inner {
-    display: flex;
-    width: fit-content;
-    animation-name: loop;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: var(--direction);
-    animation-duration: var(--duration);
-  }
-  
-  .tag {
-    display: flex;
-    align-items: center;
-    gap: 0 0.2rem;
-    color: #e2e8f0;
-    font-size: 0.9rem;
-    background-color: #ffffff1f;
-    border-radius: 0.4rem;
-    padding: 0.7rem 1rem;
-    margin-right: 1rem;
-    box-shadow:
-      0 0.1rem 0.2rem rgb(0 0 0 / 20%),
-      0 0.1rem 0.5rem #6c0041,
-      0 0.2rem 1.5rem rgb(0 0 0 / 40%);
-  }
-  
-  .tag span {
-    font-size: 1.2rem;
-    color: #5f5f5f;
-  }
-  
-  .fade {
-    pointer-events: none;
-    background: linear-gradient(90deg, #090909, transparent 10%, transparent 90%, #090909);
-    position: absolute;
-    inset: 0;
-    border-image: linear-gradient(90deg, #090909, transparent 10%, transparent 90%, #090909) 1;
-  }
-
   @media (max-width: 1211px) {
-    .hidetext {
-      display: none;
+    .desctypewriter {
+      flex-basis: 100% !important;
+      text-align: center !important;
+    }
+    .desctypewriter > h2 {
+      width: unset !important;
+    }
+    .secondsection > p {
+      text-align: center !important;
+    }
+    .secondsection > :last-child {
+      display: none !important;
     }
   }
   

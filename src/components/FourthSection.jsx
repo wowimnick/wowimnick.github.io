@@ -1,87 +1,102 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useRef} from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import emailjs from 'emailjs-com';
 import confetti from 'canvas-confetti';
+import LottieAnimation from './animation';
+
 import './FourthSection.css';
 
 const FourthSection = () => {
-  const form = useRef();
-  
-  const sendEmail = (e) => {
-    e.preventDefault();
-  
-    const nameInput = form.current.elements.name;
-    const emailInput = form.current.elements.email;
-    const subjectInput = form.current.elements.subject;
-    const messageInput = form.current.elements.message;
-  
-    if (nameInput.value === '' || emailInput.value === '' || subjectInput.value === '' || messageInput.value === '') {
-      const submitButton = document.querySelector('#submitbutton');
-      submitButton.value = '❌ Error';
-      submitButton.style.backgroundColor = '#870021';
-  
-      setTimeout(() => {
-        submitButton.style.transition = 'background-color 0.5s, color 0.5s';
-        submitButton.style.backgroundColor = '';
-        submitButton.value = 'Submit';
-    }, 3000);
-      return;
-    }
-  
+
+  const errorAnim = <LottieAnimation loop={false} src={require('../resources/error.json')} className='error' speed2={1} />;
+  const form = useRef(null);
+
+
+
+  const handleSubmit = (values, { setSubmitting, resetForm }) => {
     emailjs.sendForm('service_hpeadoj', 'template_doikkmo', form.current, 'mxhVfavVsSqczEg8r')
       .then((result) => {
-          console.log(result.text);
-      }, (error) => {
-          console.log(error.text);
+        console.log(result.text);
+        setSubmitting(false);
+        resetForm();
+      })
+      .catch((error) => {
+        console.log(error.text);
+        setSubmitting(false);
       });
-      form.current.reset();
-  
-    const element = document.querySelector('#submitbutton');
-    const { top, bottom, left, right } = element.getBoundingClientRect();
-  
-    confetti({
-      origin: {
-        x: ((left + right) / 2) / window.innerWidth,
-        y: ((top + bottom) / 2) / window.innerHeight
-      },
-      spread: 90
-    });
-  
-    element.value = '✅ Sent!';
-    element.style.backgroundColor = '#00743b';
-  
-    setTimeout(() => {
-      element.style.transition = 'background-color 0.5s, color 0.5s';
-      element.style.backgroundColor = '';
-      element.value = 'Submit';
-    }, 3000);
   };
+
   return (
-    <div className='fourthsection' data-aos="zoom-out-up" style={{ display: 'flex', alignitems: 'center', flexDirection: 'column' }}>
-        <div className='desctypewriter' style={{ display: 'flex', flexDirection: 'row', gap: '4vw', position: 'relative'}}>
-          <div className='hide' >
-          <h2 data-aos="fade-up">Contact me. 🤝</h2>
-          <p style={{fontSize:'unset'}}>
-          
-            I'm interested in any potential opportunities, especially ambitious or large projects. However, if you have other request or question, don't hesitate to use the form. <br /><br /><br />
-            Fill in the form and I'll respond to all emails as quickly as possible. <br />If you do not receive a response back within a few days, please check your SPAM folder or filter.
-          </p>
-          </div>
-          <div className='contactmebox'>
-            <form onSubmit={sendEmail} ref={form}>
-            <h3>Get in touch.</h3>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '2vw' }}>
-                <input type="text" name='name' className='textBox' placeholder="name" /> <br />
-                <input type="text" name='email' className='textBox' placeholder="email" />
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column'}}>
-                <input type="text" name='subject' className='textBox' placeholder="subject" />
-                <textarea name='message' className='textBox' placeholder="message" style={{ height: '6vh', width: '95%'}}></textarea>
-              <input type="submit" className='submitbutton' value="Submit" id="submitbutton" />
-            </div>
-            </form>
-          </div>
-        </div>
+    <div className='fourthsection' data-aos="zoom-out-up">
+      <LottieAnimation loop={false} src={require('../resources/contactcircles.json')} style={{ position: 'absolute', top: 0, left: '25%', transform: 'translateX(-50%)', width: '100vw', height: '100%', objectFit: 'cover', overflow: 'hidden', zIndex: '-1' }} speed2={1} />
+      <div className='grid-container'>
+        <h2 style={{ padding: '15px', boxShadow: 'rgb(223 225 255 / 66%) 1px 1px 20px 6px', background: '#323232', color:'white' }} data-aos="fade-up"> Contact me. 🤝</h2>
+        <div className='hide'/>
+        <p className='hide' style={{ textAlign: 'left', color: 'white' }}>
+          I'm interested in any potential opportunities, especially ambitious or large projects. However, if you have other requests or questions, don't hesitate to use the form. <br /><br /><br />
+          Fill in the form and I'll respond to all emails as quickly as possible. <br />If you do not receive a response back within a few days, please check your SPAM folder or filter.
+        </p>
+        <Formik
+          initialValues={{ name: '', email: '', subject: '', message: '' }}
+          validate={(values) => {
+            const errors = {};
+            if (!values.name) {
+              errors.name = errorAnim;
+            }
+            if (!values.email) {
+              errors.email = errorAnim;
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+              errors.email = errorAnim;
+            }
+            if (!values.subject) {
+              errors.subject = errorAnim;
+            }
+            if (!values.message) {
+              errors.message = errorAnim;
+            }
+            return errors;
+          }}
+          onSubmit={handleSubmit}
+        >
+          {({ isSubmitting }) => (
+            <Form className='contactmebox' ref={form}>
+              <h3 style={{ color: 'white', fontSize: '15px' }}>Get in touch.</h3>
+              <div className='inputGrid'>
+                <div className='rowFlex'>
+                  <Field type="text" name='name' className='textBox' placeholder="name" />
+                  <ErrorMessage name="name" component="div" className="error" />
+
+                </div>
+                <div className='rowFlex'>
+                  <Field type="text" name='email' className='textBox' placeholder="email" />
+                  <ErrorMessage name="email" component="div" className="error" />
+                </div >
+
+                <div className='rowFlex'>
+                  <Field type="text" name='subject' className='textBox' placeholder="subject" />
+                  <ErrorMessage name="subject" component="div" className="error" />
+                </div>
+                <div />
+                <div className='rowFlex'>
+                  <Field as="textarea" name='message' className='textBox' placeholder="message" />
+                  <ErrorMessage name="message" component="div" className="error" />
+                </div>
+              </div>
+              <button type="submit" className='submitbutton' disabled={isSubmitting} id="submitbutton">
+                {isSubmitting ? (
+                  <>
+                    Sent
+                    <LottieAnimation loop={false} src={require('../resources/checkmark.json')} style={{ width: '40px' }} speed2={1} />
+                  </>
+                ) : (
+                  'Submit'
+                )}
+              </button>
+            </Form>
+          )}
+        </Formik>
       </div>
+    </div>
   );
 };
 
