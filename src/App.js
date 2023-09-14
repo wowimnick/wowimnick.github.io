@@ -30,8 +30,11 @@ function App() {
   }, []);
 
   // Initialize Lenis
-  const lenis = new Lenis()
-
+  const lenis = new Lenis({
+    container: document.querySelector('.sections'), // Use the container that holds your sections
+    snap: true, // Enable snap scrolling
+    snapOffset: 0, // Adjust the snap offset as needed
+  });
   lenis.on('scroll', (e) => {
     console.log(e)
   })
@@ -55,7 +58,6 @@ function App() {
       {!loading && (
         <>
           <Navbar />
-          {/* <GradientWrapper /> */}
           <LottieAnimation style={{ position: 'fixed', top: 0, left: '50%', transform: 'translateX(-50%)', width: 'max-content', height: '100%', objectFit: 'cover', overflow: 'hidden' }} loop={false} src={require('./resources/grid.json')} speed2={1} />
           <LottieAnimation style={{position: 'absolute', width: '100%', height: '100%'}} loop={true} src={require('./resources/bga.json')} speed2={1}/>
           <div className="rowmenucontainer">
@@ -64,18 +66,13 @@ function App() {
                 <FontAwesomeIcon icon={faAngleDown} />
               </i>
             </div>
-            {/* <LottieAnimation style={{position: 'absolute', width: '200%', height: '200%', top: '65vh', left: '0'}} loop={true} src={require('./resources/sep.json')} speed2={0.1}/> */}
             <Title />
             <ButtonsHolder />
           </div>
           <div className="sections">
-            
             <FirstSection />
-            
-            <LottieAnimation src={require('./resources/animation_lkuowbyo.json')} loop={false} style={{width: '350px', height: '310px'}} speed2={1.5}/>
+            <LottieAnimation style={{position: 'relative', width: '350px', height: '250px', top: '20px'}} speed2={1.5} loop={false} src={require('./resources/animation_lkuowbyo.json')}/>
             <SecondSection />
-            
-
             <LottieAnimation style={{position: 'relative', width: '350px', height: '250px', transform: 'scaleX(-1)', left: '-23vw', top: '20px'}} speed2={1.5} loop={false} src={require('./resources/animation_lkuowbyo.json')}/>
             <ThirdSection />
             <LottieAnimation style={{position: 'relative', left: '-3vw', width: '350px', height: '250px'}} loop={false} speed2={1.5} src={require('./resources/animation_lkuowbyo.json')} />

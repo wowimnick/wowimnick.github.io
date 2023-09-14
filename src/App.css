@@ -7,7 +7,6 @@
 
 .App {
   background-color: #fff8f8;
-  /* background-image: url('resources/bg.jpg'); */
   background-size: cover;
   background-attachment: fixed;
   height: fit-content;
@@ -39,34 +38,11 @@
   position: relative;
   display: flex;
   height: 85vh;
-  width: 100vw;
   z-index: 12;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 10vw;
-}
-
-.gradient-wrapper {
-  position: absolute;
-  left: 0;
-  top: -18rem;
-  width: 100%;
-  height: 20rem;
-  transform: skewY(-8deg);
-  
-  z-index: 3;
-  display: grid;
-  place-items: stretch;
-}
-
-#gradient-canvas {
-  width: 100%;
-  height: 100%;
-  --gradient-color-1: #FFE08C;
-  --gradient-color-2: #F2A7A0;
-  --gradient-color-3: #B2C8F5;
-  --gradient-color-4: #D9C8B1;
 }
 
 .arrow {
@@ -89,8 +65,7 @@
   align-items: center;
   top: 15vh;
   margin-bottom: 145px;
-  overflow: visible;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.363) 15%, black 85%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.363) 80%, black 88%);
 }
 
 .textBox {
@@ -140,6 +115,7 @@ h2 {
   font-size: 6vh;
   border-radius: 5px;
   color: #000000;
+  background: rgb(213 210 229 / 93%);
   font-weight: 500;
   font-family: 'Poppins';
   font-weight: 700;

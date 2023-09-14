@@ -1,8 +1,6 @@
 .thirdsection {
     position: relative;
     box-sizing: border-box;
-    background-image: radial-gradient(#4d30858f , #2b2b2b00 70%);
-    filter: drop-shadow(0px 0px 20px #000000);
     padding: 20px;
     padding-top: 0px;
     border-radius: 20px;
@@ -27,18 +25,19 @@
   width: 60%;
   flex-direction: column;
   align-items: center;
-  background: radial-gradient(ellipse at center, #000000 0%, #ffffff80 100%);
-  border: 1px rgb(163 163 163 / 25%) solid;
+  color: white;
+  background: radial-gradient(ellipse at top, #454a55 0%, #ffffff00 100%);
+  border: 1px rgba(83, 83, 83, 0.25) solid;
   transition: all 0.2s ease-out !important;
   border-radius: 5px;
   padding: 20px;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(2px);
 }
 
 .sentimentanalysis:hover, .everx:hover, .snakie:hover {
   border: 1px rgba(255, 255, 255, 0.527) solid !important;
   transition: all 0.2s ease-out  !important;
-  scale: 1.020;
+  scale: 1.010;
 }
 
 .tilt {
@@ -57,6 +56,5 @@
     }
     .sentimentanalysis, .everx, .snakie {
       width: 95%;
-      background-color: whitesmoke;
     }
   }

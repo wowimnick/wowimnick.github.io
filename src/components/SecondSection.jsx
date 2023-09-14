@@ -9,7 +9,7 @@ const SecondSection = () => {
     <div className='secondsection' style={{ display: 'flex', justifyContent: 'space-evenly', alignitems: 'center', flexDirection: 'row' }} >
 
       <div className='desctypewriter' data-aos="zoom-out-up">
-        <h2 style={{ width: '80%', padding: '15px', background: '#9591cd33', boxShadow: 'rgb(46 46 46 / 31%) -20px 20px 6px 0px' }}>What I can do 🛠️</h2>
+        <h2 style={{ width: '80%', padding: '15px', background: 'rgb(205 204 215);', boxShadow: 'rgb(46 46 46 / 31%) -20px 20px 6px 0px' }}>What I can do 🛠️</h2>
         <br />
         <p>
           Having over 3 years of development experience in both back-end and front-end development, I have experience in a variety of programming languages, tools, and technologies, <br />like
