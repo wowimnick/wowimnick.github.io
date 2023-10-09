@@ -22,7 +22,7 @@ const FirstSection = () => {
           <span style={{ color: '#4bc9f9' }}>Let's make something special.</span>
         </p>
       </div>
-      <LottieAnimation loop={false} src={require('../resources/me.json')} style={{width: '20vw'}} speed2={1}/>
+      <LottieAnimation loop={false} src={require('../resources/me.json')} style={{width: '20vw'}} progressiveLoad={true} speed2={1}/>
     </div>
   );
 };

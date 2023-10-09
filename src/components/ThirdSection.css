@@ -17,9 +17,7 @@
   word-wrap: break-word;
 }
 
-.sentimentanalysis,
-.everx,
-.snakie {
+.project {
   display: flex;
   align-self: center;
   width: 60%;
@@ -34,7 +32,11 @@
   backdrop-filter: blur(2px);
 }
 
-.sentimentanalysis:hover, .everx:hover, .snakie:hover {
+.more {
+  width: 25%;
+}
+
+.project:hover {
   border: 1px rgba(255, 255, 255, 0.527) solid !important;
   transition: all 0.2s ease-out  !important;
   scale: 1.010;

@@ -28,7 +28,6 @@ const FourthSection = () => {
 
   return (
     <div className='fourthsection' data-aos="zoom-out-up">
-      <LottieAnimation loop={false} src={require('../resources/contactcircles.json')} style={{ position: 'absolute', top: 0, left: '25%', transform: 'translateX(-50%)', width: '100vw', height: '100%', objectFit: 'cover', overflow: 'hidden', zIndex: '-1' }} speed2={1} />
       <div className='grid-container'>
         <h2 style={{ padding: '15px', boxShadow: 'rgb(223 225 255 / 66%) 1px 1px 20px 6px', background: '#323232', color:'white' }} data-aos="fade-up"> Contact me. 🤝</h2>
         <div className='hide'/>
