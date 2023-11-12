@@ -9,7 +9,7 @@ const Navbar = () => {
         NICK
         <div style={{display: 'flex'}}>
             <button className='NavbarItem' target="_blank" onClick={() => { scroll.scrollToTop() }}>Home</button>
-            <a href="https://acrobat.adobe.com/id/urn:aaid:sc:US:e59101ef-a6ed-4ecd-94e8-9794ad3011b3" className='NavbarItem' target="_blank">Resume</a>
+            <a href="https://acrobat.adobe.com/id/urn:aaid:sc:US:dcf79dcc-f102-443b-be5e-ec3924b45f73" className='NavbarItem' target="_blank">Resume</a>
         </div>
   </div> 
   );

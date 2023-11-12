@@ -24,7 +24,7 @@
   flex-direction: column;
   align-items: center;
   color: white;
-  background: radial-gradient(ellipse at top, #454a55 0%, #ffffff00 100%);
+  background: radial-gradient(ellipse at top, #7c7e80 0%, #4d4d4d 100%);
   border: 1px rgba(83, 83, 83, 0.25) solid;
   transition: all 0.2s ease-out !important;
   border-radius: 5px;

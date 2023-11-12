@@ -12,10 +12,10 @@ const SecondSection = () => {
         <h2 style={{ width: '80%', padding: '15px', background: 'rgb(205 204 215);', boxShadow: 'rgb(46 46 46 / 31%) -20px 20px 6px 0px' }}>What I can do 🛠️</h2>
         <br />
         <p>
-          Having over 3 years of development experience in both back-end and front-end development, I have experience in a variety of programming languages, tools, and technologies, <br />like
+          Having over 3 years of development experience in development, I have experience in a variety of programming languages, tools, and technologies, <br />like
           <span className='rainbow' style={{ fontFamily: 'Outfit', fontWeight: 'bold', fontSize: '20px' }}>
             <Typewriter
-              words={[' Java', ' Python', ' C#', ' HTML & CSS', ' SQL', ' JavaScript', ' React.js', ' Django', ' Cloud Computing', ' Docker', ' Machine Learning', ' Git']}
+              words={[' Java', ' Python', ' Data Analysis', ' HTML & CSS', ' SQL', ' JavaScript', ' React.js', ' Django', ' Cloud Computing', ' Docker', ' Machine Learning', ' Git']}
               loop={0}
               typeSpeed={50}
               deleteSpeed={30}

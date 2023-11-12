@@ -16,7 +16,8 @@
     z-index: 20;
     font-size: 2.25rem;
     height: 6vh;
-    
+    background: #f6fdff7d;
+    backdrop-filter: blur(2px);
   }
   
   .NavbarItem {
