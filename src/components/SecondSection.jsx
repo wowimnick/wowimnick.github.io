@@ -9,7 +9,7 @@ const SecondSection = () => {
     <div className='secondsection' style={{ display: 'flex', justifyContent: 'space-evenly', alignitems: 'center', flexDirection: 'row' }} >
 
       <div className='desctypewriter' data-aos="zoom-out-up">
-        <h2 style={{ width: '80%', padding: '15px', background: 'rgb(205 204 215);', boxShadow: 'rgb(46 46 46 / 31%) -20px 20px 6px 0px' }}>What I can do 🛠️</h2>
+        <h2 style={{ width: '80%', padding: '15px', background: 'rgb(255 255 255 / 63%)', boxShadow: 'rgb(46 46 46 / 31%) -20px 20px 6px 0px' }}>What I can do 🛠️</h2>
         <br />
         <p>
           Having over 3 years of development experience in development, I have experience in a variety of programming languages, tools, and technologies, <br />like
@@ -23,8 +23,7 @@ const SecondSection = () => {
           </span>.
           
           <br /><br />
-          <span className='hidetext'> During my experience at Reeve Network I have successfully created ecommerce web applications which hooked into user management systems, and various management tools in Java which served to support the high amount of daily users.
-          </span>
+          <span className='hidetext'> During my experience at Reeve Network as a Data Scientist and Machine Learning Engineer I had responsibilities within the entirety of the ML pipeline, from data collection and cleaning, to model development, deployment, and monitoring, delivering scalable and reliable solutions to the company's needs. </span>
         </p>
       </div>
       <div style={{ display: 'grid', flexBasis: '60%', justifyContent: 'center', alignItems: 'center', alignContent: 'center' }}>

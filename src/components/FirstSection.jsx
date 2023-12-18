@@ -7,9 +7,9 @@ const FirstSection = () => {
 
 
   return (
-    <div className='firstsection' data-aos="zoom-out-up">
+    <div className='firstsection'>
       <div class='firstContainer'>
-      <h2 style={{ padding: '15px', boxShadow: 'rgb(46 46 46 / 31%) -20px 20px 6px 0px', background: 'rgb(255 255 255 / 60%)' }}>Here's a bit about me</h2>
+      <h2 style={{ padding: '15px', boxShadow: 'rgb(46 46 46 / 31%) -20px 20px 6px 0px', background: 'rgb(255 255 255 / 63%)' }}>Here's a bit about me</h2>
         <p>
           <br />
           I'm a passionate & proactive human with strong expertise & experience of 3+ years in Machine/Deep Learning, Software Development, 

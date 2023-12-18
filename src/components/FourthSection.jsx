@@ -27,11 +27,11 @@ const FourthSection = () => {
   };
 
   return (
-    <div className='fourthsection' data-aos="zoom-out-up">
+    <div className='fourthsection' data-aos="fade-up">
       <div className='grid-container'>
-        <h2 style={{ padding: '15px', boxShadow: 'rgb(223 225 255 / 66%) 1px 1px 20px 6px', background: '#323232', color:'white' }} data-aos="fade-up"> Contact me. 🤝</h2>
+        <h2 style={{ padding: '15px', boxShadow: 'rgb(223 225 255 / 66%) 1px 1px 20px 6px', background: 'rgba(255, 255, 255, 0.63)', color:'black' }}> Contact me. 🤝</h2>
         <div className='hide'/>
-        <p className='hide' style={{ textAlign: 'left', color: 'white' }}>
+        <p className='hide' style={{ textAlign: 'left', color: 'black' }}>
           I'm interested in any potential opportunities, especially ambitious or large projects. However, if you have other requests or questions, don't hesitate to use the form. <br /><br /><br />
           Fill in the form and I'll respond to all emails as quickly as possible. <br />If you do not receive a response back within a few days, please check your SPAM folder or filter.
         </p>

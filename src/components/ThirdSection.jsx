@@ -9,7 +9,7 @@ import snakie from '../resources/snakie.mp4'
 const ThirdSection = () => {
   return (
     <div className='thirdsection' style={{ display: 'flex', alignitems: 'center', flexDirection: 'column' }}>
-      <h2 data-aos="zoom-out-up" style={{ alignSelf: 'center', width: 'fit-content', padding: '15px', marginTop: '0', background:'radial-gradient(at center bottom, rgb(131 131 131) 0%, rgb(255 255 255 / 94%) 100%)' }}>Some of my work 💻</h2>
+      <h2 data-aos="zoom-out-up" style={{ alignSelf: 'center', width: 'fit-content', padding: '15px', marginTop: '0', background:' rgb(213 210 229 / 78%)' }}>Some of my work 💻</h2>
         <div className='project' data-aos="fade-up">
           <a href="https://github.com/wowimnick/Sentiment-Analysis" target='blank_'><img src={sa} width="100%" height="300" style={{ objectFit: 'cover', borderRadius: '5px' }} /></a>
           <span style={{ fontFamily: 'Damion', textAlign: 'center', fontSize: '22px' }}>Sentiment Analysis</span>
