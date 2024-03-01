@@ -12,7 +12,7 @@ const SecondSection = () => {
         <h2 style={{ width: '80%', padding: '15px', background: 'rgb(255 255 255 / 63%)', boxShadow: 'rgb(46 46 46 / 31%) -20px 20px 6px 0px' }}>What I can do 🛠️</h2>
         <br />
         <p>
-          Having over 3 years of development experience in development, I have experience in a variety of programming languages, tools, and technologies, <br />like
+          Having strong expertise in development, I am proficient in a variety of programming languages, tools, and technologies, <br />like
           <span className='rainbow' style={{ fontFamily: 'Outfit', fontWeight: 'bold', fontSize: '20px' }}>
             <Typewriter
               words={[' Java', ' Python', ' Data Analysis', ' HTML & CSS', ' SQL', ' JavaScript', ' React.js', ' Django', ' Cloud Computing', ' Docker', ' Machine Learning', ' Git']}
@@ -23,7 +23,7 @@ const SecondSection = () => {
           </span>.
           
           <br /><br />
-          <span className='hidetext'> During my experience at Reeve Network as a Data Scientist and Machine Learning Engineer I had responsibilities within the entirety of the ML pipeline, from data collection and cleaning, to model development, deployment, and monitoring, delivering scalable and reliable solutions to the company's needs. </span>
+          <span className='hidetext'> As a Software Developer and Machine Learning Engineer, I have gained skills and knowledge in the whole ML pipeline, from data collection and cleaning, to model development, deployment, and monitoring. I can deliver scalable and reliable solutions to various business problems. </span>
         </p>
       </div>
       <div style={{ display: 'grid', flexBasis: '60%', justifyContent: 'center', alignItems: 'center', alignContent: 'center' }}>
