@@ -5,7 +5,6 @@ import LottieAnimation from './components/animation'
 import 'aos/dist/aos.css';
 import Lenis from '@studio-freight/lenis'
 import { PropagateLoader } from 'react-spinners'; // Removed PropagateLoader since it's not used
-import GradientWrapper from './GradientWrapper';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Navbar from './components/Navbar';

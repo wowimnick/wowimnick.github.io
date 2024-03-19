@@ -27,7 +27,7 @@ const FourthSection = () => {
   };
 
   return (
-    <div className='fourthsection' data-aos="fade-up">
+    <div className='fourthsection' data-aos="fade-up" data-aos-easing="ease-in-sine">
       <div className='grid-container'>
         <h2 style={{ padding: '15px', boxShadow: 'rgb(223 225 255 / 66%) 1px 1px 20px 6px', background: 'rgba(255, 255, 255, 0.63)', color:'black' }}> Contact me. 🤝</h2>
         <div className='hide'/>

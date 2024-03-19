@@ -22,14 +22,15 @@
   display: flex;
   align-self: center;
   width: 60%;
+  background: aliceblue;
   font-family: 'Outfit', sans-serif;
   font-size: 18px;
   flex-direction: column;
   align-items: center;
   color: black;
-  border: 5px rgba(83, 83, 83, 0.25) solid;
+  border: 2px rgb(0 0 0) solid;
   transition: all 0.2s ease-out !important;
-  border-radius: 20px;
+  border-radius: 19px;
   padding: 20px;
 }
 
