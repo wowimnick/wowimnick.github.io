@@ -29,7 +29,6 @@ const AnimatedRoutes = () => {
         <Route path="/careers" element={<Careers />} />
         <Route path='/terms-of-service' element={<TOS />} />
         <Route path='privacy-policy' element={<Privacy />} />
-        <Route path="*" element={<NotFoundPage />} />
 
       </Routes>
     </AnimatePresence>
