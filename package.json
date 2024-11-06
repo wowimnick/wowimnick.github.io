@@ -1,12 +1,9 @@
 {
   "name": "confidentcare",
-  "private": false,
+  "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://wowimnick.github.io/CCF",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
@@ -25,7 +22,6 @@
     "emailjs": "^4.0.3",
     "embla-carousel-react": "^8.2.1",
     "framer-motion": "^11.5.2",
-    "gh-pages": "^6.2.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.438.0",
     "mammoth": "^1.8.0",
