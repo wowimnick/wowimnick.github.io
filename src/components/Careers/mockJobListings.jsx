@@ -55,4 +55,18 @@ export const mockJobListings = [
       'Compassionate and patient-centered approach to care',
     ],
   },
+  {
+    id: 5,
+    title: 'Speech-Language Pathologist',
+    department: 'Therapy',
+    location: 'Aventura (Miami-Dade)',
+    type: 'Full-time',
+    description: 'We are seeking a qualified Speech-Language Pathologist to provide therapy services to our patients...',
+    requirements: [
+      'Licensed Speech-Language Pathologist in the state of Florida',
+      'Minimum of 2 years of experience in home health care',
+      'Experience with swallowing disorders and cognitive rehabilitation',
+      'Excellent documentation and time management skills',
+    ],
+  },
 ];

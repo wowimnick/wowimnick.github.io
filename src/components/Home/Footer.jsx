@@ -21,7 +21,7 @@ const Footer = () => {
             </ContactItem>
             <ContactItem>
               <Mail size={16} />
-              info@confidentcare.com
+              <a href="mailto:info@confidentcare.com">info@confidentcare.com</a>
             </ContactItem>
           </ContactInfo>
         </CompanyInfo>
@@ -110,6 +110,15 @@ const ContactItem = styled.p`
   gap: 0.5rem;
   font-size: 0.9rem;
   color: #666;
+
+  a {
+    color: #666;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #e6777d;
+    }
+  }
 `;
 
 const QuickLinksSection = styled.div`

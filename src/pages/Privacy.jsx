@@ -118,11 +118,11 @@ const Privacy = () => {
                 <p>
                     We are in compliance with the requirements of COPPA (Childrens Online
                     Privacy Protection Act), Our website, products and services are all
-                    directed to people who are at least 13 years old or older. We do not
-                    knowingly collect any information from anyone under 13 years of age.
+                    directed to people who are at least 18 years old or older. We do not
+                    knowingly collect any information from anyone under 18 years of age.
                     If a parent or guardian becomes aware that his or her child has
                     provided us with Personal Information without their consent, he or she
-                    should contact us. If we become aware that a child under 13 has
+                    should contact us. If we become aware that a child under 18 has
                     provided us with Personal Information, we will delete such information
                     from our files.
                 </p>
@@ -137,7 +137,7 @@ const Privacy = () => {
                 <p>
                     Please also visit our Terms and Conditions section establishing the
                     use, disclaimers, and limitations of liability governing the use of
-                    our website at www.confidentcarecorp.com/terms-and-conditions
+                    our website at <a href="/terms-of-service">Terms of Service</a>
                 </p>
 
                 <SectionTitle>Your Consent</SectionTitle>

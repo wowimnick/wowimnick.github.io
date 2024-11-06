@@ -11,8 +11,8 @@ const numberWithinRange = (number, min, max) =>
 
 const testimonials = [
   {
-    text: "The care I received from Confident Care of Florida was exceptional. The nurses were professional and compassionate.",
-    name: "John D.",
+    text: "My RN Irina took great care of me! I am fortunate to have Irina as my RN and I consider you fortunate to have her on your staff. The only reason I gave her a five star review was because a TEN review wasn't an option!",
+    name: "Rob Holtzer",
     role: "Patient"
   },
   {
@@ -21,18 +21,23 @@ const testimonials = [
     role: "Patient"
   },
   {
-    text: "I had the pleasure of using this company for rehab and was very happy and impressed with the level of service they had provided. Highly recommend.",
-    name: "Farzin Abdi",
+    text: "Kathryn Kwasnick was my husband's nurse, she is excellent, very profesional and kind, she always has a piece of advice in order to improve his health.",
+    name: "Patricia Echeverri",
     role: "Patient"
   },
   {
-    text: "My grandmother who lives in Jacksonville recently received wound care and was very satisfied. She was attended to very well.",
-    name: "Kathy Vila",
+    text: "I had the best experience with Confident Care of Florida! They are the best and I highly recommend them! My nurse Kathryn and physical therapists, Ami ( supervisor) and Cindy and occupational therapist, Daisy are compassionate, professional and offer the highest level of care. Damaris, who coordinates everything is top notch as well. If you or a loved one need home health, call Confident Care today! You will be glad you did!",
+    name: "Karyn Morris",
     role: "Patient"
   },
   {
-    text: "This is a great company with reliable and compassionate nurse- care. The nurses who took care of my grandpa were very helpful, and precise in assisting him back to health. I would recommend  this company to anyone who needs home healthcare.",
-    name: "Anonymous",
+    text: "Kathryn was assigned to me after being discharged from the hospital with a life-threatening diagnosis and a brand new medical apparatus of which I had no prior experience. Kathryn was professional, punctual, and had an easiness about her that helped me transition into the newness of my ailment. She went above and beyond to offer her professional recommendations for medical equipment and supplies. I honestly would not have recovered as seamlessly and quickly as I did if it weren't for her care. Superior service!!",
+    name: "LaKiesha Hall",
+    role: "Patient"
+  },
+  {
+    text: "CONFIDENT CARE- Service delivered with confidence and care; as exemplified by the indefatigable KATHRYN KWASNICK RN; who supervised my recovery from two successive surgeries- 2022/2023. Kudos for utmost diligence , devotion, and indisputable commitment- Professional competence complemented by an innate charm and engaging wit. JOSE GUEREDO, a gifted and enormously skilled professional, who was responsible for my rehabilitation from Laminectomy. A true Physiotherapist, whose age and youthful disposition belie his expertise, indisputable competence, and strict adherence to post spinal protocols critical in the recovery process. What a perfect fit!",
+    name: "Wisdom Dafinone",
     role: "Patient"
   }
 ];

@@ -5,6 +5,11 @@ import '@fontsource/poppins';
 import withPageTransition from '../components/withPageTransition';
 
 const TermsOfService = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
     <TermsWrapper>
       <HeroSection>

@@ -9,6 +9,7 @@ const { Option } = Select;
 
 // Import the locations array
 import { locations } from '../Locations/locationData';
+import { NavLink } from 'react-router-dom';
 
 const AnimatedInput = ({ label, ...props }) => {
   return (
@@ -113,10 +114,6 @@ const Hero = () => {
     direction.current = direction.current * -1;
   }, [currentImageIndex]);
 
-  const navigateToLocations = () => {
-    window.location.href = '/locations';
-  };
-
   return (
     <HeroWrapper ref={ref}>
       <AnimatePresence initial={false} custom={direction.current}>
@@ -173,9 +170,10 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.7 }}
-            onClick={navigateToLocations}
           >
-            Contact Us
+            <StyledNavLink to="/locations">
+              Contact Us
+            </StyledNavLink>
           </SecondaryButton>
         </ButtonGroup>
       </HeroContent>
@@ -417,6 +415,11 @@ const SecondaryButton = styled(ButtonBase)`
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
+`;
+
+const StyledNavLink = styled(NavLink)`
+  color: white;
+  text-decoration: none;
 `;
 
 const AnimatedInputWrapper = styled.div`
