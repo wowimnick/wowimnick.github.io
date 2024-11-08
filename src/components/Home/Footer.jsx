@@ -16,10 +16,6 @@ const Footer = () => {
           <Tagline>Quality Care You Can Trust</Tagline>
           <ContactInfo>
             <ContactItem>
-              <Phone size={16} />
-              (904) 733-1717
-            </ContactItem>
-            <ContactItem>
               <Mail size={16} />
               <a href="mailto:info@confidentcare.com">info@confidentcare.com</a>
             </ContactItem>
