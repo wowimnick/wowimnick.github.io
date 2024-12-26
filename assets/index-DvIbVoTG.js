@@ -2798,7 +2798,7 @@ html body {
 `,Nae=Wl(Rae),jae=()=>{const e=yu();return k.jsx(Tl,{mode:"wait",children:k.jsxs(F3,{location:e,children:[k.jsx(ya,{path:"/",element:k.jsx(qne,{})}),k.jsx(ya,{path:"/services",element:k.jsx(Rre,{})}),k.jsx(ya,{path:"/about-us",element:k.jsx(oie,{})}),k.jsx(ya,{path:"/locations",element:k.jsx(qie,{})}),k.jsx(ya,{path:"/insurances",element:k.jsx(xoe,{})}),k.jsx(ya,{path:"/careers",element:k.jsx(wae,{})}),k.jsx(ya,{path:"/terms-of-service",element:k.jsx(Iae,{})}),k.jsx(ya,{path:"privacy-policy",element:k.jsx(Nae,{})})]},e.pathname)})},zae=()=>k.jsx(Dae,{children:k.jsxs(q3,{children:[k.jsx(D8,{}),k.jsx(Fae,{children:k.jsx(jae,{})}),k.jsx(CV,{}),k.jsx(Cae,{})]})}),Dae=be.div`
   font-family: 'Arial', sans-serif;
   color: #333;
-  line-height: 1.6;
+  line-height: 1.59;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
