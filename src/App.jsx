@@ -53,7 +53,7 @@ const App = () => {
 const AppWrapper = styled.div`
   font-family: 'Arial', sans-serif;
   color: #333;
-  line-height: 1.6;
+  line-height: 1.59;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
