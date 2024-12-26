@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { motion, useInView } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const CTASection = () => {
   const ref = useRef(null);
@@ -25,7 +26,7 @@ const CTASection = () => {
           Discover how our comprehensive services can improve your quality of life or that of your loved ones.
         </motion.p>
         <ButtonGroup>
-          <a href="/services">
+          <Link to="/services">
             <CTAButton
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -35,8 +36,8 @@ const CTASection = () => {
             >
               Our Services <ArrowRight size={20} />
             </CTAButton>
-          </a>
-          <a href="/locations">
+          </Link>
+          <Link to="/locations">
             <CTAButton
               secondary
               whileHover={{ scale: 1.05 }}
@@ -47,7 +48,7 @@ const CTASection = () => {
             >
               Contact Us
             </CTAButton>
-          </a>
+          </Link>
         </ButtonGroup>
       </ContentWrapper>
     </CTAWrapper>
@@ -61,7 +62,6 @@ const CTAWrapper = styled.section`
   margin-bottom: 4rem;
   text-align: center;
   font-family: 'Poppins', sans-serif;
-
   @media (max-width: 768px) {
     padding: 3rem 1rem;
     margin-bottom: 3rem;
@@ -71,24 +71,20 @@ const CTAWrapper = styled.section`
 const ContentWrapper = styled.div`
   max-width: 800px;
   margin: 0 auto;
-
   h2 {
     font-size: 2.5rem;
     color: #333;
     margin-bottom: 1rem;
     font-weight: 600;
-
     @media (max-width: 768px) {
       font-size: 2rem;
     }
   }
-
   p {
     font-size: 1.1rem;
     color: #666;
     margin-bottom: 2rem;
     line-height: 1.6;
-
     @media (max-width: 768px) {
       font-size: 1rem;
       margin-bottom: 1.5rem;
@@ -100,12 +96,10 @@ const ButtonGroup = styled.div`
   display: flex;
   justify-content: center;
   gap: 1rem;
-
   a {
     color: ${props => props.secondary ? '#4a90e2' : 'white'};
     text-decoration: none;
   }
-
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
@@ -125,14 +119,11 @@ const CTAButton = styled(motion.button)`
   gap: 0.5rem;
   transition: all 0.3s ease;
   font-family: 'Poppins', sans-serif;
-
   
-
   &:hover {
     background-color: ${props => props.secondary ? '#4a90e2' : '#357abd'};
     color: white;
   }
-
   @media (max-width: 768px) {
     width: 100%;
     justify-content: center;
