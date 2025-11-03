@@ -78,6 +78,24 @@ const ServicesWrapper = styled.section`
     text-align: center;
     margin-bottom: 3rem;
   }
+
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 0.75rem;
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+  }
 `;
 
 const ServicesGrid = styled.div`
@@ -86,6 +104,16 @@ const ServicesGrid = styled.div`
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
 `;
 
 const ServiceCard = styled(motion.div)`
@@ -110,6 +138,33 @@ const ServiceCard = styled(motion.div)`
     font-size: 1rem;
     color: #666;
   }
+
+  @media (max-width: 768px) {
+    padding: 1.75rem;
+
+    h3 {
+      font-size: 1.1rem;
+      margin: 0.875rem 0;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+
+    h3 {
+      font-size: 1.05rem;
+      margin: 0.75rem 0;
+    }
+
+    p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -122,6 +177,26 @@ const IconWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    width: 56px;
+    height: 56px;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 52px;
+    height: 52px;
+
+    svg {
+      width: 26px;
+      height: 26px;
+    }
+  }
 `;
 
 export default HomeServices;

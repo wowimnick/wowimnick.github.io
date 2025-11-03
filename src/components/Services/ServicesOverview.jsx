@@ -30,6 +30,7 @@ const OverviewWrapper = styled.section`
   font-family: 'Poppins', sans-serif;
   text-align: center;
   margin: 4rem 0;
+  padding: 0 2rem;
 
   h2 {
     font-size: 2.7rem;
@@ -44,6 +45,36 @@ const OverviewWrapper = styled.section`
     margin: 0 auto;
     line-height: 1.6;
     color: #333;
+  }
+
+  @media (max-width: 768px) {
+    margin: 3rem 0;
+    padding: 0 1rem;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 0.875rem;
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin: 2rem 0;
+    padding: 0 0.75rem;
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
   }
 `;
 

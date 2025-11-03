@@ -31,6 +31,40 @@ const CTAWrapper = styled.section`
   p {
     font-size: 1.1rem;
     margin-bottom: 2rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    padding: 3rem 1.5rem;
+    margin: 3rem 0;
+    border-radius: 8px;
+
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.875rem;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 1.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 1rem;
+    margin: 2rem 0;
+    border-radius: 6px;
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+    }
   }
 `;
 
@@ -48,6 +82,17 @@ const CTAButton = styled(Link)`
   &:hover {
     background-color: #f0f0f0;
     transform: translateY(-3px);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    border-radius: 40px;
   }
 `;
 

@@ -20,6 +20,7 @@ const insuranceCategories = [
       "Careplus (Integrated)",
       "Wellmed",
       "Blue Cross Blue Shield",
+      "Gold Kidney",
     ]
   },
   {
@@ -93,6 +94,7 @@ const InsuranceList = () => {
 const ListWrapper = styled.section`
   margin-bottom: 4rem;
   font-family: 'Poppins', sans-serif;
+  padding: 0 2rem;
 
   h2 {
     font-size: 2.5rem;
@@ -114,12 +116,56 @@ const ListWrapper = styled.section`
       background-color: #4a90e2;
     }
   }
+
+  @media (max-width: 768px) {
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      margin-top: 1.5rem;
+
+      &::after {
+        width: 80px;
+        height: 2px;
+        bottom: -8px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 2rem;
+    padding: 0 0.75rem;
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 2.5rem;
+      margin-top: 1.25rem;
+
+      &::after {
+        width: 70px;
+      }
+    }
+  }
 `;
 
 const CategoryGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
 `;
 
 const CategoryCard = styled(motion.div)`
@@ -133,6 +179,18 @@ const CategoryCard = styled(motion.div)`
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
+
+  @media (max-width: 768px) {
+    border-radius: 10px;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 8px;
+  }
 `;
 
 const CategoryHeader = styled.div`
@@ -145,12 +203,44 @@ const CategoryHeader = styled.div`
   svg {
     margin-right: 1rem;
     transform: translateY(8px);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.875rem;
+
+    svg {
+      width: 28px;
+      height: 28px;
+      margin-right: 0.875rem;
+      transform: translateY(6px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem;
+
+    svg {
+      width: 26px;
+      height: 26px;
+      margin-right: 0.75rem;
+      transform: translateY(5px);
+    }
   }
 `;
 
 const CategoryName = styled.h3`
   font-size: 1.2rem;
   font-weight: 600;
+  line-height: 1.3;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.05rem;
+  }
 `;
 
 const PlanList = styled.ul`
@@ -163,9 +253,29 @@ const PlanList = styled.ul`
     color: #333;
     padding: 0.5rem 0;
     border-bottom: 1px solid #f0f0f0;
+    line-height: 1.4;
 
     &:last-child {
       border-bottom: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.25rem;
+
+    li {
+      font-size: 0.95rem;
+      padding: 0.45rem 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+
+    li {
+      font-size: 0.9rem;
+      padding: 0.4rem 0;
+      line-height: 1.35;
     }
   }
 `;

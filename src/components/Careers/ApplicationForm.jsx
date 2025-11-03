@@ -46,7 +46,7 @@ const ApplicationForm = ({ selectedJob }) => {
       <h2>Apply for {selectedJob.title}</h2>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
-          <label htmlFor="name">Full Name</label>
+          <label htmlFor="name">Full Name *</label>
           <input
             type="text"
             id="name"
@@ -55,7 +55,7 @@ const ApplicationForm = ({ selectedJob }) => {
           {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
         </FormGroup>
         <FormGroup>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email *</label>
           <input
             type="email"
             id="email"
@@ -70,7 +70,7 @@ const ApplicationForm = ({ selectedJob }) => {
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </FormGroup>
         <FormGroup>
-          <label htmlFor="phone">Phone</label>
+          <label htmlFor="phone">Phone *</label>
           <input
             type="tel"
             id="phone"
@@ -79,7 +79,7 @@ const ApplicationForm = ({ selectedJob }) => {
           {errors.phone && <ErrorMessage>{errors.phone.message}</ErrorMessage>}
         </FormGroup>
         <FormGroup>
-          <label htmlFor="resumeContent">Resume</label>
+          <label htmlFor="resumeContent">Resume *</label>
           <textarea
             id="resumeContent"
             rows="10"
@@ -89,10 +89,11 @@ const ApplicationForm = ({ selectedJob }) => {
           {errors.resumeContent && <ErrorMessage>{errors.resumeContent.message}</ErrorMessage>}
         </FormGroup>
         <FormGroup>
-          <label htmlFor="coverLetter">Cover Letter</label>
+          <label htmlFor="coverLetter">Cover Letter *</label>
           <textarea
             id="coverLetter"
             rows="5"
+            placeholder="Tell us why you're a great fit for this position"
             {...register('coverLetter', { required: 'Cover letter is required' })}
           ></textarea>
           {errors.coverLetter && <ErrorMessage>{errors.coverLetter.message}</ErrorMessage>}
@@ -102,6 +103,7 @@ const ApplicationForm = ({ selectedJob }) => {
           <textarea
             id="additionalInfo"
             rows="3"
+            placeholder="Any other information you'd like to share"
             {...register('additionalInfo')}
           ></textarea>
         </FormGroup>
@@ -126,22 +128,60 @@ const ApplicationForm = ({ selectedJob }) => {
 
 const ApplicationFormSection = styled.div`
   margin-top: 2rem;
+  margin-bottom: 2rem;
   background-color: #f9f9f9;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 
   h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
     color: #4a90e2;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem 1rem;
+    border-radius: 8px;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    padding: 1.25rem 0.75rem;
+    border-radius: 6px;
+
+    h2 {
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
   }
 `;
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
+
+  @media (max-width: 768px) {
+    gap: 1.15rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+  }
 `;
 
 const FormGroup = styled.div`
@@ -151,48 +191,123 @@ const FormGroup = styled.div`
   label {
     margin-bottom: 0.5rem;
     font-weight: 600;
+    color: #333;
+    font-size: 1rem;
   }
 
   input, textarea {
-    padding: 0.5rem;
+    padding: 0.75rem;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background-color: white;
+
+    &::placeholder {
+      color: #999;
+    }
 
     &:focus {
       outline: none;
       border-color: #4a90e2;
+      box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  @media (max-width: 768px) {
+    label {
+      font-size: 0.95rem;
+      margin-bottom: 0.45rem;
+    }
+
+    input, textarea {
+      padding: 0.65rem;
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    label {
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+    }
+
+    input, textarea {
+      padding: 0.6rem;
+      font-size: 0.9rem;
+      border-radius: 4px;
     }
   }
 `;
 
 const ErrorMessage = styled.span`
-  color: #ff0000;
-  font-size: 0.9rem;
-  margin-top: 0.25rem;
+  color: #ff4444;
+  font-size: 0.875rem;
+  margin-top: 0.35rem;
+  font-weight: 500;
+
+  @media (max-width: 480px) {
+    font-size: 0.825rem;
+    margin-top: 0.3rem;
+  }
 `;
 
 const SubmitButton = styled.button`
   background-color: #4a90e2;
   color: white;
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 0.875rem 1.75rem;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 1.05rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: #357abd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
   }
 
   &:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+    transform: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+    border-radius: 4px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
   }
 `;
 
@@ -251,6 +366,15 @@ const LoadingSpinner = styled.div`
     }
     100% {
       transform: translate(24px, 0);
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 70px;
+
+    div {
+      width: 11px;
+      height: 11px;
     }
   }
 `;

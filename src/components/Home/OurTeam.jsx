@@ -66,7 +66,6 @@ const OurTeam = () => {
 const TeamWrapper = styled.section`
   margin-bottom: 4rem;
   font-family: 'Poppins', sans-serif;
-  
   text-align: center;
   padding: 4rem 2rem;
   background-color: #fff;
@@ -86,6 +85,37 @@ const TeamWrapper = styled.section`
     margin-left: auto;
     margin-right: auto;
   }
+
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+    margin-bottom: 3rem;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 0.875rem;
+    }
+
+    p {
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 0.75rem;
+    margin-bottom: 2rem;
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+  }
 `;
 
 const TeamPhotoGrid = styled.div`
@@ -94,6 +124,16 @@ const TeamPhotoGrid = styled.div`
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
 `;
 
 const TeamPhotoWrapper = styled(motion.div)`
@@ -106,6 +146,18 @@ const TeamPhotoWrapper = styled(motion.div)`
     transform: translateY(-5px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
   }
+
+  @media (max-width: 768px) {
+    border-radius: 12px;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 10px;
+  }
 `;
 
 const TeamPhoto = styled.img`
@@ -116,6 +168,14 @@ const TeamPhoto = styled.img`
 
   ${TeamPhotoWrapper}:hover & {
     transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    height: 250px;
+  }
+
+  @media (max-width: 480px) {
+    height: 220px;
   }
 `;
 

@@ -31,6 +31,7 @@ const ProgramsShowcase = () => {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <ProgramContent>
@@ -39,14 +40,13 @@ const ProgramsShowcase = () => {
               </ProgramContent>
               <DownloadButton href={`/path/to/${program.file}`} download>
                 <Download size={16} />
-                Download PDF
+                <span>Download PDF</span>
               </DownloadButton>
             </Program>
           ))}
         </ProgramsContainer>
 
         <CoordinatedCareSection>
-
           <CoordinatedCareDescription>
             Our services are seamlessly coordinated to ensure comprehensive care:
           </CoordinatedCareDescription>
@@ -56,6 +56,7 @@ const ProgramsShowcase = () => {
                 key={index}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
               >
                 <AspectIcon>{aspect.icon}</AspectIcon>
@@ -75,11 +76,22 @@ const ShowcaseWrapper = styled.section`
   font-family: 'Poppins', sans-serif;
   padding: 4rem 0;
   margin: 4rem 0;
+
+  @media (max-width: 768px) {
+    padding: 3rem 0;
+    margin: 3rem 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 0;
+    margin: 2rem 0;
+  }
 `;
 
 const ContentContainer = styled.div`
   margin: 0 auto;
   padding: 0 2rem;
+  max-width: 1400px;
 
   h2 {
     font-size: 2.5rem;
@@ -91,20 +103,49 @@ const ContentContainer = styled.div`
 
   @media (max-width: 768px) {
     padding: 0 1rem;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.75rem;
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
   }
 `;
 
 const ProgramsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.75rem;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
 `;
 
 const Program = styled(motion.div)`
   background-color: white;
   border-radius: 15px;
-  width: 250px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -112,8 +153,20 @@ const Program = styled(motion.div)`
   transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 12px;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 10px;
   }
 `;
 
@@ -124,62 +177,134 @@ const ProgramContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 1.75rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 const ProgramIcon = styled.div`
   font-size: 3rem;
   color: #4a90e2;
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+
+  svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  @media (max-width: 768px) {
+    svg {
+      width: 42px;
+      height: 42px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 0.75rem;
+
+    svg {
+      width: 38px;
+      height: 38px;
+    }
+  }
 `;
 
 const ProgramName = styled.h3`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #333;
-  margin-bottom: 0;
+  margin: 0;
+  line-height: 1.4;
+  font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
 `;
 
 const DownloadButton = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   background-color: #4a90e2;
   color: white;
-  padding: 0.75rem 1rem;
+  padding: 0.875rem 1rem;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 0.95rem;
   transition: all 0.3s ease;
-  transform: translateY(100%);
-  opacity: 0;
-
-  ${Program}:hover & {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 
   &:hover {
     background-color: #357abd;
   }
 
   svg {
-    margin-right: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  span {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.7rem 0.75rem;
+    font-size: 0.875rem;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
   }
 `;
 
 const CoordinatedCareSection = styled.div`
   margin-top: 4rem;
   text-align: center;
-`;
 
-const CoordinatedCareTitle = styled.h3`
-  font-size: 2rem;
-  color: #4a90e2;
-  margin-bottom: 1rem;
+  @media (max-width: 768px) {
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 2.5rem;
+  }
 `;
 
 const CoordinatedCareDescription = styled.p`
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #333;
   margin-bottom: 2rem;
+  font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
 `;
 
 const CoordinationAspects = styled.div`
@@ -187,12 +312,25 @@ const CoordinationAspects = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1.25rem;
+  }
 `;
 
 const CoordinationAspect = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.5rem;
+
+  @media (max-width: 480px) {
+    gap: 0.4rem;
+  }
 `;
 
 const AspectIcon = styled.div`
@@ -204,12 +342,45 @@ const AspectIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease;
+
+  ${CoordinationAspect}:hover & {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    width: 54px;
+    height: 54px;
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 50px;
+    height: 50px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
 `;
 
 const AspectTitle = styled.span`
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #333;
+  font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
+  }
 `;
 
 export default ProgramsShowcase;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
 import Header from './components/header/Header';

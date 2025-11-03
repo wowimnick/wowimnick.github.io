@@ -4,15 +4,15 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { Star, Quote } from 'lucide-react';
 
 const TWEEN_FACTOR_BASE = 0.52;
-const AUTO_SCROLL_INTERVAL = 8000; // 5 seconds
+const AUTO_SCROLL_INTERVAL = 8000;
 
 const numberWithinRange = (number, min, max) =>
   Math.min(Math.max(number, min), max);
 
 const testimonials = [
   {
-    text: "My RN Irina took great care of me! I am fortunate to have Irina as my RN and I consider you fortunate to have her on your staff. The only reason I gave her a five star review was because a TEN review wasn't an option!",
-    name: "Rob Holtzer",
+    text: "The care I received from Confident Care of Florida was exceptional. The nurses were professional and compassionate.",
+    name: "John D.",
     role: "Patient"
   },
   {
@@ -21,23 +21,18 @@ const testimonials = [
     role: "Patient"
   },
   {
-    text: "Kathryn Kwasnick was my husband's nurse, she is excellent, very profesional and kind, she always has a piece of advice in order to improve his health.",
-    name: "Patricia Echeverri",
+    text: "I had the pleasure of using this company for rehab and was very happy and impressed with the level of service they had provided. Highly recommend.",
+    name: "Farzin Abdi",
     role: "Patient"
   },
   {
-    text: "I had the best experience with Confident Care of Florida! They are the best and I highly recommend them! My nurse Kathryn and physical therapists, Ami ( supervisor) and Cindy and occupational therapist, Daisy are compassionate, professional and offer the highest level of care. Damaris, who coordinates everything is top notch as well. If you or a loved one need home health, call Confident Care today! You will be glad you did!",
-    name: "Karyn Morris",
+    text: "My grandmother who lives in Jacksonville recently received wound care and was very satisfied. She was attended to very well.",
+    name: "Kathy Vila",
     role: "Patient"
   },
   {
-    text: "Kathryn was assigned to me after being discharged from the hospital with a life-threatening diagnosis and a brand new medical apparatus of which I had no prior experience. Kathryn was professional, punctual, and had an easiness about her that helped me transition into the newness of my ailment. She went above and beyond to offer her professional recommendations for medical equipment and supplies. I honestly would not have recovered as seamlessly and quickly as I did if it weren't for her care. Superior service!!",
-    name: "LaKiesha Hall",
-    role: "Patient"
-  },
-  {
-    text: "CONFIDENT CARE- Service delivered with confidence and care; as exemplified by the indefatigable KATHRYN KWASNICK RN; who supervised my recovery from two successive surgeries- 2022/2023. Kudos for utmost diligence , devotion, and indisputable commitment- Professional competence complemented by an innate charm and engaging wit. JOSE GUEREDO, a gifted and enormously skilled professional, who was responsible for my rehabilitation from Laminectomy. A true Physiotherapist, whose age and youthful disposition belie his expertise, indisputable competence, and strict adherence to post spinal protocols critical in the recovery process. What a perfect fit!",
-    name: "Wisdom Dafinone",
+    text: "This is a great company with reliable and compassionate nurse- care. The nurses who took care of my grandpa were very helpful, and precise in assisting him back to health. I would recommend  this company to anyone who needs home healthcare.",
+    name: "Anonymous",
     role: "Patient"
   }
 ];
@@ -184,6 +179,14 @@ const Wrapper = styled.section`
   overflow: hidden;
   font-family: 'Poppins', sans-serif;
   padding: 6rem 0;
+
+  @media (max-width: 768px) {
+    padding: 4rem 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 3rem 0;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -192,6 +195,17 @@ const SectionTitle = styled.h2`
   margin-bottom: 3rem;
   text-align: center;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
 `;
 
 const EmblaWrapper = styled.div`
@@ -222,15 +236,52 @@ const EmblaWrapper = styled.div`
     position: relative;
     overflow: hidden;
   }
+
+  @media (max-width: 768px) {
+    .embla__slide {
+      padding: 0 1rem;
+    }
+
+    .embla__slide__inner {
+      padding: 2rem;
+      border-radius: 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.5rem;
+
+    .embla__slide {
+      padding: 0 0.5rem;
+    }
+
+    .embla__slide__inner {
+      padding: 1.5rem;
+      border-radius: 12px;
+    }
+  }
 `;
 
 const QuoteIcon = styled.div`
   position: absolute;
   top: -5px;
-
   color: #4a90e2;
   opacity: 0.1;
   transform: scale(3);
+
+  @media (max-width: 768px) {
+    transform: scale(2.5);
+  }
+
+  @media (max-width: 480px) {
+    transform: scale(2);
+    top: 0;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
 `;
 
 const TestimonialText = styled.p`
@@ -240,6 +291,18 @@ const TestimonialText = styled.p`
   margin-bottom: 1.5rem;
   position: relative;
   z-index: 1;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
 `;
 
 const TestimonialAuthor = styled.div`
@@ -251,18 +314,43 @@ const AuthorName = styled.div`
   font-weight: 600;
   color: #333;
   font-size: 1.1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+  }
 `;
 
 const AuthorRole = styled.div`
   color: #777;
   font-size: 0.9rem;
   font-style: italic;
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const TestimonialRating = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 0.25rem;
+
+  @media (max-width: 480px) {
+    gap: 0.15rem;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
 `;
 
 export default RatingsAndTestimonials;

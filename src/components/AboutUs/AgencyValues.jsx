@@ -3,77 +3,179 @@ import styled from 'styled-components';
 import '@fontsource/poppins';
 import { motion } from 'framer-motion';
 
+const values = [
+  {
+    title: 'Dignity and Respect',
+    description: 'We recognize the innate worth of every individual, regardless of their circumstances.'
+  },
+  {
+    title: 'Personalized Care',
+    description: 'Our services are tailored to each patient\'s unique needs and goals.'
+  },
+  {
+    title: 'Empowerment',
+    description: 'We strive to maximize each person\'s potential and enhance their self-respect.'
+  },
+  {
+    title: 'Holistic Approach',
+    description: 'We view aging and chronic conditions as part of life\'s journey, providing comprehensive support.'
+  }
+];
+
 const AgencyValues = () => {
   return (
     <ValuesWrapper>
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
-        Our Commitment to You
-      </motion.h2>
+      <SectionTitle>Our Commitment to You</SectionTitle>
       <ValuesList>
-        <ValueItem>
-          <h3>Dignity and Respect</h3>
-          <p>We recognize the innate worth of every individual, regardless of their circumstances.</p>
-        </ValueItem>
-        <ValueItem>
-          <h3>Personalized Care</h3>
-          <p>Our services are tailored to each patient's unique needs and goals.</p>
-        </ValueItem>
-        <ValueItem>
-          <h3>Empowerment</h3>
-          <p>We strive to maximize each person's potential and enhance their self-respect.</p>
-        </ValueItem>
-        <ValueItem>
-          <h3>Holistic Approach</h3>
-          <p>We view aging and chronic conditions as part of life's journey, providing comprehensive support.</p>
-        </ValueItem>
+        {values.map((value, index) => (
+          <ValueItem
+            key={index}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+          >
+            <ValueNumber>{index + 1}</ValueNumber>
+            <ValueContent>
+              <ValueTitle>{value.title}</ValueTitle>
+              <ValueDescription>{value.description}</ValueDescription>
+            </ValueContent>
+          </ValueItem>
+        ))}
       </ValuesList>
     </ValuesWrapper>
   );
 };
 
 const ValuesWrapper = styled.section`
-  margin: 4rem 0;
-  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
   font-family: 'Poppins', sans-serif;
 
-  h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #000;
-    margin-bottom: 2rem;
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem 0.75rem;
+  }
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.35rem;
+    margin-bottom: 1.25rem;
   }
 `;
 
 const ValuesList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+  }
 `;
 
 const ValueItem = styled(motion.div)`
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: left;
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid #e8eaed;
 
-  h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-spacing: 1px;
-    color: #4a90e2;
-    margin-bottom: 1rem;
+  &:last-child {
+    border-bottom: none;
   }
 
-  p {
+  @media (max-width: 768px) {
+    padding: 1rem 0;
+    gap: 0.875rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem 0;
+    gap: 0.75rem;
+  }
+`;
+
+const ValueNumber = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #4a90e2;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    width: 26px;
+    height: 26px;
+    font-size: 0.8rem;
+  }
+`;
+
+const ValueContent = styled.div`
+  flex: 1;
+`;
+
+const ValueTitle = styled.h3`
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.4rem;
+
+  @media (max-width: 768px) {
     font-size: 1rem;
-    line-height: 1.6;
-    color: #333;
+    margin-bottom: 0.35rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+`;
+
+const ValueDescription = styled.p`
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #5f6368;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.875rem;
+    line-height: 1.4;
   }
 `;
 

@@ -5,11 +5,10 @@ import '@fontsource/poppins';
 import withPageTransition from '../components/withPageTransition';
 
 const TermsOfService = () => {
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   return (
     <TermsWrapper>
       <HeroSection>
@@ -97,23 +96,70 @@ const HeroSection = styled.div`
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
   background-size: cover;
   background-position: center;
-  height: 300px;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+
+  @media (max-width: 768px) {
+    height: 350px;
+  }
+
+  @media (max-width: 480px) {
+    height: 300px;
+  }
 `;
 
 const HeroContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: center;
   color: white;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+  width: 100%;
 
   h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
+    font-weight: 600;
   }
 
   p {
     font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem 0.75rem;
+
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
   }
 `;
 
@@ -130,6 +176,18 @@ const ContentSection = styled.div`
   ul, ol {
     padding-left: 2rem;
   }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+
+    ul, ol {
+      padding-left: 1.5rem;
+    }
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -137,6 +195,16 @@ const SectionTitle = styled.h2`
   color: #4a90e2;
   margin-top: 2rem;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.3rem;
+    margin-top: 1.25rem;
+  }
 `;
 
 export default withPageTransition(TermsOfService);

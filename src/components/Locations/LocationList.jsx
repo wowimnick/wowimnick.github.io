@@ -37,7 +37,7 @@ const LocationsList = ({ locations, selectedLocation, onLocationSelect, isMapVis
               </ContactGrid>
               <ContactInfo>
                 <Mail size={14} />
-                <span>{location.email}</span>
+                <EmailLink href={`mailto:${location.email}`}>{location.email}</EmailLink>
               </ContactInfo>
               {!isMapVisible && (
                 <DirectionsButton 
@@ -67,7 +67,13 @@ const CustomH2 = styled.h2`
   font-weight: 600;
 
   @media (max-width: 768px) {
-    font-size: 1.3rem;
+    font-size: 1.35rem;
+    margin-bottom: 0.875rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
   }
 `;
 
@@ -92,6 +98,12 @@ const LocationsContainer = styled.div`
 
   @media (max-width: 768px) {
     max-height: none;
+    gap: 0.875rem;
+    padding-right: 0;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
   }
 
   &::-webkit-scrollbar {
@@ -123,33 +135,77 @@ const LocationItem = styled.div`
     transform: translateY(-3px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
+
+  @media (max-width: 768px) {
+    border-radius: 6px;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem;
+  }
 `;
 
 const LocationHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 0.75rem;
 
   h3 {
     font-size: 1.1rem;
     color: ${(props) => (props.selected ? 'white' : '#333')};
     font-weight: 600;
+    line-height: 1.3;
+    flex: 1;
+    padding-right: 0.5rem;
   }
 
   svg {
     color: ${(props) => (props.selected ? 'white' : '#4a90e2')};
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    h3 {
+      font-size: 1.05rem;
+    }
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 0.65rem;
+
+    h3 {
+      font-size: 1rem;
+    }
   }
 `;
 
 const LocationDetails = styled.div`
   color: ${(props) => (props.selected ? 'white' : '#666')};
   font-size: 0.9rem;
+
+  @media (max-width: 480px) {
+    font-size: 0.875rem;
+  }
 `;
 
 const AddressInfo = styled.p`
   margin-bottom: 0.75rem;
   line-height: 1.4;
+
+  @media (max-width: 480px) {
+    margin-bottom: 0.65rem;
+    line-height: 1.35;
+  }
 `;
 
 const ContactGrid = styled.div`
@@ -157,12 +213,50 @@ const ContactGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
 `;
 
 const ContactInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  min-width: 0;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.4rem;
+
+    svg {
+      width: 13px;
+      height: 13px;
+    }
+  }
+`;
+
+const EmailLink = styled.a`
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const DirectionsButton = styled.button`
@@ -189,6 +283,18 @@ const DirectionsButton = styled.button`
 
   @media (max-width: 768px) {
     display: flex;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.45rem 0.875rem;
+    font-size: 0.875rem;
+    margin-top: 0.65rem;
+    gap: 0.4rem;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
   }
 `;
 

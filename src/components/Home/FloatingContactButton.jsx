@@ -72,6 +72,30 @@ const ButtonWrapper = styled(motion.button)`
   &:hover {
     background-color: #357abd;
   }
+
+  @media (max-width: 768px) {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 46px;
+    height: 46px;
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    bottom: 1rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
 `;
 
 export default FloatingButton;

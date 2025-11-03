@@ -16,8 +16,12 @@ const Footer = () => {
           <Tagline>Quality Care You Can Trust</Tagline>
           <ContactInfo>
             <ContactItem>
+              <Phone size={16} />
+              (904) 733-1717
+            </ContactItem>
+            <ContactItem>
               <Mail size={16} />
-              <a href="mailto:info@confidentcare.com">info@confidentcare.com</a>
+              info@confidentcare.com
             </ContactItem>
           </ContactInfo>
         </CompanyInfo>
@@ -38,7 +42,6 @@ const Footer = () => {
       </FooterContent>
       <BottomBar>
         <Copyright>&copy; 2024 Confident Care of Florida. All rights reserved.</Copyright>
-        
       </BottomBar>
     </FooterWrapper>
   );
@@ -63,6 +66,12 @@ const FooterContent = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.75rem;
+    gap: 1.5rem;
   }
 `;
 
@@ -82,6 +91,14 @@ const Logo = styled.h2`
   margin-bottom: 0.5rem;
   color: #e6777d;
   line-height: 1.2;
+
+  @media (max-width: 768px) {
+    font-size: 1.35rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const LogoBreak = styled.span`
@@ -92,12 +109,25 @@ const Tagline = styled.p`
   font-size: 0.9rem;
   color: #666;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    margin-bottom: 0.875rem;
+  }
 `;
 
 const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  @media (max-width: 480px) {
+    gap: 0.4rem;
+  }
 `;
 
 const ContactItem = styled.p`
@@ -107,12 +137,17 @@ const ContactItem = styled.p`
   font-size: 0.9rem;
   color: #666;
 
-  a {
-    color: #666;
-    transition: color 0.3s ease;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 
-    &:hover {
-      color: #e6777d;
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
+    gap: 0.4rem;
+
+    svg {
+      width: 14px;
+      height: 14px;
     }
   }
 `;
@@ -124,6 +159,11 @@ const QuickLinksSection = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     justify-content: space-around;
+    gap: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 2rem;
   }
 `;
 
@@ -136,6 +176,15 @@ const QuickLinkTitle = styled.h4`
   font-size: 1rem;
   margin-bottom: 0.5rem;
   color: #e6777d;
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+  }
 `;
 
 const QuickLink = styled(Link)`
@@ -147,6 +196,15 @@ const QuickLink = styled(Link)`
 
   &:hover {
     color: #e6777d;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
   }
 `;
 
@@ -161,6 +219,13 @@ const BottomBar = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 1rem;
+    padding: 1rem 1rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem 0.75rem;
+    margin-top: 1.25rem;
   }
 `;
 
@@ -168,11 +233,20 @@ const Copyright = styled.p`
   font-size: 0.8rem;
   color: #666;
   margin: 0;
+
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+    text-align: center;
+  }
 `;
 
 const SocialIcons = styled.div`
   display: flex;
   gap: 1rem;
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
+  }
 `;
 
 const SocialIcon = styled.a`
@@ -188,6 +262,15 @@ const SocialIcon = styled.a`
   &:hover {
     background-color: #d56c72;
     transform: translateY(-3px);
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.4rem;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 `;
 

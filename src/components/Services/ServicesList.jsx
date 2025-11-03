@@ -106,34 +106,38 @@ const ServicesList = () => {
       <h2>Our Comprehensive Services</h2>
       <ServicesContainer>
         {isMobile ? (
-          services.map((service, index) => (
-            <MobileDropdown key={index}>
-              <DropdownButton onClick={() => toggleDropdown(index)}>
-                <IconWrapper>{service.icon}</IconWrapper>
-                <span>{service.title}</span>
-                {openDropdowns[index] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-              </DropdownButton>
-              <AnimatePresence>
-                {openDropdowns[index] && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <DropdownContent>
-                      <p>{service.description}</p>
-                      <DetailsList>
-                        {service.details.map((detail, idx) => (
-                          <DetailItem key={idx}>{detail}</DetailItem>
-                        ))}
-                      </DetailsList>
-                    </DropdownContent>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </MobileDropdown>
-          ))
+          <MobileContainer>
+            {services.map((service, index) => (
+              <MobileDropdown key={index}>
+                <DropdownButton onClick={() => toggleDropdown(index)}>
+                  <ButtonContent>
+                    <IconWrapper>{service.icon}</IconWrapper>
+                    <span>{service.title}</span>
+                  </ButtonContent>
+                  {openDropdowns[index] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                </DropdownButton>
+                <AnimatePresence>
+                  {openDropdowns[index] && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <DropdownContent>
+                        <p>{service.description}</p>
+                        <DetailsList>
+                          {service.details.map((detail, idx) => (
+                            <DetailItem key={idx}>{detail}</DetailItem>
+                          ))}
+                        </DetailsList>
+                      </DropdownContent>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </MobileDropdown>
+            ))}
+          </MobileContainer>
         ) : (
           <>
             <ServiceMenu>
@@ -180,6 +184,7 @@ const ServicesWrapper = styled.section`
   align-items: center;
   margin: 4rem 0;
   font-family: 'Poppins', sans-serif;
+  padding: 0 2rem;
 
   h2 {
     font-size: 2.5rem;
@@ -188,16 +193,47 @@ const ServicesWrapper = styled.section`
     text-align: center;
     margin-bottom: 2rem;
   }
+
+  @media (max-width: 768px) {
+    margin: 3rem 0;
+    padding: 0 1rem;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin: 2rem 0;
+    padding: 0 0.75rem;
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+  }
 `;
 
 const ServicesContainer = styled.div`
   display: flex;
   gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
   
   @media (max-width: 768px) {
     gap: 0;
-    width: 70%;
-    flex-direction: column;
+  }
+`;
+
+const MobileContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
   }
 `;
 
@@ -226,12 +262,26 @@ const ServiceMenuItem = styled.div`
 const IconWrapper = styled.div`
   color: ${props => props.$active ? 'white' : '#4a90e2'};
   transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  @media (max-width: 480px) {
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
 `;
 
 const ServiceTitle = styled.span`
   font-size: 1.1rem;
   color: ${props => props.$active ? 'white' : '#333'};
   transition: color 0.3s ease;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 const ServiceDetails = styled.div`
@@ -276,10 +326,23 @@ const DetailItem = styled.li`
     left: 0;
     top: -2px;
   }
+
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+    margin-bottom: 0.65rem;
+    padding-left: 1.25rem;
+    line-height: 1.4;
+  }
 `;
 
 const MobileDropdown = styled.div`
-  margin-bottom: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 480px) {
+    border-radius: 8px;
+  }
 `;
 
 const DropdownButton = styled.button`
@@ -287,25 +350,33 @@ const DropdownButton = styled.button`
   padding: 1rem;
   background-color: #f8f9fa;
   color: #333;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
+  border: none;
   font-size: 1.1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
 
   &:hover {
     background-color: #e9ecef;
   }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem;
+    font-size: 1rem;
+  }
+`;
+
+const ButtonContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 `;
 
 const DropdownContent = styled.div`
   background-color: white;
-  border: 1px solid #e0e0e0;
-  border-top: none;
-  border-radius: 0 0 10px 10px;
   padding: 1rem;
 
   p {
@@ -313,6 +384,16 @@ const DropdownContent = styled.div`
     color: #333;
     line-height: 1.6;
     margin-bottom: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem;
+
+    p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 0.875rem;
+    }
   }
 `;
 

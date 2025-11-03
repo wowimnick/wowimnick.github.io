@@ -43,6 +43,14 @@ const HeroBannerWrapper = styled.div`
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
   }
+
+  @media (max-width: 768px) {
+    height: 350px;
+  }
+
+  @media (max-width: 480px) {
+    height: 300px;
+  }
 `;
 
 const Content = styled.div`
@@ -52,6 +60,7 @@ const Content = styled.div`
   color: white;
   position: relative;
   z-index: 1;
+  width: 100%;
 
   h1 {
     font-size: 3rem;
@@ -64,6 +73,36 @@ const Content = styled.div`
     font-size: 1.2rem;
     max-width: 600px;
     text-align: center;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem 0.75rem;
+
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
   }
 `;
 

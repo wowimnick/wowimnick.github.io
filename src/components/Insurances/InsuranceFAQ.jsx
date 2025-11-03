@@ -56,8 +56,10 @@ const InsuranceFAQ = () => {
             >
               <FAQItem>
                 <FAQQuestion onClick={() => toggleFAQ(index)}>
-                  <span>{faq.question}</span>
-                  {activeIndex === index ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                  <QuestionText>{faq.question}</QuestionText>
+                  <IconWrapper>
+                    {activeIndex === index ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                  </IconWrapper>
                 </FAQQuestion>
                 <AnimatePresence>
                   {activeIndex === index && (
@@ -81,7 +83,11 @@ const InsuranceFAQ = () => {
 
 const FAQWrapper = styled.section`
   margin-bottom: 4rem;
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  padding: 0 2rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 
   h2 {
     font-size: 2rem;
@@ -90,12 +96,40 @@ const FAQWrapper = styled.section`
     margin-bottom: 2rem;
     text-align: center;
   }
+
+  @media (max-width: 768px) {
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 2rem;
+    padding: 0 0.75rem;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+  }
 `;
 
 const FAQList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  @media (max-width: 768px) {
+    gap: 0.875rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
+  }
 `;
 
 const FAQItem = styled.div`
@@ -103,12 +137,22 @@ const FAQItem = styled.div`
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 6px;
+  }
 `;
 
 const FAQQuestion = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   padding: 1rem;
   cursor: pointer;
   font-weight: 600;
@@ -118,12 +162,65 @@ const FAQQuestion = styled.div`
   &:hover {
     background-color: #f0f7ff;
   }
+
+  @media (max-width: 768px) {
+    padding: 0.875rem;
+    font-size: 0.95rem;
+    gap: 0.875rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    gap: 0.75rem;
+  }
+`;
+
+const QuestionText = styled.span`
+  flex: 1;
+  line-height: 1.4;
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: #4a90e2;
+
+  @media (max-width: 768px) {
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
 `;
 
 const FAQAnswer = styled.div`
   padding: 1rem;
+  padding-top: 0.5rem;
   color: #666;
   line-height: 1.6;
+
+  @media (max-width: 768px) {
+    padding: 0.875rem;
+    padding-top: 0.4rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem;
+    padding-top: 0.35rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
 `;
 
 export default InsuranceFAQ;

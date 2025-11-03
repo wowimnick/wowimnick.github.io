@@ -118,11 +118,11 @@ const Privacy = () => {
                 <p>
                     We are in compliance with the requirements of COPPA (Childrens Online
                     Privacy Protection Act), Our website, products and services are all
-                    directed to people who are at least 18 years old or older. We do not
-                    knowingly collect any information from anyone under 18 years of age.
+                    directed to people who are at least 13 years old or older. We do not
+                    knowingly collect any information from anyone under 13 years of age.
                     If a parent or guardian becomes aware that his or her child has
                     provided us with Personal Information without their consent, he or she
-                    should contact us. If we become aware that a child under 18 has
+                    should contact us. If we become aware that a child under 13 has
                     provided us with Personal Information, we will delete such information
                     from our files.
                 </p>
@@ -137,7 +137,7 @@ const Privacy = () => {
                 <p>
                     Please also visit our Terms and Conditions section establishing the
                     use, disclaimers, and limitations of liability governing the use of
-                    our website at <a href="/terms-of-service">Terms of Service</a>
+                    our website at www.confidentcarecorp.com/terms-and-conditions
                 </p>
 
                 <SectionTitle>Your Consent</SectionTitle>
@@ -162,23 +162,71 @@ const HeroSection = styled.div`
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1073&q=80');
   background-size: cover;
   background-position: center;
-  height: 300px;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+
+  @media (max-width: 768px) {
+    height: 350px;
+  }
+
+  @media (max-width: 480px) {
+    height: 300px;
+  }
 `;
 
+
 const HeroContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: center;
   color: white;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+  width: 100%;
 
   h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
+    font-weight: 600;
   }
 
   p {
     font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem 0.75rem;
+
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
   }
 `;
 
@@ -195,6 +243,14 @@ const ContentSection = styled.div`
   ul, ol {
     padding-left: 2rem;
   }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -202,6 +258,16 @@ const SectionTitle = styled.h2`
   color: #4a90e2;
   margin-top: 2rem;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.3rem;
+    margin-top: 1.25rem;
+  }
 `;
 
 export default withPageTransition(Privacy);

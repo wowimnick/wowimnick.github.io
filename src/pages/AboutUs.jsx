@@ -17,11 +17,13 @@ const AboutUs = () => {
     <AboutUsWrapper>
       <HeroSection />
       <ContentContainer>
-        <MissionStatement />
-        <AgencyValues />
+        <QualityRating />
         <CompanyHighlights />
+        <AgencyValues />
+
+        <MissionStatement />
       </ContentContainer>
-      <QualityRating />
+      
       <ContentContainer>
         <ContactCTA />
       </ContentContainer>

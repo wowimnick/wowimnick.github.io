@@ -61,12 +61,52 @@ const HighlightsWrapper = styled.section`
       background-color: #4a90e2;
     }
   }
+
+  @media (max-width: 768px) {
+    margin: 2.5rem 0;
+    padding: 0 1rem;
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 2rem;
+
+      &::after {
+        width: 80px;
+        height: 2px;
+        bottom: -8px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin: 2rem 0;
+    padding: 0 0.75rem;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+
+      &::after {
+        width: 70px;
+      }
+    }
+  }
 `;
 
 const HighlightsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
 `;
 
 const HighlightItem = styled(motion.div)`
@@ -74,19 +114,64 @@ const HighlightItem = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   text-align: center;
+
+  p {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    p {
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: row;
+    text-align: left;
+    justify-content: flex-start;
+    gap: 1rem;
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
 `;
 
 const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   margin-bottom: 1rem;
 
   svg {
     color: white;
+  }
+
+  @media (max-width: 768px) {
+    width: 54px;
+    height: 54px;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 `;
 
