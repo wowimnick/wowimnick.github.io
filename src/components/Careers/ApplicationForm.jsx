@@ -1,3 +1,13 @@
+// Remove list of careers positions
+// Add Social Worker position to the application form options
+// Add PRN (as-needed) employment type option
+// Remove Liscensed to work in Florida?
+// Make what makes you a good candidate an optional field
+// Previous Employer > Previous/Current Employer
+// Make reference email optional
+// Make SSN upload optional
+// Remove purpose of prior screening field
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
@@ -858,7 +868,7 @@ const ApplicationForm = ({ selectedJob }) => {
             <Divider />
             <SubSectionTitle>Reference</SubSectionTitle>
             <InfoBox>
-              For verbal references, a supervisor will contact the reference via phone to verify your employment, quality of work, attendance, cooperation, and dependability.
+              For verbal references, a supervisor will contact the reference via phone to verify your employment, quality of work, attendance, and dependability.
             </InfoBox>
 
             <FormRow>
@@ -903,7 +913,7 @@ const ApplicationForm = ({ selectedJob }) => {
             </FormGroup>
 
             <Divider />
-            <SubSectionTitle>Cover Letter & Documents</SubSectionTitle>
+            <SubSectionTitle>Cover Letter</SubSectionTitle>
 
             <FormGroup>
               <label htmlFor="coverLetter">Cover Letter *</label>
