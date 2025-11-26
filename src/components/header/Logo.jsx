@@ -42,7 +42,7 @@ const LogoText = styled.div`
 const CompanyName = styled.span`
   font-size: 1.5rem;
   font-weight: bold;
-  color: #4a90e2;
+  color: #ef1c1f;
 `;
 
 const Tagline = styled.span`

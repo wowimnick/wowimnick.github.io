@@ -72,7 +72,7 @@ const ProgramsShowcase = () => {
 
 const ShowcaseWrapper = styled.section`
   width: 100%;
-  background-color: #f8f9fa;
+  background-color: #fff9f0; /* Warm neutral background */
   font-family: 'Poppins', sans-serif;
   padding: 4rem 0;
   margin: 4rem 0;
@@ -95,7 +95,7 @@ const ContentContainer = styled.div`
 
   h2 {
     font-size: 2.5rem;
-    color: #4a90e2;
+    color: #ff5722;
     text-align: center;
     margin-bottom: 3rem;
     font-weight: 600;
@@ -190,7 +190,7 @@ const ProgramContent = styled.div`
 
 const ProgramIcon = styled.div`
   font-size: 3rem;
-  color: #4a90e2;
+  color: #ff5722;
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
@@ -239,7 +239,7 @@ const DownloadButton = styled.a`
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #4a90e2;
+  background-color: #ff5722;
   color: white;
   padding: 0.875rem 1rem;
   text-decoration: none;
@@ -249,7 +249,7 @@ const DownloadButton = styled.a`
   border-top: 1px solid rgba(0, 0, 0, 0.05);
 
   &:hover {
-    background-color: #357abd;
+    background-color: #e64a19;
   }
 
   svg {
@@ -334,7 +334,7 @@ const CoordinationAspect = styled(motion.div)`
 `;
 
 const AspectIcon = styled.div`
-  background-color: #4a90e2;
+  background-color: #ff5722;
   color: white;
   width: 60px;
   height: 60px;

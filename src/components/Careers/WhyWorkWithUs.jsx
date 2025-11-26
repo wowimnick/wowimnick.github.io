@@ -36,7 +36,7 @@ const WhyWorkWithUs = () => {
 };
 
 const WhyWorkWithUsWrapper = styled.section`
-  background-color: #f8f9fa;
+  background-color: #fff9f0;
   padding: 3rem 1rem;
 
   @media (max-width: 768px) {
@@ -123,7 +123,7 @@ const BenefitCard = styled(motion.div)`
 const IconCircle = styled.div`
   width: 48px;
   height: 48px;
-  background-color: #4a90e2;
+  background-color: #ff5722;
   border-radius: 50%;
   display: flex;
   align-items: center;

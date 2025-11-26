@@ -122,7 +122,7 @@ const ValueNumber = styled.div`
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #4a90e2;
+  background-color: #ff5722;
   color: white;
   font-size: 0.9rem;
   font-weight: 600;

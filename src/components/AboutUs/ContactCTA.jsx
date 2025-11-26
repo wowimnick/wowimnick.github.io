@@ -14,7 +14,7 @@ const ContactCTA = () => {
 };
 
 const CTAWrapper = styled.section`
-  background-color: #386ba7;
+  background: linear-gradient(135deg, #ff5622b2 0%, #ef1c1fce 100%);
   font-family: 'Poppins', sans-serif;
   color: white;
   text-align: center;
@@ -71,7 +71,7 @@ const CTAWrapper = styled.section`
 const CTAButton = styled(Link)`
   display: inline-block;
   background-color: white;
-  color: #4a90e2;
+  color: #ef1c1f;
   padding: 1rem 2rem;
   border-radius: 50px;
   text-decoration: none;
@@ -80,8 +80,9 @@ const CTAButton = styled(Link)`
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: #fff9f0;
     transform: translateY(-3px);
+    color: #ff5722;
   }
 
   @media (max-width: 768px) {

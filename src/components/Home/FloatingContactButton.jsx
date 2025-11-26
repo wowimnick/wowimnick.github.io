@@ -58,7 +58,7 @@ const ButtonWrapper = styled(motion.button)`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #4a90e2;
+  background-color: #ff5722;
   color: white;
   border: none;
   cursor: pointer;
@@ -70,7 +70,7 @@ const ButtonWrapper = styled(motion.button)`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #357abd;
+    background-color: #e64a19;
   }
 
   @media (max-width: 768px) {

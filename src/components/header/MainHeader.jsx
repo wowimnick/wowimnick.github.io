@@ -10,9 +10,9 @@ const floatAnimation = keyframes`
 `;
 
 const glowAnimation = keyframes`
-  0% { box-shadow: 0 0 5px #ff6b6b; }
-  50% { box-shadow: 0 0 20px #ff6b6b; }
-  100% { box-shadow: 0 0 5px #ff6b6b; }
+  0% { box-shadow: 0 0 5px #ef1c1f; }
+  50% { box-shadow: 0 0 20px #ef1c1f; }
+  100% { box-shadow: 0 0 5px #ef1c1f; }
 `;
 
 const MainHeaderWrapper = styled.div`
@@ -22,7 +22,7 @@ const MainHeaderWrapper = styled.div`
   padding: 1.5rem 2rem;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 107, 107, 0.2);
+  border-bottom: 1px solid rgba(239, 28, 31, 0.2);
 `;
 
 const LogoWrapper = styled.div`
@@ -41,7 +41,7 @@ const LogoWrapper = styled.div`
 `;
 
 const LogoIcon = styled(Heart)`
-  color: #ff6b6b;
+  color: #ef1c1f;
   animation: ${floatAnimation} 3s ease-in-out infinite;
 `;
 
@@ -53,12 +53,12 @@ const LogoText = styled.div`
   line-height: 1.2;
 
   span:first-child {
-    color: #ff6b6b;
+    color: #ef1c1f;
   }
 
   span:last-child {
     font-size: 1.2rem;
-    color: #feca57;
+    color: #fee301;
   }
 `;
 
@@ -68,7 +68,7 @@ const Slogan = styled.div`
   color: #333;
   position: relative;
   padding: 0.5rem 1rem;
-  background: linear-gradient(45deg, #ff6b6b, #feca57);
+  background: linear-gradient(45deg, #ef1c1f, #fee301);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   
@@ -78,7 +78,7 @@ const Slogan = styled.div`
     position: absolute;
     left: -10px;
     top: -10px;
-    color: #ff6b6b;
+    color: #ef1c1f;
   }
 
   &::after {
@@ -87,12 +87,12 @@ const Slogan = styled.div`
     position: absolute;
     right: -10px;
     bottom: -10px;
-    color: #feca57;
+    color: #fee301;
   }
 `;
 
 const CTAButton = styled.button`
-  background-color: #ff6b6b;
+  background-color: #ef1c1f;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -109,7 +109,7 @@ const CTAButton = styled.button`
   position: relative;
 
   &:hover {
-    background-color: #feca57;
+    background-color: #ff5722;
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }

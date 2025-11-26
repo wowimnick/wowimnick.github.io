@@ -89,7 +89,7 @@ const Logo = styled.h2`
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: #e6777d;
+  color: #ef1c1f;
   line-height: 1.2;
 
   @media (max-width: 768px) {
@@ -175,7 +175,7 @@ const QuickLinksColumn = styled.div`
 const QuickLinkTitle = styled.h4`
   font-size: 1rem;
   margin-bottom: 0.5rem;
-  color: #e6777d;
+  color: #ef1c1f;
 
   @media (max-width: 768px) {
     font-size: 0.95rem;
@@ -195,7 +195,7 @@ const QuickLink = styled(Link)`
   transition: color 0.3s ease;
 
   &:hover {
-    color: #e6777d;
+    color: #ff5722;
   }
 
   @media (max-width: 768px) {
@@ -251,7 +251,7 @@ const SocialIcons = styled.div`
 
 const SocialIcon = styled.a`
   color: #fff;
-  background-color: #e6777d;
+  background-color: #ef1c1f;
   padding: 0.5rem;
   border-radius: 50%;
   transition: all 0.3s ease;
@@ -260,7 +260,7 @@ const SocialIcon = styled.a`
   justify-content: center;
 
   &:hover {
-    background-color: #d56c72;
+    background-color: #d11215;
     transform: translateY(-3px);
   }
 

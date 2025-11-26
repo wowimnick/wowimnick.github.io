@@ -5,12 +5,12 @@ import { motion } from 'framer-motion';
 import { Award, Clock, Shield, Users, BarChart, Globe } from 'lucide-react';
 
 const highlights = [
-  { icon: <Award size={32} />, text: 'Medicare Certified', color: '#ffa201' },
-  { icon: <Shield size={32} />, text: 'CHAP Accredited', color: '#3b9b3f' },
-  { icon: <Clock size={32} />, text: '24/7/365 Availability', color: '#6d8ea9' },
-  { icon: <Users size={32} />, text: 'Background Checked Employees', color: '#9C27B0' },
-  { icon: <BarChart size={32} />, text: 'QAPI Committee Oversight', color: '#FF5722' },
-  { icon: <Globe size={32} />, text: 'Multiple Languages', color: '#00BCD4' },
+  { icon: <Award size={32} />, text: 'Medicare Certified', color: '#fee301' }, // Sunset Yellow
+  { icon: <Shield size={32} />, text: 'CHAP Accredited', color: '#ff5722' },   // Sunset Orange
+  { icon: <Clock size={32} />, text: '24/7/365 Availability', color: '#ef1c1f' }, // Sunset Red
+  { icon: <Users size={32} />, text: 'Background Checked Employees', color: '#ff8f00' }, // Deep Amber
+  { icon: <BarChart size={32} />, text: 'QAPI Committee Oversight', color: '#d84315' }, // Deep Orange
+  { icon: <Globe size={32} />, text: 'Multiple Languages', color: '#c62828' }, // Dark Red
 ];
 
 const CompanyHighlights = () => {
@@ -58,7 +58,7 @@ const HighlightsWrapper = styled.section`
       transform: translateX(-50%);
       width: 100px;
       height: 3px;
-      background-color: #4a90e2;
+      background-color: #ff5722;
     }
   }
 

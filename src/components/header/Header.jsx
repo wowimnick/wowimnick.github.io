@@ -144,10 +144,10 @@ const LogoText = styled.div`
   font-weight: bold;
   line-height: 1.2;
   transition: all 0.3s ease;
-  color: ${props => props.$scrolled ? '#ff6b6b' : '#fff'};
+  color: ${props => props.$scrolled ? '#ef1c1f' : '#fff'};
 
   @media (max-width: 1094px) {
-    color: ${props => props.$scrolled || props.$isOpen ? '#ff6b6b' : '#fff'};
+    color: ${props => props.$scrolled || props.$isOpen ? '#ef1c1f' : '#fff'};
   }
 
   @media (max-width: 768px) {
@@ -222,7 +222,7 @@ const HamburgerIcon = styled.div`
   }
 
   &:hover span {
-    background: #ff6b6b;
+    background: #ff5722;
   }
 
   @media (max-width: 480px) {
@@ -280,12 +280,12 @@ const NavItem = styled(NavLink)`
     left: 50%;
     width: 0;
     height: 2px;
-    background-color: #ff6b6b;
+    background-color: #ff5722;
     transition: all 0.3s ease;
   }
 
   &:hover, &.active {
-    color: #ff6b6b;
+    color: #ff5722;
 
     &::after {
       width: 100%;
@@ -310,7 +310,8 @@ const NavItem = styled(NavLink)`
     }
 
     &:hover, &.active {
-      background-color: rgba(255, 107, 107, 0.08);
+      background-color: rgba(255, 87, 34, 0.08);
+      color: #ff5722;
     }
   }
 
@@ -338,7 +339,7 @@ const ContactInfo = styled.div`
     align-items: center;
 
     &:hover {
-      color: #ff6b6b;
+      color: #ff5722;
       transform: scale(1.1);
     }
   }

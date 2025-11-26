@@ -56,7 +56,7 @@ const CTASection = () => {
 };
 
 const CTAWrapper = styled.section`
-  background-color: #f8f8f8;
+  background-color: #fff9f0; /* Very light warm background */
   border-radius: 10px;
   padding: 4rem 2rem;
   margin-bottom: 4rem;
@@ -123,7 +123,7 @@ const ButtonGroup = styled.div`
   justify-content: center;
   gap: 1rem;
   a {
-    color: ${props => props.secondary ? '#4a90e2' : 'white'};
+    color: ${props => props.secondary ? '#ff5722' : 'white'};
     text-decoration: none;
   }
   @media (max-width: 768px) {
@@ -134,9 +134,9 @@ const ButtonGroup = styled.div`
 `;
 
 const CTAButton = styled(motion.button)`
-  background-color: ${props => props.secondary ? 'transparent' : '#4a90e2'};
-  color: ${props => props.secondary ? '#4a90e2' : 'white'};
-  border: ${props => props.secondary ? '2px solid #4a90e2' : 'none'};
+  background-color: ${props => props.secondary ? 'transparent' : '#ff5722'};
+  color: ${props => props.secondary ? '#ff5722' : 'white'};
+  border: ${props => props.secondary ? '2px solid #ff5722' : 'none'};
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   border-radius: 5px;
@@ -148,7 +148,7 @@ const CTAButton = styled(motion.button)`
   font-family: 'Poppins', sans-serif;
 
   &:hover {
-    background-color: ${props => props.secondary ? '#4a90e2' : '#357abd'};
+    background-color: ${props => props.secondary ? '#ff5722' : '#e64a19'};
     color: white;
   }
   @media (max-width: 768px) {

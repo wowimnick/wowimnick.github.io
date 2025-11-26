@@ -74,7 +74,7 @@ const ServicesWrapper = styled.section`
   h2 {
     font-size: 2.5rem;
     font-weight: 600;
-    color: #4a90e2;
+    color: #ff5722;
     text-align: center;
     margin-bottom: 3rem;
   }
@@ -117,7 +117,7 @@ const ServicesGrid = styled.div`
 `;
 
 const ServiceCard = styled(motion.div)`
-  background-color: #f9f9f9;
+  background-color: #fff9f0;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -130,7 +130,7 @@ const ServiceCard = styled(motion.div)`
 
   h3 {
     font-size: 1.2rem;
-    color: #4a90e2;
+    color: #ff5722;
     margin: 1rem 0;
   }
 
@@ -168,8 +168,8 @@ const ServiceCard = styled(motion.div)`
 `;
 
 const IconWrapper = styled.div`
-  color: #4a90e2;
-  background-color: rgba(74, 144, 226, 0.1);
+  color: #ff5722;
+  background-color: rgba(255, 87, 34, 0.1);
   width: 64px;
   height: 64px;
   border-radius: 50%;

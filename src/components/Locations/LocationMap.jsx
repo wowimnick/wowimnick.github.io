@@ -149,7 +149,7 @@ const PopupContent = styled.div`
     font-family: 'Poppins', sans-serif;
     font-size: 0.95rem;
     margin-bottom: 0.5rem;
-    color: #4a90e2;
+    color: #ff5722;
     line-height: 1.3;
     word-wrap: break-word;
   }
@@ -204,7 +204,7 @@ const DirectionsButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  background-color: #4a90e2;
+  background-color: #ff5722;
   color: white;
   border: none;
   padding: 0.45rem 0.875rem;
@@ -218,7 +218,7 @@ const DirectionsButton = styled.button`
   width: 100%;
 
   &:hover {
-    background-color: #3a7bc8;
+    background-color: #e64a19;
   }
 
   @media (max-width: 480px) {

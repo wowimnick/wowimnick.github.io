@@ -189,7 +189,7 @@ const ServicesWrapper = styled.section`
   h2 {
     font-size: 2.5rem;
     font-weight: 600;
-    color: #4a90e2;
+    color: #ff5722;
     text-align: center;
     margin-bottom: 2rem;
   }
@@ -249,18 +249,18 @@ const ServiceMenuItem = styled.div`
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background-color: ${props => props.$active ? '#4a90e2' : '#f8f9fa'};
+  background-color: ${props => props.$active ? '#ff5722' : '#fff9f0'};
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: ${props => props.$active ? '#4a90e2' : '#e9ecef'};
+    background-color: ${props => props.$active ? '#ff5722' : '#fff3e0'};
   }
 `;
 
 const IconWrapper = styled.div`
-  color: ${props => props.$active ? 'white' : '#4a90e2'};
+  color: ${props => props.$active ? 'white' : '#ff5722'};
   transition: color 0.3s ease;
   display: flex;
   align-items: center;
@@ -286,14 +286,14 @@ const ServiceTitle = styled.span`
 
 const ServiceDetails = styled.div`
   flex: 2;
-  background-color: #f8f9fa;
+  background-color: #fff9f0;
   border-radius: 10px;
   padding: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   h3 {
     font-size: 1.8rem;
-    color: #4a90e2;
+    color: #ff5722;
     margin-bottom: 1rem;
     font-weight: 600;
   }
@@ -320,7 +320,7 @@ const DetailItem = styled.li`
 
   &:before {
     content: '•';
-    color: #4a90e2;
+    color: #ff5722;
     font-size: 1.2rem;
     position: absolute;
     left: 0;
@@ -348,7 +348,7 @@ const MobileDropdown = styled.div`
 const DropdownButton = styled.button`
   width: 100%;
   padding: 1rem;
-  background-color: #f8f9fa;
+  background-color: #fff9f0;
   color: #333;
   border: none;
   font-size: 1.1rem;
@@ -360,7 +360,7 @@ const DropdownButton = styled.button`
   font-family: 'Poppins', sans-serif;
 
   &:hover {
-    background-color: #e9ecef;
+    background-color: #fff3e0;
   }
 
   @media (max-width: 480px) {

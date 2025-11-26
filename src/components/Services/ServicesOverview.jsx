@@ -34,7 +34,7 @@ const OverviewWrapper = styled.section`
 
   h2 {
     font-size: 2.7rem;
-    color: #4a90e2;
+    color: #ff5722;
     margin-bottom: 1rem;
     font-weight: 600;
   }

@@ -9,7 +9,7 @@ const insuranceCategories = [
   {
     name: "Medicare & Medicare Advantage",
     icon: <Shield size={32} />,
-    color: "#4a90e2",
+    color: "#ff5722", // Sunset Orange
     plans: [
       "Traditional Medicare",
       "United Health HMO/PPO/Dual complete",
@@ -26,7 +26,7 @@ const insuranceCategories = [
   {
     name: "Commercial Insurance",
     icon: <Briefcase size={32} />,
-    color: "#50c878",
+    color: "#ef1c1f", // Sunset Red
     plans: [
       "United Health",
       "UMR",
@@ -38,7 +38,7 @@ const insuranceCategories = [
   {
     name: "Other Options",
     icon: <Heart size={32} />,
-    color: "#ff6b6b",
+    color: "#ff8f00", // Deep Amber (Darker than #fee301 for white text readability)
     plans: [
       "Private Pay",
       "Long-term Care Insurance",
@@ -113,7 +113,7 @@ const ListWrapper = styled.section`
       transform: translateX(-50%);
       width: 100px;
       height: 3px;
-      background-color: #4a90e2;
+      background-color: #ff5722;
     }
   }
 

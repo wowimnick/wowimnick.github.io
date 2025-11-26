@@ -88,8 +88,8 @@ const IconWrapper = styled.div`
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background-color: rgba(74, 144, 226, 0.1);
-  color: #4a90e2;
+  background-color: rgba(255, 87, 34, 0.1);
+  color: #ff5722;
   flex-shrink: 0;
 
   @media (max-width: 768px) {

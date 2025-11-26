@@ -61,7 +61,7 @@ const StarContainer = styled.div`
 
 const Star = styled.div`
   font-size: 2rem;
-  color: #ffd700;
+  color: #fee301;
   line-height: 1;
 `;
 

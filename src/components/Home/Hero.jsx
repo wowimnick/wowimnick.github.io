@@ -1,16 +1,33 @@
 import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { Modal, Form, DatePicker, Radio, Button, Input, Select, message } from 'antd';
-import { Drawer } from 'vaul';
-import emailjs from '@emailjs/browser';
+import { ArrowRight, CheckCircle, MapPin } from 'lucide-react';
+import { 
+  Modal, 
+  Form, 
+  DatePicker, 
+  Radio, 
+  Button, 
+  Input, 
+  Select, 
+  message, 
+  ConfigProvider,
+  Typography,
+  Row,
+  Col,
+  Divider
+} from 'antd';
+import { locations } from '../Locations/locationData';
+import { theme } from '../../styles/theme';
 
+const { Title, Text } = Typography;
 const { Option } = Select;
 
-import { locations } from '../Locations/locationData';
+// Reuse the API URL from ApplicationForm
+const API_URL = "https://ru2dx2s2w8.execute-api.us-east-2.amazonaws.com/default/ConfidentCare-Email";
 
-// Styled Components
+// --- STYLED COMPONENTS (Hero Specific) ---
+
 const HeroWrapper = styled.section`
   position: relative;
   height: 100vh;
@@ -24,10 +41,6 @@ const HeroWrapper = styled.section`
     height: auto;
     min-height: 80vh;
     padding-top: 60px;
-  }
-
-  @media (max-width: 480px) {
-    min-height: 70vh;
   }
 `;
 
@@ -58,14 +71,6 @@ const ImageOverlay = styled.div`
     rgba(0, 0, 0, 0.5) 50%,
     rgba(0, 0, 0, 0.3) 100%
   );
-
-  @media (max-width: 768px) {
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0.7) 100%
-    );
-  }
 `;
 
 const HeroContent = styled.div`
@@ -83,7 +88,7 @@ const HeroContent = styled.div`
     line-height: 1.2;
 
     span {
-      color: #d17474;
+      color: #fee301;
     }
   }
 
@@ -93,52 +98,22 @@ const HeroContent = styled.div`
     line-height: 1.6;
   }
 
-  @media (max-width: 1024px) {
-    margin-left: 5%;
-  }
-
   @media (max-width: 768px) {
     margin: 0 auto;
     text-align: center;
     padding: 2rem 1rem;
-    max-width: 100%;
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0.75rem;
-    }
-
-    p {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.5;
-    }
-  }
-
-  @media (max-width: 480px) {
-    padding: 1.5rem 0.75rem;
-
-    h1 {
-      font-size: 1.75rem;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      font-size: 0.95rem;
-      margin-bottom: 1.25rem;
-      line-height: 1.4;
-    }
+    h1 { font-size: 2rem; }
+    p { font-size: 1rem; }
   }
 `;
 
 const ButtonGroup = styled.div`
   display: flex;
   gap: 1rem;
-
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
   }
 `;
 
@@ -153,291 +128,34 @@ const ButtonBase = styled(motion.button)`
   gap: 0.5rem;
   transition: all 0.3s ease;
   font-family: 'Poppins', sans-serif;
-
+  
   @media (max-width: 768px) {
     width: 100%;
     max-width: 280px;
     justify-content: center;
-    padding: 0.65rem 1.25rem;
-    font-size: 0.95rem;
-  }
-
-  @media (max-width: 480px) {
-    max-width: 260px;
-    padding: 0.6rem 1.15rem;
-    font-size: 0.9rem;
   }
 `;
 
 const PrimaryButton = styled(ButtonBase)`
-  background-color: #a35756b8;
+  background-color: #ef1c1fad;
   color: white;
   border: none;
-
-  &:hover {
-    background-color: #8c3d3c;
-  }
 `;
 
 const SecondaryButton = styled(ButtonBase)`
   background-color: transparent;
   color: white;
   border: 2px solid white;
-
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
 `;
 
-const AnimatedInputWrapper = styled.div`
-  position: relative;
-  margin-bottom: 0rem;
-`;
-
-const StyledInput = styled(Input)`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
-  font-size: 16px;
-  transition: all 0.3s;
-
-  &:hover {
-    border-color: #4a90e2;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 15px;
-    padding: 9px;
-  }
-`;
-
-const AnimatedLabel = styled.label`
-  position: absolute;
-  left: 10px;
-  top: -12px;
-  font-size: 12px;
-  color: #4a90e2;
-  background-color: white;
-  padding: 0 5px;
-  pointer-events: none;
-
-  @media (max-width: 480px) {
-    font-size: 11px;
-  }
-`;
-
-const StyledDatePicker = styled(DatePicker)`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
-  font-size: 16px;
-  transition: all 0.3s;
-
-  &:hover {
-    border-color: #4a90e2;
-  }
-
-  .ant-picker-input > input {
-    font-size: 16px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 9px;
-    font-size: 15px;
-
-    .ant-picker-input > input {
-      font-size: 15px;
-    }
-  }
-`;
-
-const StyledSelect = styled(Select)`
-  width: 100%;
-
-  .ant-select-selector {
-    padding: 10px !important;
-    height: auto !important;
-    border: 1px solid #d9d9d9 !important;
-    border-radius: 4px !important;
-    font-size: 16px !important;
-  }
-
-  &:hover .ant-select-selector {
-    border-color: #4a90e2 !important;
-  }
-
-  .ant-select-selection-placeholder {
-    font-size: 16px;
-  }
-
-  @media (max-width: 480px) {
-    .ant-select-selector {
-      padding: 9px !important;
-      font-size: 15px !important;
-    }
-
-    .ant-select-selection-placeholder {
-      font-size: 15px;
-    }
-  }
-`;
-
-const StyledModal = styled(Modal)`
-  .ant-modal-content {
-    border-radius: 10px;
-  }
-
-  .ant-modal-header {
-    border-radius: 10px 10px 0 0;
-  }
-
-  .ant-modal-title {
-    color: #4a90e2;
-  }
-
-  .ant-form-item-label > label {
-    font-weight: 600;
-  }
-
-  .ant-btn-primary {
-    background-color: #4a90e2;
-    border-color: #4a90e2;
-
-    &:hover {
-      background-color: #357abd;
-      border-color: #357abd;
-    }
-  }
-
-  .ant-form-item-explain-error {
-    font-size: 12px;
-    margin-bottom: 13px;
-    color: #ff4d4f;
-  }
-
-  @media (max-width: 768px) {
-    max-width: 90% !important;
-    margin: 1rem auto;
-  }
-
-  @media (max-width: 480px) {
-    max-width: 95% !important;
-    margin: 0.5rem auto;
-
-    .ant-modal-content {
-      padding: 1rem;
-    }
-
-    .ant-modal-header {
-      padding: 1rem 1rem 0.75rem;
-    }
-
-    .ant-modal-body {
-      padding: 1rem;
-    }
-
-    .ant-modal-title {
-      font-size: 1.1rem;
-    }
-
-    .ant-form-item {
-      margin-bottom: 1rem;
-    }
-  }
-`;
-
-// Vaul Drawer Styles
-const DrawerOverlay = styled(Drawer.Overlay)`
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 1000;
-`;
-
-const DrawerContent = styled(Drawer.Content)`
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  border-radius: 16px 16px 0 0;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-height: 90vh;
-  z-index: 1001;
-`;
-
-const DrawerHandle = styled.div`
-  width: 48px;
-  height: 4px;
-  background-color: #d1d5db;
-  border-radius: 2px;
-  margin: 12px auto 8px;
-`;
-
-const DrawerHeader = styled.div`
-  padding: 16px 20px 8px;
-  border-bottom: 1px solid #e5e7eb;
-`;
-
-const DrawerTitle = styled(Drawer.Title)`
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #4a90e2;
-  margin: 0;
-`;
-
-const DrawerBody = styled.div`
-  padding: 20px;
-  overflow-y: auto;
-  flex: 1;
-`;
-
-const DrawerForm = styled(Form)`
-  .ant-form-item {
-    margin-bottom: 1rem;
-  }
-
-  .ant-form-item-label > label {
-    font-weight: 600;
-  }
-
-  .ant-btn-primary {
-    background-color: #4a90e2;
-    border-color: #4a90e2;
-    width: 100%;
-    height: 44px;
-    font-size: 16px;
-    font-weight: 600;
-
-    &:hover {
-      background-color: #357abd;
-      border-color: #357abd;
-    }
-  }
-
-  .ant-form-item-explain-error {
-    font-size: 12px;
-    margin-bottom: 13px;
-    color: #ff4d4f;
-  }
-`;
-
+// --- ANIMATION VARIANTS ---
 const slideVariants = {
-  enter: (direction) => ({
-    x: direction > 0 ? '100%' : '-100%',
-    opacity: 0,
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-  },
-  exit: (direction) => ({
-    x: direction < 0 ? '100%' : '-100%',
-    opacity: 0,
-  }),
+  enter: (direction) => ({ x: direction > 0 ? '100%' : '-100%', opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (direction) => ({ x: direction < 0 ? '100%' : '-100%', opacity: 0 }),
 };
 
 const transition = {
@@ -445,259 +163,92 @@ const transition = {
   opacity: { duration: 2, ease: 'easeInOut' },
 };
 
-const AnimatedInput = ({ label, ...props }) => {
-  return (
-    <AnimatedInputWrapper>
-      <StyledInput {...props} />
-      <AnimatedLabel>{label}</AnimatedLabel>
-    </AnimatedInputWrapper>
-  );
-};
+const images = [
+  { url: "https://guidewaycare.com/wp-content/themes/yootheme/cache/7a/how-can-nurses-improve-patient-satisfaction--7acfbb81.webp", alt: "Nurse holding hand" },
+  { url: "https://aihcp.net/main/wp-content/uploads/2024/02/Depositphotos_622838168_S-1-1.jpg", alt: "Educating family" },
+  { url: "https://www.northeastspineandsports.com/wp-content/uploads/2021/09/shutterstock_1639731775-scaled.jpg", alt: "Rehabilitation" },
+];
+
+// --- MAIN COMPONENT ---
 
 const Hero = () => {
   const [form] = Form.useForm();
-  const [drawerForm] = Form.useForm();
   const ref = useRef(null);
+  const direction = useRef(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
-  const images = [
-    {
-      url: "https://guidewaycare.com/wp-content/themes/yootheme/cache/7a/how-can-nurses-improve-patient-satisfaction--7acfbb81.webp",
-      alt: "Nurse holding a patient's hand"
-    },
-    {
-      url: "https://aihcp.net/main/wp-content/uploads/2024/02/Depositphotos_622838168_S-1-1.jpg",
-      alt: "Educating a family on medication"
-    },
-    {
-      url: "https://www.northeastspineandsports.com/wp-content/uploads/2021/09/shutterstock_1639731775-scaled.jpg",
-      alt: "Nurse helping a patient with walk rehabilitation"
-    },
-  ];
-
-  // Check if mobile on mount and resize
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  // Block scroll when modal or drawer is open
-  useEffect(() => {
-    if (isModalOpen || isDrawerOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isModalOpen, isDrawerOpen]);
-
+  // Carousel Logic
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      direction.current = 1;
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
     }, 10000);
-
     return () => clearInterval(interval);
   }, []);
 
-  const openModal = () => {
-    if (isMobile) {
-      setIsDrawerOpen(true);
-    } else {
-      setIsModalOpen(true);
-    }
-  };
-
+  const openModal = () => setIsModalOpen(true);
+  
   const closeModal = () => {
     setIsModalOpen(false);
     form.resetFields();
   };
 
-  const closeDrawer = () => {
-    setIsDrawerOpen(false);
-    drawerForm.resetFields();
+  const navigateToInsurances = () => {
+    window.location.href = '/insurances';
   };
 
-  const handleDateChange = (date, dateString) => {
-    form.setFieldsValue({ dateOfBirth: dateString });
-  };
-
-  const handleDrawerDateChange = (date, dateString) => {
-    drawerForm.setFieldsValue({ dateOfBirth: dateString });
-  };
-
-  const handleLocationChange = (value) => {
-    form.setFieldsValue({ locationId: value });
-  };
-
-  const handleDrawerLocationChange = (value) => {
-    drawerForm.setFieldsValue({ locationId: value });
-  };
+  // --- SUBMISSION LOGIC ---
 
   const onFinish = async (values) => {
     setIsSubmitting(true);
-    const loadingMessage = message.loading('Submitting referral...', 0);
-  
+    
     try {
-      emailjs.init("mxhVfavVsSqczEg8r");
-      
+      // Find the email address associated with the selected location
       const selectedLocation = locations.find(loc => loc.id === values.locationId);
-      
+      const targetEmail = selectedLocation ? selectedLocation.email : null;
+      const locationName = selectedLocation ? selectedLocation.name : "Unknown Location";
+
       if (!selectedLocation) {
-        throw new Error('Selected location not found');
+        message.error("Please select a valid location.");
+        setIsSubmitting(false);
+        return;
       }
 
-      const result = await emailjs.send(
-        'service_8pz3fia',
-        'template_doikkmo',
-        {
-          to_email: selectedLocation.email,
-          firstName: values.firstName,
-          lastName: values.lastName,
-          dateOfBirth: values.dateOfBirth,
-          insuranceName: values.insuranceName,
-          insuranceNumber: values.insuranceNumber,
-          doctorOrder: values.doctorOrder,
-          phoneNumber: values.phoneNumber,
-          email: values.email,
-          locationName: selectedLocation.name
+      const payload = {
+        referral: {
+          ...values,
+          dob: values.dateOfBirth?.format('YYYY-MM-DD'),
+          locationName,
+          targetEmail // Pass this to Lambda so it knows where to route
         }
-      );
-  
-      console.log('EmailJS result:', result);
-      loadingMessage();
+      };
+
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) throw new Error('Network response was not ok');
+
       message.success('Referral submitted successfully!');
-      
-      if (isMobile) {
-        closeDrawer();
-      } else {
-        closeModal();
-      }
+      closeModal();
+
     } catch (error) {
-      console.error('Error sending email:', error);
-      loadingMessage();
-      message.error('Failed to submit referral. Please try again.');
+      console.error('Error submitting referral:', error);
+      message.error('Failed to submit. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const direction = useRef(1);
-
-  useEffect(() => {
-    direction.current = direction.current * -1;
-  }, [currentImageIndex]);
-
-  const navigateToInsurances = () => {
-    window.location.href = '/insurances';
-  };
-
-  const FormFields = ({ formInstance, onDateChange, onLocationChange }) => (
-    <>
-      <Form.Item 
-        name="firstName" 
-        rules={[{ required: true, message: 'Please input the first name!' }]}
-      >
-        <AnimatedInput label="First Name" />
-      </Form.Item>
-      <Form.Item 
-        name="lastName" 
-        rules={[{ required: true, message: 'Please input the last name!' }]}
-      >
-        <AnimatedInput label="Last Name" />
-      </Form.Item>
-      <Form.Item 
-        name="dateOfBirth" 
-        rules={[{ required: true, message: 'Please select the date of birth!' }]}
-      >
-        <AnimatedInputWrapper>
-          <StyledDatePicker 
-            placeholder="Date of Birth"
-            format="YYYY-MM-DD"
-            onChange={onDateChange}
-          />
-          <AnimatedLabel>Date of Birth</AnimatedLabel>
-        </AnimatedInputWrapper>
-      </Form.Item>
-      <Form.Item 
-        name="insuranceName" 
-        rules={[{ required: true, message: 'Please input the insurance name!' }]}
-      >
-        <AnimatedInput label="Insurance Name" />
-      </Form.Item>
-      <Form.Item 
-        name="insuranceNumber" 
-        rules={[{ required: false, message: 'Please input the insurance number!' }]}
-      >
-        <AnimatedInput label="Insurance Number" />
-      </Form.Item>
-      <Form.Item 
-        name="doctorOrder" 
-        label="Do you have a doctor's order?" 
-        rules={[{ required: true, message: 'Please select an option!' }]}
-      >
-        <Radio.Group>
-          <Radio value="yes">Yes</Radio>
-          <Radio value="no">No</Radio>
-          <Radio value="notSure">Not Sure</Radio>
-        </Radio.Group>
-      </Form.Item>
-      <Form.Item
-        name="phoneNumber"
-        rules={[
-          { required: true, message: 'Please input your phone number!' },
-          { pattern: /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/, message: 'Please enter a valid phone number!' }
-        ]}
-      >
-        <AnimatedInput label="Phone Number" />
-      </Form.Item>
-      <Form.Item
-        name="email"
-        rules={[
-          { required: true, message: 'Please input your email!' },
-          { type: 'email', message: 'Please enter a valid email address!' }
-        ]}
-      >
-        <AnimatedInput label="Email" />
-      </Form.Item>
-      <Form.Item
-        name="locationId"
-        rules={[{ required: true, message: 'Please select a location!' }]}
-      >
-        <AnimatedInputWrapper>
-          <StyledSelect 
-            placeholder="Select a location"
-            onChange={onLocationChange}
-          >
-            {locations.map(location => (
-              <Option key={location.id} value={location.id}>{location.name}</Option>
-            ))}
-          </StyledSelect>
-          <AnimatedLabel>Location</AnimatedLabel>
-        </AnimatedInputWrapper>
-      </Form.Item>
-      <Form.Item>
-        <Button type="primary" htmlType="submit" block loading={isSubmitting}>
-          Submit Referral
-        </Button>
-      </Form.Item>
-    </>
-  );
-
   return (
     <HeroWrapper ref={ref}>
+      {/* Background Carousel */}
       <AnimatePresence initial={false} custom={direction.current}>
         <HeroImageWrapper
           key={currentImageIndex}
@@ -718,14 +269,15 @@ const Hero = () => {
           <ImageOverlay />
         </HeroImageWrapper>
       </AnimatePresence>
+
+      {/* Hero Text Content */}
       <HeroContent>
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Compassionate Care
-          <br />
+          Compassionate Care<br />
           <span>in the Comfort <br />of Your Own Home</span>
         </motion.h1>
         <motion.p
@@ -739,9 +291,6 @@ const Hero = () => {
           <PrimaryButton
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
             onClick={openModal}
           >
             Refer a Patient <ArrowRight size={20} />
@@ -749,9 +298,6 @@ const Hero = () => {
           <SecondaryButton
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
             onClick={navigateToInsurances}
           >
             Insurances
@@ -759,44 +305,102 @@ const Hero = () => {
         </ButtonGroup>
       </HeroContent>
 
-      {/* Desktop Modal */}
-      <StyledModal
-        title="Refer a Patient"
-        open={isModalOpen}
-        onCancel={closeModal}
-        footer={null}
-        width={600}
-      >
-        <Form form={form} layout="vertical" onFinish={onFinish}>
-          <FormFields 
-            formInstance={form}
-            onDateChange={handleDateChange}
-            onLocationChange={handleLocationChange}
-          />
-        </Form>
-      </StyledModal>
+      {/* Ant Design Modal (Responsive) */}
+      <ConfigProvider theme={theme}>
+        <Modal
+          title={<div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>Refer a Patient</div>}
+          open={isModalOpen}
+          onCancel={closeModal}
+          footer={null}
+          width={600}
+          centered
+          destroyOnClose
+          maskClosable={false}
+          style={{ top: 20 }}
+        >
+          <Text type="secondary" style={{ display: 'block', marginBottom: 20 }}>
+            Enter the patient's details below to start the intake process.
+          </Text>
 
-      {/* Mobile Drawer */}
-      <Drawer.Root open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
-        <Drawer.Portal>
-          <DrawerOverlay />
-          <DrawerContent>
-            <DrawerHandle />
-            <DrawerHeader>
-              <DrawerTitle>Refer a Patient</DrawerTitle>
-            </DrawerHeader>
-            <DrawerBody>
-              <DrawerForm form={drawerForm} layout="vertical" onFinish={onFinish}>
-                <FormFields 
-                  formInstance={drawerForm}
-                  onDateChange={handleDrawerDateChange}
-                  onLocationChange={handleDrawerLocationChange}
-                />
-              </DrawerForm>
-            </DrawerBody>
-          </DrawerContent>
-        </Drawer.Portal>
-      </Drawer.Root>
+          <Form 
+            form={form} 
+            layout="vertical" 
+            onFinish={onFinish}
+            initialValues={{ doctorOrder: 'yes' }}
+          >
+            <Title level={5} style={{ marginTop: 0, color: '#ff5722' }}>Patient Details</Title>
+            <Row gutter={16}>
+              <Col xs={24} sm={12}>
+                <Form.Item name="firstName" label="First Name" rules={[{ required: true }]}>
+                  <Input placeholder="Jane" />
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={12}>
+                <Form.Item name="lastName" label="Last Name" rules={[{ required: true }]}>
+                  <Input placeholder="Doe" />
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Row gutter={16}>
+              <Col xs={24} sm={12}>
+                <Form.Item name="dateOfBirth" label="Date of Birth" rules={[{ required: true }]}>
+                  <DatePicker style={{ width: '100%' }} format="YYYY-MM-DD" placeholder="Select Date" />
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={12}>
+                <Form.Item name="locationId" label="Preferred Location" rules={[{ required: true }]}>
+                  <Select placeholder="Select Office" suffixIcon={<MapPin size={14} />}>
+                    {locations.map(loc => (
+                      <Option key={loc.id} value={loc.id}>{loc.name}</Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Divider style={{ margin: '10px 0 20px' }} />
+            
+            <Title level={5} style={{ color: '#ff5722' }}>Insurance & Contact</Title>
+
+            <Form.Item name="insuranceName" label="Insurance Provider" rules={[{ required: true }]}>
+              <Input placeholder="e.g. Blue Cross Blue Shield" />
+            </Form.Item>
+
+            <Form.Item name="insuranceNumber" label="Insurance Policy Number">
+              <Input placeholder="Policy ID (Optional)" />
+            </Form.Item>
+
+            <Form.Item name="doctorOrder" label="Do you have a doctor's order?">
+              <Radio.Group buttonStyle="solid">
+                <Radio.Button value="yes">Yes</Radio.Button>
+                <Radio.Button value="no">No</Radio.Button>
+                <Radio.Button value="notSure">Not Sure</Radio.Button>
+              </Radio.Group>
+            </Form.Item>
+
+            <Row gutter={16}>
+              <Col xs={24} sm={12}>
+                <Form.Item name="phoneNumber" label="Phone Number" rules={[{ required: true }]}>
+                  <Input type="tel" placeholder="(555) 555-5555" />
+                </Form.Item>
+              </Col>
+              <Col xs={24} sm={12}>
+                <Form.Item name="email" label="Email Address" rules={[{ required: true, type: 'email' }]}>
+                  <Input placeholder="jane@example.com" />
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <div style={{ marginTop: 20 }}>
+              <Button type="primary" htmlType="submit" block loading={isSubmitting} size="large">
+                Send Referral
+              </Button>
+            </div>
+
+          </Form>
+        </Modal>
+      </ConfigProvider>
     </HeroWrapper>
   );
 };

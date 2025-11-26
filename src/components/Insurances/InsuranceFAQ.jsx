@@ -92,7 +92,7 @@ const FAQWrapper = styled.section`
   h2 {
     font-size: 2rem;
     font-weight: 600;
-    color: #4a90e2;
+    color: #ff5722;
     margin-bottom: 2rem;
     text-align: center;
   }
@@ -160,7 +160,7 @@ const FAQQuestion = styled.div`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #f0f7ff;
+    background-color: #fff9f0;
   }
 
   @media (max-width: 768px) {
@@ -185,7 +185,7 @@ const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  color: #4a90e2;
+  color: #ff5722;
 
   @media (max-width: 768px) {
     svg {

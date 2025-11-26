@@ -159,7 +159,7 @@ const RatingsAndTestimonials = () => {
                     </TestimonialAuthor>
                     <TestimonialRating>
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={16} fill="#ffc107" stroke="#ffc107" />
+                        <Star key={i} size={16} fill="#fee301" stroke="#fee301" />
                       ))}
                     </TestimonialRating>
                   </div>
@@ -265,7 +265,7 @@ const EmblaWrapper = styled.div`
 const QuoteIcon = styled.div`
   position: absolute;
   top: -5px;
-  color: #4a90e2;
+  color: #ff5722;
   opacity: 0.1;
   transform: scale(3);
 

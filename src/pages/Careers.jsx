@@ -1,82 +1,25 @@
-import React, { useState, useEffect } from 'react';
+// --- START OF FILE Careers.jsx ---
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import withPageTransition from '../components/withPageTransition';
 import HeroBanner from '../components/Careers/HeroBanner';
-import JobSearch from '../components/Careers/JobSearch';
-import JobListings from '../components/Careers/JobListings';
 import ApplicationForm from '../components/Careers/ApplicationForm';
 import WhyWorkWithUs from '../components/Careers/WhyWorkWithUs';
-import { mockJobListings } from '../components/Careers/mockJobListings';
 
 const Careers = () => {
-  const [jobListings, setJobListings] = useState([]);
-  const [selectedJob, setSelectedJob] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filter, setFilter] = useState({ department: '', location: '', type: '' });
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    setJobListings(mockJobListings);
-
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const handleJobSelect = (job) => {
-    setSelectedJob(selectedJob && selectedJob.id === job.id ? null : job);
-  };
-
-  const handleApplyClick = (job) => {
-    setSelectedJob(job);
-    document.getElementById('application-form').scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleFilter = (e) => {
-    setFilter({ ...filter, [e.target.name]: e.target.value });
-  };
-
-  const filteredJobs = jobListings.filter((job) => {
-    return (
-      job.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (filter.department === '' || job.department === filter.department) &&
-      (filter.location === '' || job.location === filter.location) &&
-      (filter.type === '' || job.type === filter.type)
-    );
-  });
 
   return (
     <CareersWrapper>
       <HeroBanner />
       <ContentSection>
-        <JobSearch
-          searchTerm={searchTerm}
-          handleSearch={handleSearch}
-          filter={filter}
-          handleFilter={handleFilter}
-          isSmallScreen={isSmallScreen}
-        />
-        <JobListings
-          filteredJobs={filteredJobs}
-          selectedJob={selectedJob}
-          handleJobSelect={handleJobSelect}
-          handleApplyClick={handleApplyClick}
-          isSmallScreen={isSmallScreen}
-        />
-        {selectedJob && (
-          <ApplicationForm selectedJob={selectedJob} />
-        )}
+        <IntroText>
+          <h2>Join Our Team</h2>
+          <p>We are always looking for compassionate, skilled professionals to join the Confident Care family. Please fill out the general application below to be considered for current and future openings.</p>
+        </IntroText>
+        <ApplicationForm />
       </ContentSection>
       <WhyWorkWithUs />
     </CareersWrapper>
@@ -86,15 +29,39 @@ const Careers = () => {
 const CareersWrapper = styled.div`
   font-family: 'Poppins', sans-serif;
   color: #333;
+  background-color: #fcfcfc;
 `;
 
 const ContentSection = styled.div`
-  max-width: 1200px;
-  margin: 3rem auto;
-  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
 
   @media (max-width: 768px) {
-    padding: 1rem;
+    padding: 0 1rem 3rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.2rem 2rem;
+  }
+`;
+
+const IntroText = styled.div`
+  text-align: center;
+  margin: 3rem auto;
+  max-width: 700px;
+
+  h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
   }
 `;
 

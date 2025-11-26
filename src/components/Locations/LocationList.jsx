@@ -62,7 +62,7 @@ const LocationsList = ({ locations, selectedLocation, onLocationSelect, isMapVis
 const CustomH2 = styled.h2`
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #4a90e2;
+  color: #ff5722;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
 
@@ -125,7 +125,7 @@ const LocationsContainer = styled.div`
 `;
 
 const LocationItem = styled.div`
-  background-color: ${(props) => (props.selected ? '#4a90e2' : '#f0f0f0')};
+  background-color: ${(props) => (props.selected ? '#ff5722' : '#fff9f0')};
   border-radius: 8px;
   padding: 1rem;
   cursor: pointer;
@@ -165,7 +165,7 @@ const LocationHeader = styled.div`
   }
 
   svg {
-    color: ${(props) => (props.selected ? 'white' : '#4a90e2')};
+    color: ${(props) => (props.selected ? 'white' : '#ff5722')};
     flex-shrink: 0;
   }
 
@@ -264,8 +264,8 @@ const DirectionsButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: ${(props) => (props.selected ? 'white' : '#4a90e2')};
-  color: ${(props) => (props.selected ? '#4a90e2' : 'white')};
+  background-color: ${(props) => (props.selected ? 'white' : '#ff5722')};
+  color: ${(props) => (props.selected ? '#ff5722' : 'white')};
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -278,7 +278,7 @@ const DirectionsButton = styled.button`
   width: 100%;
 
   &:hover {
-    background-color: ${(props) => (props.selected ? '#f0f0f0' : '#3a7bc8')};
+    background-color: ${(props) => (props.selected ? '#f0f0f0' : '#e64a19')};
   }
 
   @media (max-width: 768px) {
