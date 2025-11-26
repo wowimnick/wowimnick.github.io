@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, CheckCircle, MapPin } from 'lucide-react';
+import { Drawer } from 'vaul';
 import { 
   Modal, 
   Form, 
@@ -151,6 +152,47 @@ const SecondaryButton = styled(ButtonBase)`
   }
 `;
 
+// --- VAUL DRAWER STYLES ---
+
+const DrawerOverlay = styled(Drawer.Overlay)`
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+`;
+
+const DrawerContent = styled(Drawer.Content)`
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 90vh;
+  margin-top: 24px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  outline: none;
+`;
+
+const DrawerHandle = styled.div`
+  width: 40px;
+  height: 6px;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  margin: 16px auto;
+  flex-shrink: 0;
+`;
+
+const ScrollableContainer = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  padding-bottom: 40px;
+`;
+
 // --- ANIMATION VARIANTS ---
 const slideVariants = {
   enter: (direction) => ({ x: direction > 0 ? '100%' : '-100%', opacity: 0 }),
@@ -180,6 +222,16 @@ const Hero = () => {
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Responsive Helper
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.matchMedia('(max-width: 768px)').matches);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Carousel Logic
   useEffect(() => {
@@ -219,7 +271,6 @@ const Hero = () => {
     setIsSubmitting(true);
     
     try {
-      // Find the email address associated with the selected location
       const selectedLocation = locations.find(loc => loc.id === values.locationId);
       const targetEmail = selectedLocation ? selectedLocation.email : null;
       const locationName = selectedLocation ? selectedLocation.name : "Unknown Location";
@@ -235,7 +286,7 @@ const Hero = () => {
           ...values,
           dob: values.dateOfBirth?.format('YYYY-MM-DD'),
           locationName,
-          targetEmail // Pass this to Lambda so it knows where to route
+          targetEmail
         }
       };
 
@@ -257,6 +308,92 @@ const Hero = () => {
       setIsSubmitting(false);
     }
   };
+
+  // Reusable Form Content
+  const renderFormContent = () => (
+    <>
+      <Text type="secondary" style={{ display: 'block', marginBottom: 20 }}>
+        Enter the patient's details below to start the intake process.
+      </Text>
+
+      <Form 
+        form={form} 
+        layout="vertical" 
+        onFinish={onFinish}
+        initialValues={{ doctorOrder: 'yes' }}
+      >
+        <Title level={5} style={{ marginTop: 0, color: '#ff5722' }}>Patient Details</Title>
+        <Row gutter={16}>
+          <Col xs={24} sm={12}>
+            <Form.Item name="firstName" label="First Name" rules={[{ required: true }]}>
+              <Input placeholder="Jane" />
+            </Form.Item>
+          </Col>
+          <Col xs={24} sm={12}>
+            <Form.Item name="lastName" label="Last Name" rules={[{ required: true }]}>
+              <Input placeholder="Doe" />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row gutter={16}>
+          <Col xs={24} sm={12}>
+            <Form.Item name="dateOfBirth" label="Date of Birth" rules={[{ required: true }]}>
+              <DatePicker style={{ width: '100%' }} format="YYYY-MM-DD" placeholder="Select Date" />
+            </Form.Item>
+          </Col>
+          <Col xs={24} sm={12}>
+            <Form.Item name="locationId" label="Preferred Location" rules={[{ required: true }]}>
+              <Select placeholder="Select Office" suffixIcon={<MapPin size={14} />}>
+                {locations.map(loc => (
+                  <Option key={loc.id} value={loc.id}>{loc.name}</Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Divider style={{ margin: '10px 0 20px' }} />
+        
+        <Title level={5} style={{ color: '#ff5722' }}>Insurance & Contact</Title>
+
+        <Form.Item name="insuranceName" label="Insurance Provider" rules={[{ required: true }]}>
+          <Input placeholder="e.g. Blue Cross Blue Shield" />
+        </Form.Item>
+
+        <Form.Item name="insuranceNumber" label="Insurance Policy Number">
+          <Input placeholder="Policy ID (Optional)" />
+        </Form.Item>
+
+        <Form.Item name="doctorOrder" label="Do you have a doctor's order?">
+          <Radio.Group buttonStyle="solid">
+            <Radio.Button value="yes">Yes</Radio.Button>
+            <Radio.Button value="no">No</Radio.Button>
+            <Radio.Button value="notSure">Not Sure</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+
+        <Row gutter={16}>
+          <Col xs={24} sm={12}>
+            <Form.Item name="phoneNumber" label="Phone Number" rules={[{ required: true }]}>
+              <Input type="tel" placeholder="(555) 555-5555" />
+            </Form.Item>
+          </Col>
+          <Col xs={24} sm={12}>
+            <Form.Item name="email" label="Email Address" rules={[{ required: true, type: 'email' }]}>
+              <Input placeholder="jane@example.com" />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <div style={{ marginTop: 20 }}>
+          <Button type="primary" htmlType="submit" block loading={isSubmitting} size="large">
+            Send Referral
+          </Button>
+        </div>
+      </Form>
+    </>
+  );
 
   return (
     <HeroWrapper ref={ref}>
@@ -317,101 +454,39 @@ const Hero = () => {
         </ButtonGroup>
       </HeroContent>
 
-      {/* Ant Design Modal (Responsive) */}
       <ConfigProvider theme={theme}>
-        <Modal
-          title={<div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>Refer a Patient</div>}
-          open={isModalOpen}
-          onCancel={closeModal}
-          footer={null}
-          width={600}
-          centered
-          destroyOnClose
-          maskClosable={false}
-          style={{ top: 20 }}
-        >
-          <Text type="secondary" style={{ display: 'block', marginBottom: 20 }}>
-            Enter the patient's details below to start the intake process.
-          </Text>
-
-          <Form 
-            form={form} 
-            layout="vertical" 
-            onFinish={onFinish}
-            initialValues={{ doctorOrder: 'yes' }}
+        {isMobile ? (
+          // --- MOBILE DRAWER (VAUL) ---
+          <Drawer.Root open={isModalOpen} onOpenChange={setIsModalOpen} shouldScaleBackground>
+            <Drawer.Portal>
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerHandle />
+                <div style={{ padding: '0 20px 10px 20px', borderBottom: '1px solid #f0f0f0' }}>
+                  <Title level={4} style={{ margin: 0 }}>Refer a Patient</Title>
+                </div>
+                <ScrollableContainer>
+                  {renderFormContent()}
+                </ScrollableContainer>
+              </DrawerContent>
+            </Drawer.Portal>
+          </Drawer.Root>
+        ) : (
+          // --- DESKTOP MODAL (ANTD) ---
+          <Modal
+            title={<div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>Refer a Patient</div>}
+            open={isModalOpen}
+            onCancel={closeModal}
+            footer={null}
+            width={600}
+            centered
+            destroyOnClose
+            maskClosable={false}
+            style={{ top: 20 }}
           >
-            <Title level={5} style={{ marginTop: 0, color: '#ff5722' }}>Patient Details</Title>
-            <Row gutter={16}>
-              <Col xs={24} sm={12}>
-                <Form.Item name="firstName" label="First Name" rules={[{ required: true }]}>
-                  <Input placeholder="Jane" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} sm={12}>
-                <Form.Item name="lastName" label="Last Name" rules={[{ required: true }]}>
-                  <Input placeholder="Doe" />
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Row gutter={16}>
-              <Col xs={24} sm={12}>
-                <Form.Item name="dateOfBirth" label="Date of Birth" rules={[{ required: true }]}>
-                  <DatePicker style={{ width: '100%' }} format="YYYY-MM-DD" placeholder="Select Date" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} sm={12}>
-                <Form.Item name="locationId" label="Preferred Location" rules={[{ required: true }]}>
-                  <Select placeholder="Select Office" suffixIcon={<MapPin size={14} />}>
-                    {locations.map(loc => (
-                      <Option key={loc.id} value={loc.id}>{loc.name}</Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Divider style={{ margin: '10px 0 20px' }} />
-            
-            <Title level={5} style={{ color: '#ff5722' }}>Insurance & Contact</Title>
-
-            <Form.Item name="insuranceName" label="Insurance Provider" rules={[{ required: true }]}>
-              <Input placeholder="e.g. Blue Cross Blue Shield" />
-            </Form.Item>
-
-            <Form.Item name="insuranceNumber" label="Insurance Policy Number">
-              <Input placeholder="Policy ID (Optional)" />
-            </Form.Item>
-
-            <Form.Item name="doctorOrder" label="Do you have a doctor's order?">
-              <Radio.Group buttonStyle="solid">
-                <Radio.Button value="yes">Yes</Radio.Button>
-                <Radio.Button value="no">No</Radio.Button>
-                <Radio.Button value="notSure">Not Sure</Radio.Button>
-              </Radio.Group>
-            </Form.Item>
-
-            <Row gutter={16}>
-              <Col xs={24} sm={12}>
-                <Form.Item name="phoneNumber" label="Phone Number" rules={[{ required: true }]}>
-                  <Input type="tel" placeholder="(555) 555-5555" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} sm={12}>
-                <Form.Item name="email" label="Email Address" rules={[{ required: true, type: 'email' }]}>
-                  <Input placeholder="jane@example.com" />
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <div style={{ marginTop: 20 }}>
-              <Button type="primary" htmlType="submit" block loading={isSubmitting} size="large">
-                Send Referral
-              </Button>
-            </div>
-
-          </Form>
-        </Modal>
+            {renderFormContent()}
+          </Modal>
+        )}
       </ConfigProvider>
     </HeroWrapper>
   );

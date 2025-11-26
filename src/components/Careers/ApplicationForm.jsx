@@ -28,6 +28,7 @@ import {
 } from '@ant-design/icons';
 import { Send, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Drawer } from 'vaul';
 
 import imageCompression from 'browser-image-compression';
 import dayjs from 'dayjs';
@@ -40,6 +41,45 @@ const { Option } = Select;
 
 const API_URL = "https://ru2dx2s2w8.execute-api.us-east-2.amazonaws.com/default/ConfidentCare-Email";
 const MAX_TOTAL_SIZE_BYTES = 3.5 * 1024 * 1024; // 3.5MB
+
+// --- STYLED COMPONENTS FOR DRAWER ---
+
+const DrawerOverlay = styled(Drawer.Overlay)`
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+`;
+
+const DrawerContent = styled(Drawer.Content)`
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-top: 24px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  outline: none;
+`;
+
+const DrawerHandle = styled.div`
+  width: 40px;
+  height: 6px;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  margin: 16px auto;
+  flex-shrink: 0;
+`;
+
+const ScrollableContainer = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+`;
 
 const ApplicationForm = () => {
   const [form] = Form.useForm();
@@ -617,6 +657,14 @@ const CustomUpload = ({ label, fileKey, currentFile, onUpload, onRemove, require
 const AttestationModal = ({ visible, onClose, onSubmit, initialData, isLoading }) => {
   const [attForm] = Form.useForm();
   const [priorScreening, setPriorScreening] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.matchMedia('(max-width: 768px)').matches);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Reset form when modal opens
   React.useEffect(() => {
@@ -639,21 +687,8 @@ const AttestationModal = ({ visible, onClose, onSubmit, initialData, isLoading }
     }
   };
 
-  return (
-    <Modal
-      open={visible}
-      title="Background Screening Attestation"
-      onCancel={onClose}
-      centered
-      footer={[
-        <Button key="back" onClick={onClose} disabled={isLoading}>Cancel</Button>,
-        <Button key="submit" type="primary" loading={isLoading} onClick={handleOk}>
-          Sign & Submit
-        </Button>
-      ]}
-      style={{ top: 20 }}
-      width={600}
-    >
+  const renderAttestationForm = () => (
+    <>
       <div style={{ background: '#fffbe6', border: '1px solid #ffe58f', padding: '12px', borderRadius: '4px', marginBottom: '16px' }}>
         <Text style={{ fontSize: '13px' }}>
           <strong>Under penalty of perjury</strong>, I attest that I have not been arrested for or convicted of any disqualifying offenses under Florida Statutes 435.04, 408.809, and 741.28.
@@ -713,7 +748,53 @@ const AttestationModal = ({ visible, onClose, onSubmit, initialData, isLoading }
         >
           <Checkbox>I certify that the above information is true and accurate under penalty of perjury.</Checkbox>
         </Form.Item>
+        
+        {isMobile && (
+          <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+             <Button onClick={onClose} disabled={isLoading} block>Cancel</Button>
+             <Button type="primary" loading={isLoading} onClick={handleOk} block>
+              Sign & Submit
+            </Button>
+          </div>
+        )}
       </Form>
+    </>
+  );
+
+  if (isMobile) {
+    return (
+      <Drawer.Root open={visible} onOpenChange={(open) => !open && onClose()} shouldScaleBackground>
+        <Drawer.Portal>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHandle />
+            <div style={{ padding: '0 20px 10px 20px', borderBottom: '1px solid #f0f0f0' }}>
+               <Title level={4} style={{ margin: 0 }}>Background Screening</Title>
+            </div>
+            <ScrollableContainer>
+              {renderAttestationForm()}
+            </ScrollableContainer>
+          </DrawerContent>
+        </Drawer.Portal>
+      </Drawer.Root>
+    );
+  }
+
+  return (
+    <Modal
+      open={visible}
+      title="Background Screening Attestation"
+      onCancel={onClose}
+      footer={[
+        <Button key="back" onClick={onClose} disabled={isLoading}>Cancel</Button>,
+        <Button key="submit" type="primary" loading={isLoading} onClick={handleOk}>
+          Sign & Submit
+        </Button>
+      ]}
+      style={{ top: 20 }}
+      width={600}
+    >
+      {renderAttestationForm()}
     </Modal>
   );
 };
