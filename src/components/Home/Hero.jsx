@@ -190,6 +190,18 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Scroll Locking Logic
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
+
   const openModal = () => setIsModalOpen(true);
   
   const closeModal = () => {

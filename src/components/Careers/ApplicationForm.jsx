@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { 
   Form, 
@@ -49,6 +49,9 @@ const ApplicationForm = () => {
   const [showAttestationModal, setShowAttestationModal] = useState(false);
   const [applicationData, setApplicationData] = useState(null);
   
+  // Ref for scrolling to top of form
+  const formTopRef = useRef(null);
+
   // File State
   const [totalSize, setTotalSize] = useState(0);
   const [uploadedFiles, setUploadedFiles] = useState({
@@ -61,6 +64,18 @@ const ApplicationForm = () => {
   // Watchers for conditional rendering
   const workedBefore = Form.useWatch('workedBefore', form);
   const hasContacts = Form.useWatch('hasContacts', form);
+
+  // --- SCROLL LOCKING FOR MODAL ---
+  useEffect(() => {
+    if (showAttestationModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showAttestationModal]);
 
   // --- HELPER FUNCTIONS ---
 
@@ -133,6 +148,12 @@ const ApplicationForm = () => {
     { title: 'History & Docs', icon: <FileDoneOutlined /> },
   ];
 
+  const scrollToFormTop = () => {
+    if (formTopRef.current) {
+      formTopRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const handleNext = async () => {
     try {
       await form.validateFields(); // Validates only current step implicitly if we separated fields, but here we validate all filled so far
@@ -158,7 +179,7 @@ const ApplicationForm = () => {
 
       if (currentStep < steps.length - 1) {
         setCurrentStep(currentStep + 1);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        scrollToFormTop();
       } else {
         // Pre-submission
         const values = form.getFieldsValue();
@@ -173,7 +194,7 @@ const ApplicationForm = () => {
 
   const handlePrev = () => {
     setCurrentStep(currentStep - 1);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToFormTop();
   };
 
   // --- API SUBMISSION ---
@@ -241,7 +262,7 @@ const ApplicationForm = () => {
     <ConfigProvider 
       theme={theme}
     >
-    <Container>
+    <Container ref={formTopRef}>
       <Card bordered={false} className="form-card">
         <Steps 
           current={currentStep} 
@@ -344,7 +365,7 @@ const ApplicationForm = () => {
                     </Col>
                     <Col xs={24} md={12}>
                       <Form.Item name="startDate" label="Start Date" rules={[{ required: true }]}>
-                        <DatePicker style={{ width: '100%' }} />
+                        <DatePicker style={{ width: '100%' }} placeholder="Select date" />
                       </Form.Item>
                     </Col>
                   </Row>
@@ -352,7 +373,7 @@ const ApplicationForm = () => {
                   <Row gutter={16}>
                     <Col xs={24} md={12}>
                       <Form.Item name="employmentType" label="Employment Type" rules={[{ required: true }]}>
-                        <Select>
+                        <Select placeholder="Select type">
                           <Option value="Full-time">Full-time</Option>
                           <Option value="Part-time">Part-time</Option>
                           <Option value="PRN">PRN (As Needed)</Option>
@@ -361,7 +382,7 @@ const ApplicationForm = () => {
                     </Col>
                     <Col xs={24} md={12}>
                       <Form.Item name="yearsExperience" label="Years Experience" rules={[{ required: true }]}>
-                        <Input type="number" step="0.5" />
+                        <Input type="number" step="0.5" placeholder="e.g. 5" />
                       </Form.Item>
                     </Col>
                   </Row>
@@ -392,7 +413,7 @@ const ApplicationForm = () => {
                   <Row gutter={16}>
                     <Col xs={24} md={12}>
                       <Form.Item name="workedBefore" label="Worked with us before?">
-                        <Select>
+                        <Select placeholder="Select option">
                           <Option value="no">No</Option>
                           <Option value="yes">Yes</Option>
                         </Select>
@@ -410,7 +431,7 @@ const ApplicationForm = () => {
                   <Row gutter={16}>
                     <Col xs={24} md={12}>
                       <Form.Item name="hasContacts" label="Contacts within Confident Care?">
-                        <Select>
+                        <Select placeholder="Select option">
                           <Option value="no">No</Option>
                           <Option value="yes">Yes</Option>
                         </Select>
@@ -419,7 +440,7 @@ const ApplicationForm = () => {
                     {hasContacts === 'yes' && (
                       <Col xs={24} md={12}>
                         <Form.Item name="contactDetails" label="Contact Name & Relationship" rules={[{ required: true }]}>
-                          <Input />
+                          <Input placeholder="e.g. Jane Smith, Sister" />
                         </Form.Item>
                       </Col>
                     )}
@@ -428,12 +449,12 @@ const ApplicationForm = () => {
                   <Row gutter={16}>
                     <Col xs={24} md={12}>
                       <Form.Item name="previousEmployer" label="Previous Employer" rules={[{ required: true }]}>
-                        <Input />
+                        <Input placeholder="e.g. Health Corp" />
                       </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                       <Form.Item name="previousPhone" label="Employer Phone" rules={[{ required: true }]}>
-                        <Input />
+                        <Input placeholder="e.g. (555) 555-0199" />
                       </Form.Item>
                     </Col>
                   </Row>
@@ -447,17 +468,17 @@ const ApplicationForm = () => {
                   <Row gutter={16}>
                     <Col xs={24} md={12}>
                       <Form.Item name="referenceName" label="Reference Name" rules={[{ required: true }]}>
-                        <Input />
+                        <Input placeholder="e.g. Dr. Smith" />
                       </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
                       <Form.Item name="referencePhone" label="Reference Phone" rules={[{ required: true }]}>
-                        <Input />
+                        <Input placeholder="e.g. (555) 555-0123" />
                       </Form.Item>
                     </Col>
                     <Col xs={24}>
                       <Form.Item name="referenceEmail" label="Reference Email (Optional)" rules={[{ type: 'email' }]}>
-                        <Input />
+                        <Input placeholder="ref@example.com" />
                       </Form.Item>
                     </Col>
                   </Row>
@@ -623,6 +644,7 @@ const AttestationModal = ({ visible, onClose, onSubmit, initialData, isLoading }
       open={visible}
       title="Background Screening Attestation"
       onCancel={onClose}
+      centered
       footer={[
         <Button key="back" onClick={onClose} disabled={isLoading}>Cancel</Button>,
         <Button key="submit" type="primary" loading={isLoading} onClick={handleOk}>
@@ -642,12 +664,12 @@ const AttestationModal = ({ visible, onClose, onSubmit, initialData, isLoading }
         <Row gutter={16}>
           <Col span={12}>
             <Form.Item label="Employee Name" name="employeeName">
-              <Input disabled style={{ color: '#333' }} />
+              <Input disabled style={{ color: '#333' }} placeholder="Employee Name" />
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item label="Position/Title" name="title" rules={[{ required: true }]}>
-              <Input />
+              <Input placeholder="e.g. Registered Nurse" />
             </Form.Item>
           </Col>
         </Row>
@@ -661,7 +683,7 @@ const AttestationModal = ({ visible, onClose, onSubmit, initialData, isLoading }
         </Form.Item>
 
         <Form.Item label="Date" name="date">
-          <Input disabled />
+          <Input disabled placeholder="YYYY-MM-DD" />
         </Form.Item>
 
         <Form.Item name="priorScreening" valuePropName="checked">
