@@ -194,37 +194,47 @@ const ApplicationForm = () => {
     }
   };
 
-  const handleNext = async () => {
+const handleNext = async () => {
     try {
-      await form.validateFields(); // Validates only current step implicitly if we separated fields, but here we validate all filled so far
-      const currentValues = form.getFieldsValue();
-      setApplicationData((prev) => ({ ...prev, ...currentValues }));
-      // Manual validation per step logic
+      // 1. Validate fields visible on current step
       if (currentStep === 0) {
         await form.validateFields(['name', 'dob', 'email', 'phone', 'contactMethod']);
       } else if (currentStep === 1) {
         await form.validateFields(['position', 'office', 'startDate', 'employmentType', 'floridaLicense', 'yearsExperience']);
       } else if (currentStep === 2) {
-        // Check files
+        // Validate files manually
         const missing = [];
         if (!uploadedFiles.resume) missing.push('Resume');
         if (!uploadedFiles.license) missing.push('License');
         if (!uploadedFiles.cpr) missing.push('CPR Card');
-        
         if (missing.length > 0) {
           message.error(`Missing documents: ${missing.join(', ')}`);
           return;
         }
-        await form.validateFields(); // Validate rest of history fields
+        await form.validateFields(); 
       }
+
+      // 2. Capture current form values
+      const currentFormValues = form.getFieldsValue();
+
+      // 3. MERGE current step data with existing history
+      // This variable represents exactly what we have collected so far
+      const accumulatedData = { ...applicationData, ...currentFormValues };
+
+      // Update React State
+      setApplicationData(accumulatedData);
 
       if (currentStep < steps.length - 1) {
         setCurrentStep(currentStep + 1);
         scrollToFormTop();
       } else {
-        // Pre-submission
-        const values = form.getFieldsValue();
-        setApplicationData(values);
+        console.log("%c 🔍 DATA CHECK - VERIFYING STEP 1 & 2 PRESERVATION", "background: #222; color: #bada55; font-size: 14px; padding: 5px;");
+        console.log("Step 1 (Personal) Name:", accumulatedData.name || "❌ MISSING");
+        console.log("Step 1 (Personal) Email:", accumulatedData.email || "❌ MISSING");
+        console.log("Step 2 (Position) Job:", accumulatedData.position || "❌ MISSING");
+        console.log("Step 3 (History) Ref:", accumulatedData.referenceName || "❌ MISSING");
+        console.log("FULL PAYLOAD READY FOR MODAL:", accumulatedData);
+        
         setShowAttestationModal(true);
       }
     } catch (error) {
