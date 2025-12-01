@@ -1,30 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { 
-  Form, 
-  Input, 
-  Select, 
-  Button, 
-  Steps, 
-  Upload, 
-  Modal, 
-  message, 
-  DatePicker, 
-  Radio, 
-  Checkbox, 
-  Card, 
-  Row, 
-  Col, 
-  Typography, 
+import {
+  Form,
+  Input,
+  Select,
+  Button,
+  Steps,
+  Upload,
+  Modal,
+  message,
+  DatePicker,
+  Radio,
+  Checkbox,
+  Card,
+  Row,
+  Col,
+  Typography,
   Divider,
   ConfigProvider
 } from 'antd';
-import { 
-  UserOutlined, 
-  SolutionOutlined, 
-  FileDoneOutlined, 
-  InboxOutlined, 
-  CheckCircleFilled 
+import {
+  UserOutlined,
+  SolutionOutlined,
+  FileDoneOutlined,
+  InboxOutlined,
+  CheckCircleFilled
 } from '@ant-design/icons';
 import { Send, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -88,7 +88,7 @@ const ApplicationForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showAttestationModal, setShowAttestationModal] = useState(false);
   const [applicationData, setApplicationData] = useState(null);
-  
+
   // Ref for scrolling to top of form
   const formTopRef = useRef(null);
 
@@ -194,7 +194,7 @@ const ApplicationForm = () => {
     }
   };
 
-const handleNext = async () => {
+  const handleNext = async () => {
     try {
       // 1. Validate fields visible on current step
       if (currentStep === 0) {
@@ -211,7 +211,7 @@ const handleNext = async () => {
           message.error(`Missing documents: ${missing.join(', ')}`);
           return;
         }
-        await form.validateFields(); 
+        await form.validateFields();
       }
 
       // 2. Capture current form values
@@ -234,7 +234,7 @@ const handleNext = async () => {
         console.log("Step 2 (Position) Job:", accumulatedData.position || "❌ MISSING");
         console.log("Step 3 (History) Ref:", accumulatedData.referenceName || "❌ MISSING");
         console.log("FULL PAYLOAD READY FOR MODAL:", accumulatedData);
-        
+
         setShowAttestationModal(true);
       }
     } catch (error) {
@@ -264,7 +264,7 @@ const handleNext = async () => {
         application: {
           ...formattedData,
           files: uploadedFiles,
-          job_title: applicationData.position 
+          job_title: applicationData.position
         },
         attestation: attestationData
       };
@@ -293,7 +293,7 @@ const handleNext = async () => {
   if (isSubmitted) {
     return (
       <Container>
-         <Card bordered={false} className="success-card">
+        <Card bordered={false} className="success-card">
           <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
             <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
               <CheckCircleFilled style={{ fontSize: '64px', color: '#52c41a', marginBottom: '1.5rem' }} />
@@ -304,323 +304,372 @@ const handleNext = async () => {
               <Text type="secondary">Our team will review your documents and contact you shortly.</Text>
             </div>
           </motion.div>
-         </Card>
+        </Card>
       </Container>
     );
   }
 
   return (
-    <ConfigProvider 
+    <ConfigProvider
       theme={theme}
     >
-    <Container ref={formTopRef}>
-      <Card bordered={false} className="form-card">
-        <Steps 
-          current={currentStep} 
-          items={steps} 
-          className="custom-steps" 
-          responsive={true}
-          size='small'
+      <Container ref={formTopRef}>
+        <Card bordered={false} className="form-card">
+          <Steps
+            current={currentStep}
+            items={steps}
+            className="custom-steps"
+            responsive={true}
+            size='small'
+          />
+
+          <Form
+            form={form}
+            layout="vertical"
+            size="middle"
+            preserve={true}
+            initialValues={{
+              contactMethod: 'phone',
+              floridaLicense: 'yes',
+              workedBefore: 'no',
+              hasContacts: 'no',
+              agreeToTerms: false
+            }}
+          >
+            <div className="step-content">
+              <AnimatePresence mode="wait">
+
+                {/* --- STEP 1: PERSONAL --- */}
+                {currentStep === 0 && (
+                  <motion.div
+                    key="step0"
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                  >
+                    <Title level={4} className="section-title">Personal Information</Title>
+                    <Row gutter={16}>
+                      <Col xs={24} md={12}>
+                        <Form.Item
+                          name="name"
+                          label="Full Name"
+                          rules={[
+                            { required: true, message: 'Required' },
+                            { pattern: /^[a-zA-Z\s\-.']+$/, message: 'Name can only contain letters' } // <--- ADD THIS
+                          ]}
+                        >
+                          <Input placeholder="John Doe" prefix={<UserOutlined />} />
+                        </Form.Item>
+                      </Col>
+                      <Col xs={24} md={12}>
+                        <Form.Item name="dob" label="Date of Birth" rules={[{ required: true, message: 'Required' }]}>
+                          <DatePicker style={{ width: '100%' }} format="YYYY-MM-DD" placeholder="Select date" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row gutter={16}>
+                      <Col xs={24} md={12}>
+                        <Form.Item name="email" label="Email Address" rules={[{ required: true, type: 'email', message: 'Valid email required' }]}>
+                          <Input placeholder="john@example.com" />
+                        </Form.Item>
+                      </Col>
+                      <Col xs={24} md={12}>
+                        <Form.Item
+                          name="phone"
+                          label="Phone Number"
+                          rules={[
+                            { required: true, message: 'Required' },
+                            { pattern: /^[\d\s()-]+$/, message: 'Please enter a valid phone number (digits only)' }
+                          ]}
+                        >
+                          <Input type="tel" placeholder="(555) 123-4567" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Form.Item name="contactMethod" label="Preferred Contact Method">
+                      <Radio.Group buttonStyle="solid">
+                        <Radio.Button value="phone">Phone</Radio.Button>
+                        <Radio.Button value="email">Email</Radio.Button>
+                      </Radio.Group>
+                    </Form.Item>
+                  </motion.div>
+                )}
+
+                {/* --- STEP 2: POSITION --- */}
+                {currentStep === 1 && (
+                  <motion.div
+                    key="step1"
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                  >
+                    <Title level={4} className="section-title">Position Details</Title>
+                    <Row gutter={16}>
+                      <Col xs={24}>
+                        <Form.Item name="position" label="Position Applying For" rules={[{ required: true, message: 'Please select a position' }]}>
+                          <Select placeholder="Select Position...">
+                            <Option value="RN">Registered Nurse (RN)</Option>
+                            <Option value="LPN">Licensed Practical Nurse (LPN)</Option>
+                            <Option value="PT">Physical Therapist (PT)</Option>
+                            <Option value="PTA">Physical Therapist Assistant (PTA)</Option>
+                            <Option value="OT">Occupational Therapist (OT)</Option>
+                            <Option value="OTA">Occupational Therapist Assistant (OTA)</Option>
+                            <Option value="ST">Speech Therapist (ST)</Option>
+                            <Option value="HHA">Home Health Aide (HHA)</Option>
+                            <Option value="MSW">Social Worker (MSW)</Option>
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                      <Col xs={24} md={12}>
+                        <Form.Item name="office" label="Preferred Office" rules={[{ required: true }]}>
+                          <Select placeholder="Select Location">
+                            <Option value="Jacksonville">Jacksonville</Option>
+                            <Option value="Palm Coast">Palm Coast</Option>
+                            <Option value="South Florida">South Florida</Option>
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                      <Col xs={24} md={12}>
+                        <Form.Item name="startDate" label="Start Date" rules={[{ required: true }]}>
+                          <DatePicker style={{ width: '100%' }} placeholder="Select date" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+
+                    <Row gutter={16}>
+                      <Col xs={24} md={12}>
+                        <Form.Item name="employmentType" label="Employment Type" rules={[{ required: true }]}>
+                          <Select placeholder="Select type">
+                            <Option value="Full-time">Full-time</Option>
+                            <Option value="Part-time">Part-time</Option>
+                            <Option value="PRN">PRN (As Needed)</Option>
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                      <Col xs={24} md={12}>
+                        <Form.Item
+                          name="yearsExperience"
+                          label="Years Experience"
+                          rules={[
+                            { required: true, message: 'Required' },
+                            { pattern: /^\d+(\.\d{1,2})?$/, message: 'Please enter a valid number' }
+                          ]}
+                        >
+                          <Input type="number" step="0.5" placeholder="e.g. 5" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+
+                    <Form.Item name="floridaLicense" label="Licensed in Florida?">
+                      <Radio.Group>
+                        <Radio value="yes">Yes</Radio>
+                        <Radio value="no">No</Radio>
+                      </Radio.Group>
+                    </Form.Item>
+
+                    <Form.Item name="whyGoodFit" label="Why are you a good fit? (Optional)">
+                      <TextArea rows={3} placeholder="Briefly describe your experience..." />
+                    </Form.Item>
+                  </motion.div>
+                )}
+
+                {/* --- STEP 3: HISTORY & DOCS --- */}
+                {currentStep === 2 && (
+                  <motion.div
+                    key="step2"
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                  >
+                    <Title level={4} className="section-title">Work History</Title>
+
+                    <Row gutter={16}>
+                      <Col xs={24} md={12}>
+                        <Form.Item name="workedBefore" label="Worked with us before?">
+                          <Select placeholder="Select option">
+                            <Option value="no">No</Option>
+                            <Option value="yes">Yes</Option>
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                      {workedBefore === 'yes' && (
+                        <Col xs={24} md={12}>
+                          <Form.Item name="previousDates" label="When and for how long?" rules={[{ required: true }]}>
+                            <Input placeholder="e.g. Jan 2020 - Dec 2021" />
+                          </Form.Item>
+                        </Col>
+                      )}
+                    </Row>
+
+                    <Row gutter={16}>
+                      <Col xs={24} md={12}>
+                        <Form.Item name="hasContacts" label="Contacts within Confident Care?">
+                          <Select placeholder="Select option">
+                            <Option value="no">No</Option>
+                            <Option value="yes">Yes</Option>
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                      {hasContacts === 'yes' && (
+                        <Col xs={24} md={12}>
+                          <Form.Item name="contactDetails" label="Contact Name & Relationship" rules={[{ required: true }]}>
+                            <Input placeholder="e.g. Jane Smith, Sister" />
+                          </Form.Item>
+                        </Col>
+                      )}
+                    </Row>
+
+                    <Row gutter={16}>
+                      <Col xs={24} md={12}>
+                        <Form.Item name="previousEmployer" label="Previous Employer" rules={[{ required: true }]}>
+                          <Input placeholder="e.g. Health Corp" />
+                        </Form.Item>
+                      </Col>
+                      <Col xs={24} md={12}>
+                        <Form.Item
+                          name="previousPhone"
+                          label="Employer Phone"
+                          rules={[
+                            { required: true, message: 'Required' },
+                            { pattern: /^[\d\s()-]+$/, message: 'Digits only' }
+                          ]}
+                        >
+                          <Input placeholder="e.g. (555) 555-0199" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Form.Item name="previousPosition" label="Position Held & Dates" rules={[{ required: true }]}>
+                      <Input placeholder="e.g. RN, 2020-2023" />
+                    </Form.Item>
+
+                    <Divider />
+
+                    <Title level={4} className="section-title">Reference</Title>
+                    <Row gutter={16}>
+                      <Col xs={24} md={12}>
+                        <Form.Item
+                          name="referenceName"
+                          label="Reference Name"
+                          rules={[
+                            { required: true, message: 'Required' },
+                            { pattern: /^[a-zA-Z\s\-.']+$/, message: 'Name can only contain letters' }
+                          ]}
+                        >
+                          <Input placeholder="e.g. Dr. Smith" />
+                        </Form.Item>
+                      </Col>
+                      <Col xs={24} md={12}>
+                        <Form.Item
+                          name="referencePhone"
+                          label="Reference Phone"
+                          rules={[
+                            { required: true, message: 'Required' },
+                            { pattern: /^[\d\s()-]+$/, message: 'Digits only' }
+                          ]}
+                        >
+                          <Input placeholder="e.g. (555) 555-0123" />
+                        </Form.Item>
+                      </Col>
+                      <Col xs={24}>
+                        <Form.Item
+                          name="referenceEmail"
+                          label="Reference Email (Optional)"
+                          rules={[
+                            { type: 'email', message: 'Invalid email format' }
+                          ]}
+                          normalize={(value) => value.trim()}
+                        >
+                          <Input placeholder="ref@example.com" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+
+                    <Divider />
+
+                    <Title level={4} className="section-title">Documents (PDF/Image)</Title>
+                    <Row gutter={16}>
+                      <Col xs={24} md={12}>
+                        <CustomUpload
+                          label="Resume"
+                          fileKey="resume"
+                          currentFile={uploadedFiles.resume}
+                          onUpload={handleFileProcess}
+                          onRemove={handleRemoveFile}
+                          required
+                        />
+                      </Col>
+                      <Col xs={24} md={12}>
+                        <CustomUpload
+                          label="License"
+                          fileKey="license"
+                          currentFile={uploadedFiles.license}
+                          onUpload={handleFileProcess}
+                          onRemove={handleRemoveFile}
+                          required
+                        />
+                      </Col>
+                      <Col xs={24} md={12}>
+                        <CustomUpload
+                          label="CPR Card"
+                          fileKey="cpr"
+                          currentFile={uploadedFiles.cpr}
+                          onUpload={handleFileProcess}
+                          onRemove={handleRemoveFile}
+                          required
+                        />
+                      </Col>
+                      <Col xs={24} md={12}>
+                        <CustomUpload
+                          label="SS Card"
+                          fileKey="ssCard"
+                          currentFile={uploadedFiles.ssCard}
+                          onUpload={handleFileProcess}
+                          onRemove={handleRemoveFile}
+                        />
+                      </Col>
+                    </Row>
+
+                    <Form.Item name="coverLetter" label="Cover Letter" style={{ marginTop: '1.5rem' }}>
+                      <TextArea rows={4} placeholder="Any additional information..." />
+                    </Form.Item>
+
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <Divider />
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '1rem' }}>
+              {currentStep > 0 && (
+                <Button size="middle" onClick={handlePrev} icon={<ChevronLeft size={16} />}>
+                  Back
+                </Button>
+              )}
+
+              {currentStep < steps.length - 1 ? (
+                <Button type="primary" size="middle" onClick={handleNext} style={{ marginLeft: 'auto' }}>
+                  Next Step <ChevronRight size={16} />
+                </Button>
+              ) : (
+                <Button type="primary" size="middle" onClick={handleNext} style={{ marginLeft: 'auto' }}>
+                  Review & Submit <Send size={16} />
+                </Button>
+              )}
+            </div>
+
+          </Form>
+        </Card>
+
+        <AttestationModal
+          visible={showAttestationModal}
+          onClose={() => setShowAttestationModal(false)}
+          onSubmit={handleFinalSubmit}
+          initialData={applicationData}
+          isLoading={isLoading}
         />
 
-        <Form
-          form={form}
-          layout="vertical"
-          size="middle"
-          preserve={true}
-          initialValues={{
-            contactMethod: 'phone',
-            floridaLicense: 'yes',
-            workedBefore: 'no',
-            hasContacts: 'no',
-            agreeToTerms: false
-          }}
-        >
-          <div className="step-content">
-            <AnimatePresence mode="wait">
-              
-              {/* --- STEP 1: PERSONAL --- */}
-              {currentStep === 0 && (
-                <motion.div 
-                  key="step0"
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                >
-                  <Title level={4} className="section-title">Personal Information</Title>
-                  <Row gutter={16}>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="name" label="Full Name" rules={[{ required: true, message: 'Required' }]}>
-                        <Input placeholder="John Doe" prefix={<UserOutlined />} />
-                      </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="dob" label="Date of Birth" rules={[{ required: true, message: 'Required' }]}>
-                        <DatePicker style={{ width: '100%' }} format="YYYY-MM-DD" placeholder="Select date" />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Row gutter={16}>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="email" label="Email Address" rules={[{ required: true, type: 'email', message: 'Valid email required' }]}>
-                        <Input placeholder="john@example.com" />
-                      </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="phone" label="Phone Number" rules={[{ required: true, message: 'Required' }]}>
-                        <Input type="tel" placeholder="(555) 123-4567" />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Form.Item name="contactMethod" label="Preferred Contact Method">
-                    <Radio.Group buttonStyle="solid">
-                      <Radio.Button value="phone">Phone</Radio.Button>
-                      <Radio.Button value="email">Email</Radio.Button>
-                    </Radio.Group>
-                  </Form.Item>
-                </motion.div>
-              )}
-
-              {/* --- STEP 2: POSITION --- */}
-              {currentStep === 1 && (
-                <motion.div 
-                  key="step1"
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                >
-                  <Title level={4} className="section-title">Position Details</Title>
-                  <Row gutter={16}>
-                    <Col xs={24}>
-                      <Form.Item name="position" label="Position Applying For" rules={[{ required: true, message: 'Please select a position' }]}>
-                        <Select placeholder="Select Position...">
-                          <Option value="RN">Registered Nurse (RN)</Option>
-                          <Option value="LPN">Licensed Practical Nurse (LPN)</Option>
-                          <Option value="PT">Physical Therapist (PT)</Option>
-                          <Option value="PTA">Physical Therapist Assistant (PTA)</Option>
-                          <Option value="OT">Occupational Therapist (OT)</Option>
-                          <Option value="OTA">Occupational Therapist Assistant (OTA)</Option>
-                          <Option value="ST">Speech Therapist (ST)</Option>
-                          <Option value="HHA">Home Health Aide (HHA)</Option>
-                          <Option value="MSW">Social Worker (MSW)</Option>
-                        </Select>
-                      </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="office" label="Preferred Office" rules={[{ required: true }]}>
-                        <Select placeholder="Select Location">
-                          <Option value="Jacksonville">Jacksonville</Option>
-                          <Option value="Palm Coast">Palm Coast</Option>
-                          <Option value="South Florida">South Florida</Option>
-                        </Select>
-                      </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="startDate" label="Start Date" rules={[{ required: true }]}>
-                        <DatePicker style={{ width: '100%' }} placeholder="Select date" />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Row gutter={16}>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="employmentType" label="Employment Type" rules={[{ required: true }]}>
-                        <Select placeholder="Select type">
-                          <Option value="Full-time">Full-time</Option>
-                          <Option value="Part-time">Part-time</Option>
-                          <Option value="PRN">PRN (As Needed)</Option>
-                        </Select>
-                      </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="yearsExperience" label="Years Experience" rules={[{ required: true }]}>
-                        <Input type="number" step="0.5" placeholder="e.g. 5" />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Form.Item name="floridaLicense" label="Licensed in Florida?">
-                    <Radio.Group>
-                      <Radio value="yes">Yes</Radio>
-                      <Radio value="no">No</Radio>
-                    </Radio.Group>
-                  </Form.Item>
-
-                  <Form.Item name="whyGoodFit" label="Why are you a good fit? (Optional)">
-                    <TextArea rows={3} placeholder="Briefly describe your experience..." />
-                  </Form.Item>
-                </motion.div>
-              )}
-
-              {/* --- STEP 3: HISTORY & DOCS --- */}
-              {currentStep === 2 && (
-                <motion.div 
-                  key="step2"
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                >
-                  <Title level={4} className="section-title">Work History</Title>
-                  
-                  <Row gutter={16}>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="workedBefore" label="Worked with us before?">
-                        <Select placeholder="Select option">
-                          <Option value="no">No</Option>
-                          <Option value="yes">Yes</Option>
-                        </Select>
-                      </Form.Item>
-                    </Col>
-                    {workedBefore === 'yes' && (
-                      <Col xs={24} md={12}>
-                        <Form.Item name="previousDates" label="When and for how long?" rules={[{ required: true }]}>
-                          <Input placeholder="e.g. Jan 2020 - Dec 2021" />
-                        </Form.Item>
-                      </Col>
-                    )}
-                  </Row>
-
-                  <Row gutter={16}>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="hasContacts" label="Contacts within Confident Care?">
-                        <Select placeholder="Select option">
-                          <Option value="no">No</Option>
-                          <Option value="yes">Yes</Option>
-                        </Select>
-                      </Form.Item>
-                    </Col>
-                    {hasContacts === 'yes' && (
-                      <Col xs={24} md={12}>
-                        <Form.Item name="contactDetails" label="Contact Name & Relationship" rules={[{ required: true }]}>
-                          <Input placeholder="e.g. Jane Smith, Sister" />
-                        </Form.Item>
-                      </Col>
-                    )}
-                  </Row>
-
-                  <Row gutter={16}>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="previousEmployer" label="Previous Employer" rules={[{ required: true }]}>
-                        <Input placeholder="e.g. Health Corp" />
-                      </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="previousPhone" label="Employer Phone" rules={[{ required: true }]}>
-                        <Input placeholder="e.g. (555) 555-0199" />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Form.Item name="previousPosition" label="Position Held & Dates" rules={[{ required: true }]}>
-                    <Input placeholder="e.g. RN, 2020-2023" />
-                  </Form.Item>
-
-                  <Divider />
-                  
-                  <Title level={4} className="section-title">Reference</Title>
-                  <Row gutter={16}>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="referenceName" label="Reference Name" rules={[{ required: true }]}>
-                        <Input placeholder="e.g. Dr. Smith" />
-                      </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                      <Form.Item name="referencePhone" label="Reference Phone" rules={[{ required: true }]}>
-                        <Input placeholder="e.g. (555) 555-0123" />
-                      </Form.Item>
-                    </Col>
-                    <Col xs={24}>
-                      <Form.Item name="referenceEmail" label="Reference Email (Optional)" rules={[{ type: 'email' }]}>
-                        <Input placeholder="ref@example.com" />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Divider />
-
-                  <Title level={4} className="section-title">Documents (PDF/Image)</Title>
-                  <Row gutter={16}>
-                    <Col xs={24} md={12}>
-                      <CustomUpload 
-                        label="Resume" 
-                        fileKey="resume" 
-                        currentFile={uploadedFiles.resume} 
-                        onUpload={handleFileProcess} 
-                        onRemove={handleRemoveFile}
-                        required
-                      />
-                    </Col>
-                    <Col xs={24} md={12}>
-                      <CustomUpload 
-                        label="License" 
-                        fileKey="license" 
-                        currentFile={uploadedFiles.license} 
-                        onUpload={handleFileProcess} 
-                        onRemove={handleRemoveFile}
-                        required
-                      />
-                    </Col>
-                    <Col xs={24} md={12}>
-                      <CustomUpload 
-                        label="CPR Card" 
-                        fileKey="cpr" 
-                        currentFile={uploadedFiles.cpr} 
-                        onUpload={handleFileProcess} 
-                        onRemove={handleRemoveFile}
-                        required
-                      />
-                    </Col>
-                    <Col xs={24} md={12}>
-                      <CustomUpload 
-                        label="SS Card" 
-                        fileKey="ssCard" 
-                        currentFile={uploadedFiles.ssCard} 
-                        onUpload={handleFileProcess} 
-                        onRemove={handleRemoveFile}
-                      />
-                    </Col>
-                  </Row>
-
-                  <Form.Item name="coverLetter" label="Cover Letter" style={{ marginTop: '1.5rem' }}>
-                    <TextArea rows={4} placeholder="Any additional information..." />
-                  </Form.Item>
-
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          <Divider />
-
-          <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '1rem' }}>
-            {currentStep > 0 && (
-              <Button size="middle" onClick={handlePrev} icon={<ChevronLeft size={16} />}>
-                Back
-              </Button>
-            )}
-            
-            {currentStep < steps.length - 1 ? (
-              <Button type="primary" size="middle" onClick={handleNext} style={{ marginLeft: 'auto' }}>
-                Next Step <ChevronRight size={16} />
-              </Button>
-            ) : (
-              <Button type="primary" size="middle" onClick={handleNext} style={{ marginLeft: 'auto'}}>
-                Review & Submit <Send size={16} />
-              </Button>
-            )}
-          </div>
-
-        </Form>
-      </Card>
-
-      <AttestationModal 
-        visible={showAttestationModal} 
-        onClose={() => setShowAttestationModal(false)}
-        onSubmit={handleFinalSubmit}
-        initialData={applicationData}
-        isLoading={isLoading}
-      />
-
-    </Container>
+      </Container>
     </ConfigProvider>
   );
 };
@@ -628,8 +677,8 @@ const handleNext = async () => {
 // --- SUB-COMPONENTS ---
 
 const CustomUpload = ({ label, fileKey, currentFile, onUpload, onRemove, required }) => (
-  <Form.Item 
-    label={<span>{label} {required && <span style={{color: '#ff4d4f'}}>*</span>}</span>} 
+  <Form.Item
+    label={<span>{label} {required && <span style={{ color: '#ff4d4f' }}>*</span>}</span>}
     style={{ marginBottom: '1.5rem' }}
   >
     <Dragger
@@ -638,8 +687,8 @@ const CustomUpload = ({ label, fileKey, currentFile, onUpload, onRemove, require
       showUploadList={false}
       accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
       beforeUpload={(file) => onUpload(file, fileKey)}
-      style={{ 
-        background: currentFile ? '#f6ffed' : '#fafafa', 
+      style={{
+        background: currentFile ? '#f6ffed' : '#fafafa',
         borderColor: currentFile ? '#b7eb8f' : '#d9d9d9',
         padding: '10px'
       }}
@@ -721,10 +770,13 @@ const AttestationModal = ({ visible, onClose, onSubmit, initialData, isLoading }
           </Col>
         </Row>
 
-        <Form.Item 
-          label="Electronic Signature (Type Full Legal Name)" 
-          name="signature" 
-          rules={[{ required: true, message: 'Signature is required' }]}
+        <Form.Item
+          label="Electronic Signature (Type Full Legal Name)"
+          name="signature"
+          rules={[
+            { required: true, message: 'Signature is required' },
+            { pattern: /^[a-zA-Z\s\-.']+$/, message: 'Signature must be a valid name (letters only)' } // <--- ADD THIS
+          ]}
         >
           <Input className="signature-font" placeholder="Type name here..." />
         </Form.Item>
@@ -740,8 +792,8 @@ const AttestationModal = ({ visible, onClose, onSubmit, initialData, isLoading }
         </Form.Item>
 
         {priorScreening && (
-          <Form.Item 
-            name="priorScreeningPurpose" 
+          <Form.Item
+            name="priorScreeningPurpose"
             label="Purpose of Prior Screening"
             rules={[{ required: true, message: 'Please specify purpose' }]}
           >
@@ -751,20 +803,20 @@ const AttestationModal = ({ visible, onClose, onSubmit, initialData, isLoading }
 
         <Divider style={{ margin: '12px 0' }} />
 
-        <Form.Item 
-          name="agreeToTerms" 
-          valuePropName="checked" 
+        <Form.Item
+          name="agreeToTerms"
+          valuePropName="checked"
           rules={[
             { validator: (_, value) => value ? Promise.resolve() : Promise.reject(new Error('You must agree to the terms')) }
           ]}
         >
           <Checkbox>I certify that the above information is true and accurate under penalty of perjury.</Checkbox>
         </Form.Item>
-        
+
         {isMobile && (
           <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-             <Button onClick={onClose} disabled={isLoading} block>Cancel</Button>
-             <Button type="primary" loading={isLoading} onClick={handleOk} block>
+            <Button onClick={onClose} disabled={isLoading} block>Cancel</Button>
+            <Button type="primary" loading={isLoading} onClick={handleOk} block>
               Sign & Submit
             </Button>
           </div>
@@ -781,7 +833,7 @@ const AttestationModal = ({ visible, onClose, onSubmit, initialData, isLoading }
           <DrawerContent>
             <DrawerHandle />
             <div style={{ padding: '0 20px 10px 20px', borderBottom: '1px solid #f0f0f0' }}>
-               <Title level={4} style={{ margin: 0 }}>Background Screening</Title>
+              <Title level={4} style={{ margin: 0 }}>Background Screening</Title>
             </div>
             <ScrollableContainer>
               {renderAttestationForm()}
