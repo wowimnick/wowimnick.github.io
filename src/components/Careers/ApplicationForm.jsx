@@ -197,7 +197,8 @@ const ApplicationForm = () => {
   const handleNext = async () => {
     try {
       await form.validateFields(); // Validates only current step implicitly if we separated fields, but here we validate all filled so far
-      
+      const currentValues = form.getFieldsValue();
+      setApplicationData((prev) => ({ ...prev, ...currentValues }));
       // Manual validation per step logic
       if (currentStep === 0) {
         await form.validateFields(['name', 'dob', 'email', 'phone', 'contactMethod']);
@@ -316,6 +317,7 @@ const ApplicationForm = () => {
           form={form}
           layout="vertical"
           size="middle"
+          preserve={true}
           initialValues={{
             contactMethod: 'phone',
             floridaLicense: 'yes',
