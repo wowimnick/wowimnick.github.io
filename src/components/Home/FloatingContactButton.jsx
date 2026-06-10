@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
+import { fadeUpInitial, fadeUpAnimate, fadeUpTransition } from '../../styles/animations';
 
 const FloatingButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -37,10 +38,10 @@ const FloatingButton = () => {
       <AnimatePresence>
         {isVisible && !inView && (
           <ButtonWrapper
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
+            initial={fadeUpInitial}
+            animate={fadeUpAnimate}
+            exit={fadeUpInitial}
+            transition={fadeUpTransition()}
             onClick={scrollToTop}
           >
             <ChevronUp size={24} />

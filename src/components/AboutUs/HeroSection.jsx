@@ -1,23 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { fadeUpProps } from '../../styles/animations';
 
 const HeroSection = () => {
   return (
     <HeroWrapper>
       <HeroContent>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+        <motion.h1 {...fadeUpProps(0, { inView: false })}>
           About Us
         </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        <motion.p {...fadeUpProps(0.2, { inView: false })}>
           Founded in 2001, we've grown to 5 offices covering 10 counties. 
         </motion.p>
       </HeroContent>

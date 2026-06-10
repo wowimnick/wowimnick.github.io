@@ -2,24 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import '@fontsource/poppins';
+import { fadeUpProps } from '../../styles/animations';
 
 const ServiceOverview = () => {
   return (
     <OverviewWrapper>
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
+      <motion.h2 {...fadeUpProps()}>
         Comprehensive Care at Your Fingertips
       </motion.h2>
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
+      <motion.p {...fadeUpProps(0.2)}>
         At Confident Care of Florida, we provide a wide range of skilled patient services to meet all your healthcare needs. Our dedicated team of professionals is committed to delivering exceptional care right in the comfort of your home.
       </motion.p>
     </OverviewWrapper>

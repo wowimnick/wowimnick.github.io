@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 import InsuranceHero from '../components/Insurances/InsuranceHero';
 import InsuranceList from '../components/Insurances/InsuranceList';
 import InsuranceFAQ from '../components/Insurances/InsuranceFAQ';
@@ -16,20 +15,8 @@ const InsurancesPage = () => {
     <PageWrapper>
       <InsuranceHero />
       <ContentWrapper>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <InsuranceList />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <InsuranceFAQ />
-        </motion.div>
+        <InsuranceList />
+        <InsuranceFAQ />
       </ContentWrapper>
     </PageWrapper>
   );

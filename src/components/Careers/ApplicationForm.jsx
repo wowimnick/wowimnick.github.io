@@ -28,6 +28,7 @@ import {
 } from '@ant-design/icons';
 import { Send, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { fadeUpAnimate, fadeUpInitial, fadeUpProps, fadeUpTransition } from '../../styles/animations';
 import { Drawer } from 'vaul';
 
 import imageCompression from 'browser-image-compression';
@@ -294,7 +295,7 @@ const ApplicationForm = () => {
     return (
       <Container>
         <Card bordered={false} className="success-card">
-          <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
+          <motion.div {...fadeUpProps(0, { inView: false })}>
             <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
               <CheckCircleFilled style={{ fontSize: '64px', color: '#52c41a', marginBottom: '1.5rem' }} />
               <Title level={2}>Application Sent</Title>
@@ -343,9 +344,10 @@ const ApplicationForm = () => {
                 {currentStep === 0 && (
                   <motion.div
                     key="step0"
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -10 }}
+                    initial={fadeUpInitial}
+                    animate={fadeUpAnimate}
+                    exit={fadeUpInitial}
+                    transition={fadeUpTransition()}
                   >
                     <Title level={4} className="section-title">Personal Information</Title>
                     <Row gutter={16}>
@@ -399,9 +401,10 @@ const ApplicationForm = () => {
                 {currentStep === 1 && (
                   <motion.div
                     key="step1"
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -10 }}
+                    initial={fadeUpInitial}
+                    animate={fadeUpAnimate}
+                    exit={fadeUpInitial}
+                    transition={fadeUpTransition()}
                   >
                     <Title level={4} className="section-title">Position Details</Title>
                     <Row gutter={16}>
@@ -477,9 +480,10 @@ const ApplicationForm = () => {
                 {currentStep === 2 && (
                   <motion.div
                     key="step2"
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -10 }}
+                    initial={fadeUpInitial}
+                    animate={fadeUpAnimate}
+                    exit={fadeUpInitial}
+                    transition={fadeUpTransition()}
                   >
                     <Title level={4} className="section-title">Work History</Title>
 

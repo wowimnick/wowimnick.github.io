@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import '@fontsource/poppins';
 import { motion } from 'framer-motion';
 import { Award, Clock, Shield, Users, BarChart, Globe } from 'lucide-react';
+import { fadeUpProps, staggerDelay } from '../../styles/animations';
 
 const highlights = [
   { icon: <Award size={32} />, text: 'Medicare Certified', color: '#fee301' }, // Sunset Yellow
@@ -21,10 +22,7 @@ const CompanyHighlights = () => {
         {highlights.map((highlight, index) => (
           <HighlightItem
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            {...fadeUpProps(staggerDelay(index))}
           >
             <IconWrapper style={{ backgroundColor: highlight.color }}>
               {highlight.icon}

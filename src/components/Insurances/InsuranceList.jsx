@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
-import { useInView } from 'react-intersection-observer';
+import React from 'react';
 import '@fontsource/poppins';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Shield, Users, User, Briefcase, Heart, DollarSign } from 'lucide-react';
+import { Shield, Briefcase, Heart } from 'lucide-react';
+import { fadeUpProps, staggerDelay } from '../../styles/animations';
 
 const insuranceCategories = [
   {
@@ -48,25 +48,16 @@ const insuranceCategories = [
 ];
 
 const InsuranceList = () => {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.2 });
-  
     return (
-      <ListWrapper ref={ref}>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
-        >
+      <ListWrapper>
+        <motion.h2 {...fadeUpProps()}>
           Accepted Insurance Plans
         </motion.h2>
         <CategoryGrid>
           {insuranceCategories.map((category, index) => (
             <CategoryCard
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              {...fadeUpProps(staggerDelay(index))}
             >
               <CategoryHeader style={{ backgroundColor: category.color }}>
                 {category.icon}
@@ -76,9 +67,7 @@ const InsuranceList = () => {
                 {category.plans.map((plan, planIndex) => (
                   <motion.li
                     key={planIndex}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ duration: 0.3, delay: (index * 0.1) + (planIndex * 0.05) }}
+                    {...fadeUpProps(staggerDelay(index) + planIndex * 0.05)}
                   >
                     {plan}
                   </motion.li>

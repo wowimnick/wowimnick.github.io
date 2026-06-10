@@ -2,32 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { fadeUpProps } from '../../styles/animations';
 
 const ContactCTA = () => {
   return (
     <CTAWrapper>
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
+      <motion.h2 {...fadeUpProps()}>
         Ready to Experience Our Care?
       </motion.h2>
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
+      <motion.p {...fadeUpProps(0.2)}>
         Contact us today to learn more about our services or to schedule an appointment.
       </motion.p>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-      >
+      <motion.div {...fadeUpProps(0.4)}>
         <CTAButton to="/contact">Contact Us</CTAButton>
       </motion.div>
     </CTAWrapper>

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import '@fontsource/poppins';
+import { fadeUpProps } from '../../styles/animations';
 
 const QualityRating = () => {
   const rating = 5;
@@ -9,12 +10,7 @@ const QualityRating = () => {
   return (
     <RatingWrapper>
       <ContentContainer>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
+        <motion.div {...fadeUpProps()}>
           <RatingContainer>
             <StarContainer>
               {[...Array(5)].map((_, index) => (

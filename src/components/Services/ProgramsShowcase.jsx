@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import '@fontsource/poppins';
+import { fadeUpProps, staggerDelay } from '../../styles/animations';
 import { Heart, Stethoscope, Activity, Brain, Microscope, Download, UserPlus, Shield, FileText, Clipboard, Calendar } from 'lucide-react';
 
 const programs = [
@@ -29,10 +30,7 @@ const ProgramsShowcase = () => {
           {programs.map((program, index) => (
             <Program
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              {...fadeUpProps(staggerDelay(index))}
             >
               <ProgramContent>
                 <ProgramIcon>{program.icon}</ProgramIcon>
@@ -54,10 +52,7 @@ const ProgramsShowcase = () => {
             {coordinationAspects.map((aspect, index) => (
               <CoordinationAspect
                 key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
+                {...fadeUpProps(staggerDelay(index, 0))}
               >
                 <AspectIcon>{aspect.icon}</AspectIcon>
                 <AspectTitle>{aspect.title}</AspectTitle>

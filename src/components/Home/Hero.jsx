@@ -20,6 +20,11 @@ import {
 } from 'antd';
 import { locations } from '../Locations/locationData';
 import { theme } from '../../styles/theme';
+import {
+  carouselFadeTransition,
+  carouselFadeVariants,
+  fadeUpProps,
+} from '../../styles/animations';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -193,20 +198,7 @@ const ScrollableContainer = styled.div`
   padding-bottom: 40px;
 `;
 
-// --- ANIMATION VARIANTS ---
-const slideVariants = {
-  enter: (direction) => ({ x: direction > 0 ? '100%' : '-100%', opacity: 0 }),
-  center: { x: 0, opacity: 1 },
-  exit: (direction) => ({ x: direction < 0 ? '100%' : '-100%', opacity: 0 }),
-};
-
-const transition = {
-  x: { type: 'tween', duration: 2, ease: 'easeInOut' },
-  opacity: { duration: 2, ease: 'easeInOut' },
-};
-
 const images = [
-  { url: "https://guidewaycare.com/wp-content/themes/yootheme/cache/7a/how-can-nurses-improve-patient-satisfaction--7acfbb81.webp", alt: "Nurse holding hand" },
   { url: "https://aihcp.net/main/wp-content/uploads/2024/02/Depositphotos_622838168_S-1-1.jpg", alt: "Educating family" },
   { url: "https://www.northeastspineandsports.com/wp-content/uploads/2021/09/shutterstock_1639731775-scaled.jpg", alt: "Rehabilitation" },
 ];
@@ -216,7 +208,6 @@ const images = [
 const Hero = () => {
   const [form] = Form.useForm();
   const ref = useRef(null);
-  const direction = useRef(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   // Modal State
@@ -236,7 +227,6 @@ const Hero = () => {
   // Carousel Logic
   useEffect(() => {
     const interval = setInterval(() => {
-      direction.current = 1;
       setCurrentImageIndex((prev) => (prev + 1) % images.length);
     }, 10000);
     return () => clearInterval(interval);
@@ -398,22 +388,21 @@ const Hero = () => {
   return (
     <HeroWrapper ref={ref}>
       {/* Background Carousel */}
-      <AnimatePresence initial={false} custom={direction.current}>
+      <AnimatePresence initial={false}>
         <HeroImageWrapper
           key={currentImageIndex}
-          custom={direction.current}
-          variants={slideVariants}
+          variants={carouselFadeVariants}
           initial="enter"
           animate="center"
           exit="exit"
-          transition={transition}
+          transition={carouselFadeTransition}
         >
           <motion.img
             src={images[currentImageIndex].url}
             alt={images[currentImageIndex].alt}
-            initial={{ scale: 1.1 }}
+            initial={{ scale: 1.05 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 10, ease: 'linear' }}
+            transition={{ duration: 10, ease: 'easeOut' }}
           />
           <ImageOverlay />
         </HeroImageWrapper>
@@ -421,19 +410,11 @@ const Hero = () => {
 
       {/* Hero Text Content */}
       <HeroContent>
-        <motion.h1
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        <motion.h1 {...fadeUpProps(0.2, { inView: false })}>
           Compassionate Care<br />
           <span>in the Comfort <br />of Your Own Home</span>
         </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
+        <motion.p {...fadeUpProps(0.4, { inView: false })}>
           Confident Care of Florida is your Medicare-certified, CHAP-accredited home health care partner. We bring skilled nursing, occupational, physical, and speech therapy directly to you.
         </motion.p>
         <ButtonGroup>

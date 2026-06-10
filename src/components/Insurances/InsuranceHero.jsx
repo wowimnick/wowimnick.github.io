@@ -1,27 +1,17 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import '@fontsource/poppins';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { fadeUpProps } from '../../styles/animations';
 
 const InsuranceHero = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-
   return (
-    <HeroWrapper ref={ref}>
+    <HeroWrapper>
       <HeroContent>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-          transition={{ duration: 0.5 }}
-        >
+        <motion.h1 {...fadeUpProps(0, { inView: false })}>
           Insurance Coverage
         </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        <motion.p {...fadeUpProps(0.2, { inView: false })}>
           We work with a wide range of insurance providers to ensure you receive the care you need
         </motion.p>
       </HeroContent>

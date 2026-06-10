@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import { collapseTransition, fadeUpInitial, fadeUpAnimate, fadeUpTransition } from '../../styles/animations';
 import '@fontsource/poppins';
 import { Heart, Activity, Puzzle, MessageSquare, Home, UserPlus, ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -122,7 +123,7 @@ const ServicesList = () => {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={collapseTransition}
                     >
                       <DropdownContent>
                         <p>{service.description}</p>
@@ -156,10 +157,10 @@ const ServicesList = () => {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeService}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
+                  initial={fadeUpInitial}
+                  animate={fadeUpAnimate}
+                  exit={fadeUpInitial}
+                  transition={fadeUpTransition()}
                 >
                   <h3>{services[activeService].title}</h3>
                   <p>{services[activeService].description}</p>

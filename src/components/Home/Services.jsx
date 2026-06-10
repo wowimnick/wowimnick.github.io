@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Heart, Activity, Puzzle, MessageSquare, UserPlus, Home } from 'lucide-react';
 import '@fontsource/poppins';
+import { fadeUpProps, staggerDelay } from '../../styles/animations';
 
 const services = [
   {
@@ -40,22 +41,14 @@ const services = [
 const HomeServices = () => {
   return (
     <ServicesWrapper>
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
+      <motion.h2 {...fadeUpProps()}>
         Our Comprehensive Services
       </motion.h2>
       <ServicesGrid>
         {services.map((service, index) => (
           <ServiceCard
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            {...fadeUpProps(staggerDelay(index))}
           >
             <IconWrapper>{service.icon}</IconWrapper>
             <h3>{service.title}</h3>

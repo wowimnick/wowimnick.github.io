@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Heart, TrendingUp, Clock, Shield } from 'lucide-react';
+import { fadeUpProps, staggerDelay } from '../../styles/animations';
 
 const WhyWorkWithUs = () => {
   const benefits = [
@@ -19,10 +20,7 @@ const WhyWorkWithUs = () => {
           {benefits.map((benefit, index) => (
             <BenefitCard
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
+              {...fadeUpProps(staggerDelay(index))}
             >
               <IconCircle>{benefit.icon}</IconCircle>
               <BenefitTitle>{benefit.title}</BenefitTitle>

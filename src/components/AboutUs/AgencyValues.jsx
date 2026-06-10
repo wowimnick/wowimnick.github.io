@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import '@fontsource/poppins';
 import { motion } from 'framer-motion';
+import { fadeUpProps, staggerDelay } from '../../styles/animations';
 
 const values = [
   {
@@ -30,10 +31,7 @@ const AgencyValues = () => {
         {values.map((value, index) => (
           <ValueItem
             key={index}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
+            {...fadeUpProps(staggerDelay(index))}
           >
             <ValueNumber>{index + 1}</ValueNumber>
             <ValueContent>

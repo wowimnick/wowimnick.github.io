@@ -1,28 +1,18 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { fadeUpProps } from '../../styles/animations';
 
 const CTASection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-
   return (
-    <CTAWrapper ref={ref}>
+    <CTAWrapper>
       <ContentWrapper>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
-        >
+        <motion.h2 {...fadeUpProps()}>
           Ready to Experience Our Care?
         </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        <motion.p {...fadeUpProps(0.2)}>
           Discover how our comprehensive services can improve your quality of life or that of your loved ones.
         </motion.p>
         <ButtonGroup>
@@ -30,9 +20,7 @@ const CTASection = () => {
             <CTAButton
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+              {...fadeUpProps(0.4)}
             >
               Our Services <ArrowRight size={20} />
             </CTAButton>
@@ -42,9 +30,7 @@ const CTASection = () => {
               secondary
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              {...fadeUpProps(0.5)}
             >
               Contact Us
             </CTAButton>

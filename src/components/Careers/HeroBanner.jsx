@@ -1,23 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { fadeUpProps } from '../../styles/animations';
 
 const HeroBanner = () => {
   return (
     <HeroBannerWrapper>
       <Content>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+        <motion.h1 {...fadeUpProps(0, { inView: false })}>
           Join Our Team
         </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        <motion.p {...fadeUpProps(0.2, { inView: false })}>
           Discover rewarding career opportunities at Confident Care of Florida
         </motion.p>
       </Content>

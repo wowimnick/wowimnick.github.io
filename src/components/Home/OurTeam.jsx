@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import '@fontsource/poppins';
+import { fadeUpProps, staggerDelay } from '../../styles/animations';
 
 const teamPhotos = [
   {
@@ -33,27 +34,17 @@ const teamPhotos = [
 const OurTeam = () => {
   return (
     <TeamWrapper>
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+      <motion.h2 {...fadeUpProps(0, { inView: false })}>
         Our Team
       </motion.h2>
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
+      <motion.p {...fadeUpProps(0.2, { inView: false })}>
         Meet the dedicated professionals behind Confident Care of Florida
       </motion.p>
       <TeamPhotoGrid>
         {teamPhotos.map((photo, index) => (
           <TeamPhotoWrapper
             key={index}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            {...fadeUpProps(staggerDelay(index), { inView: false })}
           >
             <TeamPhoto src={photo.src} alt={photo.alt} />
           </TeamPhotoWrapper>

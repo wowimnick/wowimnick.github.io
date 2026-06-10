@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
-import { useInView } from 'react-intersection-observer';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import '@fontsource/poppins';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { collapseTransition, fadeUpProps, staggerDelay } from '../../styles/animations';
 
 const faqs = [
   {
@@ -30,29 +30,21 @@ const faqs = [
 
 const InsuranceFAQ = () => {
     const [activeIndex, setActiveIndex] = useState(null);
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.2 });
   
     const toggleFAQ = (index) => {
       setActiveIndex(activeIndex === index ? null : index);
     };
   
     return (
-      <FAQWrapper ref={ref}>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
-        >
+      <FAQWrapper>
+        <motion.h2 {...fadeUpProps()}>
           Frequently Asked Questions
         </motion.h2>
         <FAQList>
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              {...fadeUpProps(staggerDelay(index))}
             >
               <FAQItem>
                 <FAQQuestion onClick={() => toggleFAQ(index)}>
@@ -67,7 +59,7 @@ const InsuranceFAQ = () => {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={collapseTransition}
                     >
                       <FAQAnswer>{faq.answer}</FAQAnswer>
                     </motion.div>

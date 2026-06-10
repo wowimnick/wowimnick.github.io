@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import '@fontsource/poppins';
 import { Heart, Goal, Lightbulb } from 'lucide-react';
+import { fadeUpProps, staggerDelay } from '../../styles/animations';
 
 const missions = [
   {
@@ -28,10 +29,7 @@ const MissionStatement = () => {
       {missions.map((mission, index) => (
         <MissionItem
           key={index}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: index * 0.1 }}
+          {...fadeUpProps(staggerDelay(index))}
         >
           <IconWrapper>{mission.icon}</IconWrapper>
           <MissionContent>
