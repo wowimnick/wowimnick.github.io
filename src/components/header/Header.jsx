@@ -1,518 +1,392 @@
-import React, { useState, useEffect, useRef } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { Link, NavLink } from 'react-router-dom';
-import "@fontsource/poppins";
-import "@fontsource/montserrat";
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import styled from 'styled-components';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import '@fontsource/poppins';
 import logo from '../../assets/logo.png';
-import { FaInstagram, FaLinkedinIn, FaFacebookF } from 'react-icons/fa';
+import { useReferralModal } from '../../context/ReferralModalContext';
+import { tokens } from '../../styles/tokens';
 
+const navLinks = [
+  { to: '/', label: 'Home', end: true },
+  { to: '/services', label: 'Services' },
+  { to: '/about-us', label: 'About Us' },
+  { to: '/locations', label: 'Locations' },
+  { to: '/insurances', label: 'Insurances' },
+  { to: '/careers', label: 'Careers' },
+];
+
+const DARK_HERO_ROUTES = ['/', '/services', '/about-us', '/locations', '/insurances', '/careers'];
+
+const Header = () => {
+  const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const headerRef = useRef(null);
+  const { openModal } = useReferralModal();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    document.addEventListener('scroll', handleScroll, { passive: true });
+    return () => document.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const closeMenu = () => {
+      if (window.innerWidth > 1094) setIsOpen(false);
+    };
+    window.addEventListener('resize', closeMenu);
+    return () => window.removeEventListener('resize', closeMenu);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen && window.innerWidth <= 1094 ? 'hidden' : 'unset';
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') setIsOpen(false);
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, []);
+
+  const closeMenu = useCallback(() => setIsOpen(false), []);
+  const toggleMenu = () => setIsOpen((prev) => !prev);
+
+  const hasDarkHero = DARK_HERO_ROUTES.includes(location.pathname);
+  const light = hasDarkHero && !scrolled && !isOpen;
+
+  return (
+    <>
+      <HeaderWrapper $scrolled={scrolled} $isOpen={isOpen} ref={headerRef}>
+        <HeaderContent $scrolled={scrolled}>
+          <LogoLink to="/" onClick={closeMenu}>
+            <LogoImage
+              src={logo}
+              alt="Confident Care of Florida Logo"
+              $light={light}
+              $scrolled={scrolled}
+              $isOpen={isOpen}
+            />
+            <LogoText $light={light} $scrolled={scrolled} $isOpen={isOpen}>
+              <span>Confident Care</span>
+              <span>of Florida</span>
+            </LogoText>
+          </LogoLink>
+
+          <DesktopNav>
+            {navLinks.map((link) => (
+              <NavItem key={link.to} to={link.to} end={link.end} $scrolled={scrolled} $isOpen={isOpen} $light={light}>
+                {link.label}
+              </NavItem>
+            ))}
+          </DesktopNav>
+
+          <RightActions>
+            <ReferButton onClick={() => openModal()} $scrolled={scrolled}>
+              Refer a Patient
+            </ReferButton>
+            <MenuToggle
+              onClick={toggleMenu}
+              aria-expanded={isOpen}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-controls="mobile-nav"
+              $scrolled={scrolled}
+              $isOpen={isOpen}
+              $light={light}
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </MenuToggle>
+          </RightActions>
+        </HeaderContent>
+      </HeaderWrapper>
+
+      <AnimatePresence>
+        {isOpen && (
+          <MobileOverlay
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: tokens.dur.fast }}
+          >
+            <MobileNav id="mobile-nav">
+              {navLinks.map((link, i) => (
+                <MobileNavItem
+                  key={link.to}
+                  to={link.to}
+                  end={link.end}
+                  onClick={closeMenu}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.08, duration: tokens.dur.base, ease: tokens.ease }}
+                >
+                  {link.label}
+                </MobileNavItem>
+              ))}
+              <MobileReferBtn
+                onClick={() => { openModal(); closeMenu(); }}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navLinks.length * 0.08, duration: tokens.dur.base, ease: tokens.ease }}
+              >
+                Refer a Patient
+              </MobileReferBtn>
+            </MobileNav>
+          </MobileOverlay>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
 
 const HeaderWrapper = styled.header`
-  background-color: ${props => {
-    if (props.$scrolled) {
-      return 'rgba(255, 255, 255, 0.95)';
-    } else {
-      return 'transparent';
-    }
-  }};
-  --nav-item-color: ${props => props.$scrolled ? '#333' : '#f3f3f3'};
-  box-shadow: ${props => props.$scrolled ? '0 4px 6px rgba(0, 0, 0, 0.1)' : 'none'};
-  backdrop-filter: ${props => props.$scrolled ? 'blur(10px)' : 'none'};
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  transition: all 0.3s ease-in-out;
-
-  @media (max-width: 1093px) {
-    background-color: ${props => props.$isOpen ? 'rgba(255, 255, 255, 0.95)' : (props.$scrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent')};
-    --nav-item-color: ${props => props.$isOpen || props.$scrolled ? '#333' : '#f3f3f3'};
-    backdrop-filter: ${props => props.$isOpen || props.$scrolled ? 'blur(10px)' : 'none'};
-  }
+  font-family: ${tokens.font};
+  background: ${({ $scrolled, $isOpen }) =>
+    $scrolled || $isOpen
+      ? 'rgba(245, 245, 247, 0.72)'
+      : 'transparent'};
+  backdrop-filter: ${({ $scrolled, $isOpen }) =>
+    $scrolled || $isOpen ? 'saturate(180%) blur(20px)' : 'none'};
+  border-bottom: 1px solid
+    ${({ $scrolled, $isOpen }) =>
+      $scrolled || $isOpen ? tokens.hairline : 'transparent'};
+  transition: all ${tokens.dur.fast}s ease;
 `;
 
 const HeaderContent = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem 4rem;
+  justify-content: space-between;
   max-width: 1400px;
   margin: 0 auto;
-
-  @media (max-width: 1200px) {
-    padding: 1rem 2rem;
-  }
-
-  @media (max-width: 1094px) {
-    padding: 0.875rem 1rem;
-    flex-direction: column;
-  }
-
-  @media (max-width: 480px) {
-    padding: 0.75rem 0.75rem;
-  }
+  padding: ${({ $scrolled }) => ($scrolled ? '0.65rem' : '1rem')} ${tokens.gutters};
+  height: ${({ $scrolled }) => ($scrolled ? '52px' : '72px')};
+  transition: all ${tokens.dur.fast}s ease;
 `;
 
-const LeftSection = styled.div`
-  flex: 1.2;
+const LogoLink = styled(Link)`
+  text-decoration: none;
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  transition: transform ${tokens.dur.fast}s ease;
 
-  @media (max-width: 1094px) {
-    flex: initial;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
-`;
-
-const RightSection = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-
-  @media (max-width: 1094px) {
-    display: none;
-  }
-`;
-
-const MobileRightSection = styled.div`
-  display: none;
-
-  @media (max-width: 1094px) {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  @media (max-width: 480px) {
-    gap: 0.5rem;
-  }
-`;
-
-const LogoWrapper = styled.div`
-  a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #333;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-
-    &:hover {
-      transform: scale(1.05);
-    }
+  &:hover {
+    transform: scale(1.03);
   }
 
   @media (max-width: 768px) {
-    a {
-      gap: 0.4rem;
-    }
+    gap: 0.4rem;
   }
 `;
 
 const LogoImage = styled.img`
-  width: 60px;
-  height: 60px;
+  width: 52px;
+  height: 52px;
   object-fit: contain;
-  transition: all 0.3s ease;
-  filter: ${props => props.$scrolled ? 'none' : 'brightness(0) invert(1)'};
-
-  @media (max-width: 1094px) {
-    filter: ${props => props.$scrolled || props.$isOpen ? 'none' : 'brightness(0) invert(1)'};
-  }
+  transition: filter ${tokens.dur.fast}s ease;
+  filter: ${({ $light, $scrolled, $isOpen }) =>
+    $light && !$scrolled && !$isOpen ? 'brightness(0) invert(1)' : 'none'};
 
   @media (max-width: 768px) {
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
   }
 
   @media (max-width: 480px) {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
   }
 `;
 
 const LogoText = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 700;
   line-height: 1.2;
-  transition: all 0.3s ease;
-  color: ${props => props.$scrolled ? '#ef1c1f' : '#fff'};
-
-  @media (max-width: 1094px) {
-    color: ${props => props.$scrolled || props.$isOpen ? '#ef1c1f' : '#fff'};
-  }
+  letter-spacing: -0.01em;
+  transition: color ${tokens.dur.fast}s ease;
+  color: ${({ $light, $scrolled, $isOpen }) =>
+    $light && !$scrolled && !$isOpen ? tokens.surface : tokens.brand};
 
   @media (max-width: 768px) {
-    font-size: 1rem;
-  }
-
-  @media (max-width: 480px) {
     font-size: 0.9rem;
   }
+
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
+  }
 `;
 
-const NavWrapper = styled.nav`
+const DesktopNav = styled.nav`
   display: flex;
   align-items: center;
-  margin: 0 auto;
+  gap: 0.25rem;
 
   @media (max-width: 1094px) {
-    width: 100%;
-    justify-content: center;
-    order: 3;
-  }
-`;
-
-const NavToggle = styled.div`
-  display: none;
-  cursor: pointer;
-  color: var(--nav-item-color);
-  padding: 0.5rem;
-
-  @media (max-width: 1094px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-`;
-
-const HamburgerIcon = styled.div`
-  width: 28px;
-  height: 20px;
-  position: relative;
-  transform: rotate(0deg);
-  transition: .5s ease-in-out;
-  cursor: pointer;
-
-  span {
-    display: block;
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    background: var(--nav-item-color);
-    border-radius: 9px;
-    opacity: 1;
-    left: 0;
-    transform-origin: center;
-    transition: .25s ease-in-out;
-
-    &:nth-child(1) {
-      top: ${props => props.$isOpen ? '50%' : '0px'};
-      transform: ${props => props.$isOpen ? 'translateY(-50%) rotate(45deg)' : 'rotate(0)'};
-    }
-
-    &:nth-child(2) {
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: ${props => props.$isOpen ? '0' : '1'};
-    }
-
-    &:nth-child(3) {
-      top: ${props => props.$isOpen ? '50%' : '100%'};
-      transform: ${props => props.$isOpen ? 'translateY(-50%) rotate(-45deg)' : 'translateY(-100%) rotate(0)'};
-    }
-  }
-
-  &:hover span {
-    background: #ff5722;
-  }
-
-  @media (max-width: 480px) {
-    width: 26px;
-    height: 18px;
-
-    span {
-      height: 2.5px;
-    }
-  }
-`;
-
-const NavMenu = styled.div`
-  display: flex;
-  justify-content: center;
-  transition: all 0.3s ease-in-out;
-
-  @media (max-width: 1094px) {
-    position: fixed;
-    top: 70px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.98);
-    max-height: ${({ $isOpen }) => ($isOpen ? 'calc(100vh - 70px)' : '0')};
-    opacity: ${({ $isOpen }) => ($isOpen ? '1' : '0')};
-    overflow-y: auto;
-    overflow-x: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out;
-    box-shadow: ${({ $isOpen }) => ($isOpen ? '0 4px 6px rgba(0, 0, 0, 0.1)' : 'none')};
-    backdrop-filter: blur(10px);
-  }
-
-  @media (max-width: 480px) {
-    top: 63px;
-    max-height: ${({ $isOpen }) => ($isOpen ? 'calc(100vh - 63px)' : '0')};
+    display: none;
   }
 `;
 
 const NavItem = styled(NavLink)`
-  color: var(--nav-item-color);
+  color: ${({ $scrolled, $isOpen, $light }) =>
+    $scrolled || $isOpen || !$light ? tokens.inkSoft : 'rgba(255,255,255,0.92)'};
   text-decoration: none;
-  padding: 1rem;
-  transition: all 0.3s ease;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: ${tokens.rPill}px;
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  transition: all ${tokens.dur.fast}s ease;
   white-space: nowrap;
 
   &::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 2px;
     left: 50%;
     width: 0;
     height: 2px;
-    background-color: #ff5722;
-    transition: all 0.3s ease;
+    background: ${tokens.brand};
+    transition: all ${tokens.dur.fast}s ease;
   }
 
-  &:hover, &.active {
-    color: #ff5722;
+  &:hover {
+    background: ${tokens.surfaceAlt};
+    color: ${tokens.brand};
+  }
+
+  &.active {
+    color: ${tokens.brand};
 
     &::after {
-      width: 100%;
-      left: 0;
-    }
-  }
-
-  @media (max-width: 1094px) {
-    padding: 1.25rem 2rem;
-    width: 100%;
-    color: #333;
-    font-size: 1.05rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    justify-content: center;
-
-    &:last-child {
-      border-bottom: none;
-    }
-
-    &::after {
-      display: none;
-    }
-
-    &:hover, &.active {
-      background-color: rgba(255, 87, 34, 0.08);
-      color: #ff5722;
-    }
-  }
-
-  @media (max-width: 480px) {
-    padding: 1.15rem 1.5rem;
-    font-size: 1rem;
-  }
-`;
-
-const ContactInfo = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  transition: all 0.3s ease;
-
-  span {
-    transition: all 0.3s ease;
-    color: var(--nav-item-color);
-  }
-
-  a {
-    color: var(--nav-item-color);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-
-    &:hover {
-      color: #ff5722;
-      transform: scale(1.1);
-    }
-  }
-
-  @media (max-width: 1094px) {
-    gap: 0.75rem;
-
-    svg {
-      width: 22px;
-      height: 22px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    gap: 0.5rem;
-
-    svg {
-      width: 20px;
-      height: 20px;
+      width: calc(100% - 1.5rem);
+      left: 0.75rem;
     }
   }
 `;
 
-const InfoItem = styled.span`
+const RightActions = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  font-size: 0.8rem;
-  color: #333;
+  gap: 0.75rem;
 `;
 
+const ReferButton = styled.button`
+  background: ${tokens.brand};
+  color: ${tokens.surface};
+  border: none;
+  border-radius: ${tokens.rPill}px;
+  padding: 0.5rem 1.125rem;
+  font-family: ${tokens.font};
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background ${tokens.dur.fast}s ease;
+  white-space: nowrap;
 
-const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const headerRef = useRef(null);
+  &:hover {
+    background: ${tokens.brandDeep};
+  }
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
-    };
+  @media (max-width: 1094px) {
+    display: none;
+  }
+`;
 
-    document.addEventListener('scroll', handleScroll, { passive: true });
+const MenuToggle = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.35rem;
+  color: ${({ $scrolled, $isOpen, $light }) =>
+    $scrolled || $isOpen || !$light ? tokens.ink : tokens.surface};
+  align-items: center;
+  justify-content: center;
 
-    return () => {
-      document.removeEventListener('scroll', handleScroll);
-    };
-  }, [scrolled]);
+  @media (max-width: 1094px) {
+    display: flex;
+  }
+`;
 
-  useEffect(() => {
-    const closeMenu = () => {
-      if (window.innerWidth > 1094) {
-        setIsOpen(false);
-      }
-    };
+const MobileOverlay = styled(motion.div)`
+  position: fixed;
+  inset: 0;
+  top: 72px;
+  z-index: 999;
+  background: rgba(245, 245, 247, 0.92);
+  backdrop-filter: saturate(180%) blur(20px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 3rem;
 
-    window.addEventListener('resize', closeMenu);
-    return () => window.removeEventListener('resize', closeMenu);
-  }, []);
+  @media (max-width: 1094px) {
+    display: flex;
+  }
 
-  useEffect(() => {
-    // Prevent body scroll when menu is open on mobile
-    if (isOpen && window.innerWidth <= 1094) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+  @media (min-width: 1095px) {
+    display: none;
+  }
+`;
 
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen]);
+const MobileNav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0 2rem;
+`;
 
-  useEffect(() => {
-    // Close menu when clicking outside on mobile
-    const handleClickOutside = (event) => {
-      if (isOpen && window.innerWidth <= 1094 && headerRef.current && !headerRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
+const MobileNavItem = styled(motion(NavLink))`
+  font-family: ${tokens.font};
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: ${tokens.ink};
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: ${tokens.rMd}px;
+  width: 100%;
+  text-align: center;
 
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
+  &.active {
+    color: ${tokens.brand};
+  }
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-    };
-  }, [isOpen]);
+  &:hover {
+    background: ${tokens.surfaceAlt};
+  }
+`;
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+const MobileReferBtn = styled(motion.button)`
+  margin-top: 1rem;
+  background: ${tokens.brand};
+  color: ${tokens.surface};
+  border: none;
+  border-radius: ${tokens.rPill}px;
+  padding: 0.85rem 2rem;
+  font-family: ${tokens.font};
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  max-width: 280px;
 
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
-
-  return (
-    <HeaderWrapper $scrolled={scrolled} $isOpen={isOpen} ref={headerRef}>
-      <HeaderContent>
-        <LeftSection>
-          <LogoWrapper>
-            <Link to="/" onClick={closeMenu}>
-              <LogoImage src={logo} alt="Confident Care of Florida Logo" $scrolled={scrolled} $isOpen={isOpen} />
-              <LogoText $scrolled={scrolled} $isOpen={isOpen}>
-                <span>Confident Care</span>
-                <span>of Florida</span>
-              </LogoText>
-            </Link>
-          </LogoWrapper>
-          <MobileRightSection>
-            <ContactInfo>
-              <InfoItem>
-                <a href='https://www.linkedin.com/in/confident-care-of-florida-corp-b1b10b70' target="_blank" rel="noopener noreferrer">
-                  <FaLinkedinIn />
-                </a>
-              </InfoItem>
-              <InfoItem>
-                <a href='https://www.instagram.com/confidentcareflorida/' target="_blank" rel="noopener noreferrer">
-                  <FaInstagram />
-                </a>
-              </InfoItem>
-              <InfoItem>
-                <a href='https://www.facebook.com/confidentcareflorida' target="_blank" rel="noopener noreferrer">
-                  <FaFacebookF />
-                </a>
-              </InfoItem>
-            </ContactInfo>
-            <NavToggle onClick={toggleMenu}>
-              <HamburgerIcon $isOpen={isOpen}>
-                <span></span>
-                <span></span>
-                <span></span>
-              </HamburgerIcon>
-            </NavToggle>
-          </MobileRightSection>
-        </LeftSection>
-        <NavWrapper>
-          <NavMenu $isOpen={isOpen}>
-            <NavItem to="/" end onClick={closeMenu}>Home</NavItem>
-            <NavItem to="/services" onClick={closeMenu}>Services</NavItem>
-            <NavItem to="/about-us" onClick={closeMenu}>About Us</NavItem>
-            <NavItem to="/locations" onClick={closeMenu}>Locations</NavItem>
-            <NavItem to="/insurances" onClick={closeMenu}>Insurances</NavItem>
-            <NavItem to="/careers" onClick={closeMenu}>Careers</NavItem>
-          </NavMenu>
-        </NavWrapper>
-        <RightSection>
-          <ContactInfo>
-            <InfoItem>
-              <a href='https://www.linkedin.com/in/confident-care-of-florida-corp-b1b10b70' target="_blank" rel="noopener noreferrer">
-                <FaLinkedinIn size={24} />
-              </a>
-            </InfoItem>
-            <InfoItem>
-              <a href='https://www.instagram.com/confidentcareflorida/' target="_blank" rel="noopener noreferrer">
-                <FaInstagram size={24} />
-              </a>
-            </InfoItem>
-            <InfoItem>
-              <a href='https://www.facebook.com/confidentcareflorida' target="_blank" rel="noopener noreferrer">
-                <FaFacebookF size={24} />
-              </a>
-            </InfoItem>
-          </ContactInfo>
-        </RightSection>
-      </HeaderContent>
-    </HeaderWrapper>
-  );
-};
+  &:hover {
+    background: ${tokens.brandDeep};
+  }
+`;
 
 export default Header;

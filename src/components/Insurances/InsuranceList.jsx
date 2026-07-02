@@ -3,268 +3,144 @@ import '@fontsource/poppins';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Shield, Briefcase, Heart } from 'lucide-react';
+import SectionHeader from '../shared/SectionHeader';
+import { tokens } from '../../styles/tokens';
 import { fadeUpProps, staggerDelay } from '../../styles/animations';
 
 const insuranceCategories = [
   {
-    name: "Medicare & Medicare Advantage",
-    icon: <Shield size={32} />,
-    color: "#ff5722", // Sunset Orange
+    name: 'Medicare & Medicare Advantage',
+    icon: Shield,
+    accent: tokens.brand,
     plans: [
-      "Traditional Medicare",
-      "United Health HMO/PPO/Dual complete",
-      "Aetna Carelon",
-      "Humana PPO / HMO",
-      "Humana Island Dr / One home/ Dedicated Seniors",
-      "Devoted (Integrated)",
-      "Careplus (Integrated)",
-      "Wellmed",
-      "Blue Cross Blue Shield",
-      "Gold Kidney",
-    ]
+      'Traditional Medicare',
+      'United Health HMO/PPO/Dual complete',
+      'Aetna Carelon',
+      'Humana PPO / HMO',
+      'Humana Island Dr / One home/ Dedicated Seniors',
+      'Devoted (Integrated)',
+      'Careplus (Integrated)',
+      'Wellmed',
+      'Blue Cross Blue Shield',
+      'Gold Kidney',
+    ],
   },
   {
-    name: "Commercial Insurance",
-    icon: <Briefcase size={32} />,
-    color: "#ef1c1f", // Sunset Red
+    name: 'Commercial Insurance',
+    icon: Briefcase,
+    accent: tokens.brandDeep,
     plans: [
-      "United Health",
-      "UMR",
-      "Aetna Homelink",
-      "Blue Cross Carecentrix",
-      "Cigna",
-    ]
+      'United Health',
+      'UMR',
+      'Aetna Homelink',
+      'Blue Cross Carecentrix',
+      'Cigna',
+    ],
   },
   {
-    name: "Other Options",
-    icon: <Heart size={32} />,
-    color: "#ff8f00", // Deep Amber (Darker than #fee301 for white text readability)
+    name: 'Other Options',
+    icon: Heart,
+    accent: tokens.inkSoft,
     plans: [
-      "Private Pay",
-      "Long-term Care Insurance",
-      "Haven Hospice (for PT only)",
-    ]
+      'Private Pay',
+      'Long-term Care Insurance',
+      'Haven Hospice (for PT only)',
+    ],
   },
 ];
 
 const InsuranceList = () => {
-    return (
-      <ListWrapper>
-        <motion.h2 {...fadeUpProps()}>
-          Accepted Insurance Plans
-        </motion.h2>
-        <CategoryGrid>
-          {insuranceCategories.map((category, index) => (
-            <CategoryCard
-              key={index}
-              {...fadeUpProps(staggerDelay(index))}
-            >
-              <CategoryHeader style={{ backgroundColor: category.color }}>
-                {category.icon}
+  return (
+    <ListWrapper>
+      <SectionHeader
+        eyebrow="Accepted Plans"
+        title="Insurance We Accept"
+        subtitle="We partner with major providers across Medicare, commercial, and private pay options."
+      />
+      <CategoryGrid>
+        {insuranceCategories.map((category, index) => {
+          const Icon = category.icon;
+          return (
+            <CategoryCard key={category.name} {...fadeUpProps(staggerDelay(index))}>
+              <CategoryHeader $accent={category.accent}>
+                <Icon size={24} />
                 <CategoryName>{category.name}</CategoryName>
               </CategoryHeader>
               <PlanList>
-                {category.plans.map((plan, planIndex) => (
-                  <motion.li
-                    key={planIndex}
-                    {...fadeUpProps(staggerDelay(index) + planIndex * 0.05)}
-                  >
-                    {plan}
-                  </motion.li>
+                {category.plans.map((plan) => (
+                  <li key={plan}>{plan}</li>
                 ))}
               </PlanList>
             </CategoryCard>
-          ))}
-        </CategoryGrid>
-      </ListWrapper>
-    );
-  };
+          );
+        })}
+      </CategoryGrid>
+    </ListWrapper>
+  );
+};
 
 const ListWrapper = styled.section`
-  margin-bottom: 4rem;
-  font-family: 'Poppins', sans-serif;
-  padding: 0 2rem;
-
-  h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 4rem;
-    margin-top: 2rem;
-    text-align: center;
-    position: relative;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background-color: #ff5722;
-    }
-  }
-
-  @media (max-width: 768px) {
-    margin-bottom: 3rem;
-    padding: 0 1rem;
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 3rem;
-      margin-top: 1.5rem;
-
-      &::after {
-        width: 80px;
-        height: 2px;
-        bottom: -8px;
-      }
-    }
-  }
-
-  @media (max-width: 480px) {
-    margin-bottom: 2rem;
-    padding: 0 0.75rem;
-
-    h2 {
-      font-size: 1.75rem;
-      margin-bottom: 2.5rem;
-      margin-top: 1.25rem;
-
-      &::after {
-        width: 70px;
-      }
-    }
-  }
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+  font-family: ${tokens.font};
 `;
 
 const CategoryGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
+  gap: 1.5rem;
+  max-width: ${tokens.maxW};
   margin: 0 auto;
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-  }
-
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
 `;
 
 const CategoryCard = styled(motion.div)`
-  background-color: #fff;
-  border-radius: 12px;
+  background: ${tokens.surface};
+  border-radius: ${tokens.rLg}px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: ${tokens.shadowSm};
+  border: 1px solid ${tokens.hairline};
+  transition: transform ${tokens.dur.fast}s ease, box-shadow ${tokens.dur.fast}s ease;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  @media (max-width: 768px) {
-    border-radius: 10px;
-
-    &:hover {
-      transform: translateY(-3px);
-    }
-  }
-
-  @media (max-width: 480px) {
-    border-radius: 8px;
+    transform: translateY(-4px);
+    box-shadow: ${tokens.shadowMd};
   }
 `;
 
 const CategoryHeader = styled.div`
   display: flex;
   align-items: center;
-  padding: 1rem;
-  color: white;
-  align-items: baseline;
+  gap: 0.75rem;
+  padding: 1.125rem 1.25rem;
+  background: ${({ $accent }) => $accent};
+  color: ${tokens.surface};
 
   svg {
-    margin-right: 1rem;
-    transform: translateY(8px);
     flex-shrink: 0;
-  }
-
-  @media (max-width: 768px) {
-    padding: 0.875rem;
-
-    svg {
-      width: 28px;
-      height: 28px;
-      margin-right: 0.875rem;
-      transform: translateY(6px);
-    }
-  }
-
-  @media (max-width: 480px) {
-    padding: 0.75rem;
-
-    svg {
-      width: 26px;
-      height: 26px;
-      margin-right: 0.75rem;
-      transform: translateY(5px);
-    }
   }
 `;
 
 const CategoryName = styled.h3`
-  font-size: 1.2rem;
+  font-size: ${tokens.fs.md};
   font-weight: 600;
-  line-height: 1.3;
-
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.05rem;
-  }
+  line-height: ${tokens.lh.snug};
+  margin: 0;
 `;
 
 const PlanList = styled.ul`
-  list-style-type: none;
-  padding: 1.5rem;
+  list-style: none;
+  padding: 1.25rem;
   margin: 0;
 
   li {
-    font-size: 1rem;
-    color: #333;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #f0f0f0;
-    line-height: 1.4;
+    font-size: ${tokens.fs.sm};
+    color: ${tokens.inkSoft};
+    padding: 0.55rem 0;
+    border-bottom: 1px solid ${tokens.hairline};
+    line-height: ${tokens.lh.base};
 
     &:last-child {
       border-bottom: none;
-    }
-  }
-
-  @media (max-width: 768px) {
-    padding: 1.25rem;
-
-    li {
-      font-size: 0.95rem;
-      padding: 0.45rem 0;
-    }
-  }
-
-  @media (max-width: 480px) {
-    padding: 1rem;
-
-    li {
-      font-size: 0.9rem;
-      padding: 0.4rem 0;
-      line-height: 1.35;
+      padding-bottom: 0;
     }
   }
 `;

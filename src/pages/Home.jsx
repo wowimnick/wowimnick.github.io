@@ -20,8 +20,8 @@ const Home = () => {
       <RatingsTestimonials />
       <MainContent>
         <OurTeam />
-        <CTASection />
       </MainContent>
+      <CTASection />
     </HomeWrapper>
   );
 };

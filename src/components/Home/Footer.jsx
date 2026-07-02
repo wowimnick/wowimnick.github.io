@@ -1,277 +1,236 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Phone, Mail } from 'lucide-react';
-import { FaLinkedinIn, FaInstagram } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import "@fontsource/poppins";
+import { Phone, Mail } from 'lucide-react';
+import { FaLinkedinIn, FaInstagram, FaFacebookF } from 'react-icons/fa';
+import '@fontsource/poppins';
+import logo from '../../assets/logo.png';
+import { tokens } from '../../styles/tokens';
+
+const serviceLinks = [
+  { to: '/services', label: 'Skilled Nursing' },
+  { to: '/services', label: 'Physical Therapy' },
+  { to: '/services', label: 'Occupational Therapy' },
+  { to: '/services', label: 'Speech Therapy' },
+];
 
 const Footer = () => {
+  const year = new Date().getFullYear();
+
   return (
     <FooterWrapper>
       <FooterContent>
-        <CompanyInfo>
-          <Logo>
-            Confident Care<LogoBreak>of Florida</LogoBreak>
-          </Logo>
-          <Tagline>Quality Care You Can Trust</Tagline>
-          <ContactInfo>
-            <ContactItem>
-              <Phone size={16} />
-              (904) 733-1717
-            </ContactItem>
-            <ContactItem>
-              <Mail size={16} />
-              info@confidentcare.com
-            </ContactItem>
-          </ContactInfo>
-        </CompanyInfo>
-        <QuickLinksSection>
-          <QuickLinksColumn>
-            <QuickLinkTitle>Company</QuickLinkTitle>
-            <QuickLink to="/about-us">About Us</QuickLink>
-            <QuickLink to="/services">Our Services</QuickLink>
-            <QuickLink to="/careers">Careers</QuickLink>
-            <QuickLink to="/locations">Contact</QuickLink>
-          </QuickLinksColumn>
-          <QuickLinksColumn>
-            <QuickLinkTitle>Legal</QuickLinkTitle>
-            <QuickLink to="/privacy-policy">Privacy Policy</QuickLink>
-            <QuickLink to="/terms-of-service">Terms of Service</QuickLink>
-          </QuickLinksColumn>
-        </QuickLinksSection>
+        <Column>
+          <LogoRow>
+            <LogoImage src={logo} alt="Confident Care of Florida Logo" />
+            <LogoText>
+              <span>Confident Care</span>
+              <span>of Florida</span>
+            </LogoText>
+          </LogoRow>
+          <Tagline>Quality home health care you can trust — Medicare-certified and CHAP-accredited across Florida.</Tagline>
+          <SocialRow>
+            <SocialLink href="https://www.linkedin.com/in/confident-care-of-florida-corp-b1b10b70" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <FaLinkedinIn size={16} />
+            </SocialLink>
+            <SocialLink href="https://www.instagram.com/confidentcareflorida/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <FaInstagram size={16} />
+            </SocialLink>
+            <SocialLink href="https://www.facebook.com/confidentcareflorida" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <FaFacebookF size={16} />
+            </SocialLink>
+          </SocialRow>
+        </Column>
+
+        <Column>
+          <ColumnTitle>Quick Links</ColumnTitle>
+          <FooterLink to="/about-us">About Us</FooterLink>
+          <FooterLink to="/services">Our Services</FooterLink>
+          <FooterLink to="/locations">Locations</FooterLink>
+          <FooterLink to="/careers">Careers</FooterLink>
+          <FooterLink to="/insurances">Insurances</FooterLink>
+        </Column>
+
+        <Column>
+          <ColumnTitle>Services</ColumnTitle>
+          {serviceLinks.map((link) => (
+            <FooterLink key={link.label} to={link.to}>{link.label}</FooterLink>
+          ))}
+        </Column>
+
+        <Column>
+          <ColumnTitle>Contact</ColumnTitle>
+          <ContactLink href="tel:+19047331717">
+            <Phone size={15} />
+            (904) 733-1717
+          </ContactLink>
+          <ContactLink href="mailto:info@confidentcare.com">
+            <Mail size={15} />
+            info@confidentcare.com
+          </ContactLink>
+        </Column>
       </FooterContent>
+
       <BottomBar>
-        <Copyright>&copy; 2024 Confident Care of Florida. All rights reserved.</Copyright>
+        <Copyright>&copy; {year} Confident Care of Florida. All rights reserved.</Copyright>
+        <LegalLinks>
+          <FooterLink to="/privacy-policy">Privacy</FooterLink>
+          <FooterLink to="/terms-of-service">Terms</FooterLink>
+        </LegalLinks>
       </BottomBar>
     </FooterWrapper>
   );
 };
 
 const FooterWrapper = styled.footer`
-  background-color: #f8f9fa;
-  color: #333;
-  font-family: 'Poppins', sans-serif;
-  padding: 2rem 0 0;
+  background: ${tokens.surfaceAlt};
+  color: ${tokens.grey};
+  font-family: ${tokens.font};
+  padding-top: clamp(2.5rem, 6vw, 4rem);
+  border-top: 1px solid ${tokens.hairline};
 `;
 
 const FooterContent = styled.div`
-  max-width: 1200px;
+  max-width: ${tokens.maxW};
   margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
+  padding: 0 ${tokens.gutters};
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 2.5rem;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 0 1rem;
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
   }
 
-  @media (max-width: 480px) {
-    padding: 0 0.75rem;
-    gap: 1.5rem;
+  @media (max-width: 540px) {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
   }
 `;
 
-const CompanyInfo = styled.div`
+const Column = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-
-  @media (max-width: 768px) {
-    align-items: center;
-  }
+  gap: 0.65rem;
 `;
 
-const Logo = styled.h2`
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #ef1c1f;
+const LogoRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+`;
+
+const LogoImage = styled.img`
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  flex-shrink: 0;
+`;
+
+const LogoText = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  font-weight: 700;
   line-height: 1.2;
-
-  @media (max-width: 768px) {
-    font-size: 1.35rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.25rem;
-  }
-`;
-
-const LogoBreak = styled.span`
-  display: block;
+  letter-spacing: -0.01em;
+  color: ${tokens.brand};
 `;
 
 const Tagline = styled.p`
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 1rem;
-
-  @media (max-width: 768px) {
-    font-size: 0.85rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.8rem;
-    margin-bottom: 0.875rem;
-  }
+  font-size: ${tokens.fs.sm};
+  line-height: ${tokens.lh.loose};
+  margin: 0.5rem 0 0.75rem;
+  max-width: 280px;
+  color: ${tokens.grey};
 `;
 
-const ContactInfo = styled.div`
+const SocialRow = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.65rem;
+  margin-top: 0.25rem;
+`;
 
-  @media (max-width: 480px) {
-    gap: 0.4rem;
+const SocialLink = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: ${tokens.surface};
+  border: 1px solid ${tokens.hairline};
+  color: ${tokens.inkSoft};
+  transition: all ${tokens.dur.fast}s ease;
+
+  &:hover {
+    background: ${tokens.brand};
+    border-color: ${tokens.brand};
+    color: ${tokens.surface};
+    transform: translateY(-2px);
   }
 `;
 
-const ContactItem = styled.p`
+const ColumnTitle = styled.h4`
+  font-size: ${tokens.fs.sm};
+  font-weight: 600;
+  color: ${tokens.ink};
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.02em;
+`;
+
+const FooterLink = styled(Link)`
+  color: ${tokens.grey};
+  text-decoration: none;
+  font-size: ${tokens.fs.sm};
+  transition: color ${tokens.dur.fast}s ease;
+
+  &:hover {
+    color: ${tokens.brand};
+  }
+`;
+
+const ContactLink = styled.a`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.9rem;
-  color: #666;
-
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.85rem;
-    gap: 0.4rem;
-
-    svg {
-      width: 14px;
-      height: 14px;
-    }
-  }
-`;
-
-const QuickLinksSection = styled.div`
-  display: flex;
-  gap: 2rem;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    justify-content: space-around;
-    gap: 3rem;
-  }
-
-  @media (max-width: 480px) {
-    gap: 2rem;
-  }
-`;
-
-const QuickLinksColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const QuickLinkTitle = styled.h4`
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  color: #ef1c1f;
-
-  @media (max-width: 768px) {
-    font-size: 0.95rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.9rem;
-    margin-bottom: 0.4rem;
-  }
-`;
-
-const QuickLink = styled(Link)`
-  color: #666;
+  color: ${tokens.inkSoft};
   text-decoration: none;
-  margin-bottom: 0.3rem;
-  font-size: 0.9rem;
-  transition: color 0.3s ease;
+  font-size: ${tokens.fs.sm};
+  transition: color ${tokens.dur.fast}s ease;
 
   &:hover {
-    color: #ff5722;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.85rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.8rem;
-    margin-bottom: 0.25rem;
+    color: ${tokens.brand};
   }
 `;
 
 const BottomBar = styled.div`
-  background-color: #f0f0f0;
-  padding: 1rem 2rem;
-  margin-top: 2rem;
+  max-width: ${tokens.maxW};
+  margin: 2.5rem auto 0;
+  padding: 1.25rem ${tokens.gutters};
+  border-top: 1px solid ${tokens.hairline};
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 540px) {
     flex-direction: column;
-    gap: 1rem;
-    padding: 1rem 1rem;
-    margin-top: 1.5rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 0.875rem 0.75rem;
-    margin-top: 1.25rem;
+    align-items: flex-start;
   }
 `;
 
 const Copyright = styled.p`
-  font-size: 0.8rem;
-  color: #666;
+  font-size: ${tokens.fs.xs};
   margin: 0;
-
-  @media (max-width: 480px) {
-    font-size: 0.75rem;
-    text-align: center;
-  }
+  color: ${tokens.greyLight};
 `;
 
-const SocialIcons = styled.div`
+const LegalLinks = styled.div`
   display: flex;
-  gap: 1rem;
-
-  @media (max-width: 480px) {
-    gap: 0.75rem;
-  }
-`;
-
-const SocialIcon = styled.a`
-  color: #fff;
-  background-color: #ef1c1f;
-  padding: 0.5rem;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    background-color: #d11215;
-    transform: translateY(-3px);
-  }
-
-  @media (max-width: 480px) {
-    padding: 0.4rem;
-
-    svg {
-      width: 16px;
-      height: 16px;
-    }
-  }
+  gap: 1.25rem;
 `;
 
 export default Footer;

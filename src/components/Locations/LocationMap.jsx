@@ -17,7 +17,7 @@ L.Icon.Default.mergeOptions({
 });
 
 const LocationMap = ({ locations, selectedLocation, onLocationSelect }) => {
-  const center = [27.6648, -81.5158]; // Center of Florida
+  const center = [27.6648, -81.5158];
   const mapRef = useRef(null);
   const markerRefs = useRef({});
 
@@ -49,15 +49,13 @@ const LocationMap = ({ locations, selectedLocation, onLocationSelect }) => {
 
   return (
     <MapWrapper>
-      <StyledMapContainer 
-        center={center} 
-        zoom={7} 
+      <StyledMapContainer
+        center={center}
+        zoom={7}
         style={{ height: '100%', width: '100%' }}
         attributionControl={false}
       >
-        <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-        />
+        <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
         <MapEvents />
         {locations.map((location) => (
           <Marker
@@ -102,7 +100,6 @@ const MapWrapper = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
 
-  /* Hide Leaflet attribution */
   .leaflet-control-attribution {
     display: none !important;
   }
@@ -123,17 +120,15 @@ const MapWrapper = styled.div`
 `;
 
 const StyledMapContainer = styled(MapContainer)`
-  /* Additional styling to ensure attribution is hidden */
   .leaflet-control-attribution {
     display: none !important;
   }
 
-  /* Adjust popup positioning on mobile to prevent cutoff */
   @media (max-width: 480px) {
     .leaflet-popup {
       margin-bottom: 20px;
     }
-    
+
     .leaflet-popup-content-wrapper {
       border-radius: 6px;
     }
@@ -149,7 +144,7 @@ const PopupContent = styled.div`
     font-family: 'Poppins', sans-serif;
     font-size: 0.95rem;
     margin-bottom: 0.5rem;
-    color: #ff5722;
+    color: #ef1c1f;
     line-height: 1.3;
     word-wrap: break-word;
   }
@@ -204,7 +199,7 @@ const DirectionsButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  background-color: #ff5722;
+  background-color: #ef1c1f;
   color: white;
   border: none;
   padding: 0.45rem 0.875rem;
@@ -218,7 +213,7 @@ const DirectionsButton = styled.button`
   width: 100%;
 
   &:hover {
-    background-color: #e64a19;
+    background-color: #c8161a;
   }
 
   @media (max-width: 480px) {

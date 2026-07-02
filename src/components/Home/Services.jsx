@@ -1,194 +1,131 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Heart, Activity, Puzzle, MessageSquare, UserPlus, Home } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Heart, Activity, Puzzle, MessageSquare, UserPlus, Home, ArrowRight } from 'lucide-react';
 import '@fontsource/poppins';
+import SectionHeader from '../shared/SectionHeader';
+import { tokens } from '../../styles/tokens';
 import { fadeUpProps, staggerDelay } from '../../styles/animations';
 
 const services = [
-  {
-    icon: <Heart size={32} />,
-    title: 'Skilled Nursing',
-    description: 'Professional care from Registered Nurses and Licensed Practical Nurses.',
-  },
-  {
-    icon: <Activity size={32} />,
-    title: 'Physical Therapy',
-    description: 'Improve mobility, strength, and balance with our expert therapists.',
-  },
-  {
-    icon: <Puzzle size={32} />,
-    title: 'Occupational Therapy',
-    description: 'Enhance daily living activities and independence.',
-  },
-  {
-    icon: <MessageSquare size={32} />,
-    title: 'Speech Therapy',
-    description: 'Address communication, swallowing, and cognitive issues.',
-  },
-  {
-    icon: <UserPlus size={32} />,
-    title: 'Medical Social Work',
-    description: 'Access community resources and long-term care assistance.',
-  },
-  {
-    icon: <Home size={32} />,
-    title: 'Home Health Aide',
-    description: 'Personal care services to ensure safety and promote independence.',
-  },
+  { icon: Heart, title: 'Skilled Nursing', description: 'Professional care from Registered Nurses and Licensed Practical Nurses for medication management, wound care, and more.' },
+  { icon: Activity, title: 'Physical Therapy', description: 'Improve mobility, strength, and balance with our expert therapists through customized home exercise programs.' },
+  { icon: Puzzle, title: 'Occupational Therapy', description: 'Enhance daily living activities and independence with fine motor and ADL training.' },
+  { icon: MessageSquare, title: 'Speech Therapy', description: 'Address communication, swallowing, and cognitive issues with skilled speech-language pathologists.' },
+  { icon: UserPlus, title: 'Medical Social Work', description: 'Access community resources, long-term care planning, and emotional support services.' },
+  { icon: Home, title: 'Home Health Aide', description: 'Personal care services including bathing, grooming, and safety monitoring to promote independence.' },
 ];
 
 const HomeServices = () => {
+  const navigate = useNavigate();
+
   return (
     <ServicesWrapper>
-      <motion.h2 {...fadeUpProps()}>
-        Our Comprehensive Services
-      </motion.h2>
+      <SectionHeader
+        eyebrow="What We Do"
+        title="Our Comprehensive Services"
+        subtitle="Skilled home health care delivered with compassion — right where patients feel most comfortable."
+      />
       <ServicesGrid>
-        {services.map((service, index) => (
-          <ServiceCard
-            key={index}
-            {...fadeUpProps(staggerDelay(index))}
-          >
-            <IconWrapper>{service.icon}</IconWrapper>
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-          </ServiceCard>
-        ))}
+        {services.map((service, index) => {
+          const Icon = service.icon;
+          return (
+            <ServiceCard key={service.title} {...fadeUpProps(staggerDelay(index))}>
+              <IconBox><Icon size={22} /></IconBox>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              <LearnMore onClick={() => navigate('/services')}>
+                Learn more <ArrowRight size={14} />
+              </LearnMore>
+            </ServiceCard>
+          );
+        })}
       </ServicesGrid>
     </ServicesWrapper>
   );
 };
 
 const ServicesWrapper = styled.section`
-  padding: 4rem 2rem;
-  font-family: 'Poppins', sans-serif;
-
-  h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #ff5722;
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-
-  @media (max-width: 768px) {
-    padding: 3rem 1rem;
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    padding: 2rem 0.75rem;
-
-    h2 {
-      font-size: 1.75rem;
-      margin-bottom: 1.5rem;
-    }
-  }
+  padding: clamp(3rem, 8vw, 5rem) ${tokens.gutters};
+  font-family: ${tokens.font};
+  background: ${tokens.surface};
 `;
 
 const ServicesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: ${tokens.maxW};
   margin: 0 auto;
 
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 540px) {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
   }
 `;
 
-const ServiceCard = styled(motion.div)`
-  background-color: #fff9f0;
+const ServiceCard = styled(motion.article)`
+  background: ${tokens.surface};
+  border-radius: ${tokens.rLg}px;
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s ease;
+  box-shadow: ${tokens.shadowSm};
+  transition: transform ${tokens.dur.base}s cubic-bezier(${tokens.ease.join(',')}),
+    box-shadow ${tokens.dur.base}s ease;
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
+    box-shadow: ${tokens.shadowMd};
   }
 
   h3 {
-    font-size: 1.2rem;
-    color: #ff5722;
-    margin: 1rem 0;
+    font-size: ${tokens.fs.lg};
+    font-weight: 600;
+    color: ${tokens.ink};
+    margin: 1rem 0 0.5rem;
   }
 
   p {
-    font-size: 1rem;
-    color: #666;
-  }
-
-  @media (max-width: 768px) {
-    padding: 1.75rem;
-
-    h3 {
-      font-size: 1.1rem;
-      margin: 0.875rem 0;
-    }
-
-    p {
-      font-size: 0.95rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    padding: 1.5rem;
-
-    h3 {
-      font-size: 1.05rem;
-      margin: 0.75rem 0;
-    }
-
-    p {
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
+    font-size: ${tokens.fs.sm};
+    color: ${tokens.grey};
+    line-height: ${tokens.lh.base};
+    margin: 0 0 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 `;
 
-const IconWrapper = styled.div`
-  color: #ff5722;
-  background-color: rgba(255, 87, 34, 0.1);
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
+const IconBox = styled.div`
+  width: 56px;
+  height: 56px;
+  border-radius: ${tokens.rMd}px;
+  background: ${tokens.surfaceWarm};
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  color: ${tokens.brand};
+`;
 
-  @media (max-width: 768px) {
-    width: 56px;
-    height: 56px;
+const LearnMore = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  color: ${tokens.brand};
+  font-family: ${tokens.font};
+  font-size: ${tokens.fs.sm};
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
 
-    svg {
-      width: 28px;
-      height: 28px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    width: 52px;
-    height: 52px;
-
-    svg {
-      width: 26px;
-      height: 26px;
-    }
+  &:hover {
+    color: ${tokens.brandDeep};
   }
 `;
 

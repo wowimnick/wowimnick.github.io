@@ -1,102 +1,80 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { tokens } from '../../styles/tokens';
 import { fadeUpProps } from '../../styles/animations';
+
+const HERO_IMAGE =
+  'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80';
 
 const HeroBanner = () => {
   return (
     <HeroBannerWrapper>
-      <Content>
-        <motion.h1 {...fadeUpProps(0, { inView: false })}>
-          Join Our Team
-        </motion.h1>
-        <motion.p {...fadeUpProps(0.2, { inView: false })}>
-          Discover rewarding career opportunities at Confident Care of Florida
-        </motion.p>
-      </Content>
+      <HeroInner>
+        <TextCol>
+          <Eyebrow {...fadeUpProps(0, { inView: false })}>Careers</Eyebrow>
+          <Title {...fadeUpProps(0.1, { inView: false })}>Join Our Team</Title>
+          <Subhead {...fadeUpProps(0.2, { inView: false })}>
+            Discover rewarding career opportunities at Confident Care of Florida.
+          </Subhead>
+        </TextCol>
+      </HeroInner>
     </HeroBannerWrapper>
   );
 };
 
-const HeroBannerWrapper = styled.div`
-  background-image: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
+const HeroBannerWrapper = styled.section`
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.45)),
+    url('${HERO_IMAGE}');
   background-size: cover;
   background-position: center;
-  height: 500px;
+  font-family: ${tokens.font};
+  padding: calc(72px + 4rem) ${tokens.gutters} 4rem;
+  min-height: 420px;
   display: flex;
   align-items: center;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-  }
 
   @media (max-width: 768px) {
-    height: 350px;
-  }
-
-  @media (max-width: 480px) {
-    height: 300px;
+    min-height: 340px;
+    padding: calc(72px + 3rem) ${tokens.gutters} 3rem;
   }
 `;
 
-const Content = styled.div`
-  max-width: 1200px;
+const HeroInner = styled.div`
+  max-width: ${tokens.maxW};
   margin: 0 auto;
-  padding: 2rem;
-  color: white;
-  position: relative;
-  z-index: 1;
   width: 100%;
+`;
 
-  h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-    text-align: center;
-  }
+const TextCol = styled.div`
+  max-width: 640px;
+`;
 
-  p {
-    font-size: 1.2rem;
-    max-width: 600px;
-    text-align: center;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
+const Eyebrow = styled(motion.span)`
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: ${tokens.gold};
+  margin-bottom: 0.75rem;
+`;
 
-  @media (max-width: 768px) {
-    padding: 1.5rem 1rem;
+const Title = styled(motion.h1)`
+  font-size: clamp(2rem, 5vw, ${tokens.fs.h1});
+  font-weight: 700;
+  color: ${tokens.surface};
+  line-height: ${tokens.lh.tight};
+  margin: 0 0 1rem;
+`;
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0.75rem;
-    }
-
-    p {
-      font-size: 1.1rem;
-      line-height: 1.5;
-    }
-  }
-
-  @media (max-width: 480px) {
-    padding: 1rem 0.75rem;
-
-    h1 {
-      font-size: 1.75rem;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      font-size: 1rem;
-      line-height: 1.4;
-    }
-  }
+const Subhead = styled(motion.p)`
+  font-size: ${tokens.fs.lg};
+  color: rgba(255, 255, 255, 0.85);
+  line-height: ${tokens.lh.loose};
+  max-width: 560px;
+  margin: 0;
 `;
 
 export default HeroBanner;

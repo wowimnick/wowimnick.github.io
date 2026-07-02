@@ -1,77 +1,63 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { Star } from 'lucide-react';
 import '@fontsource/poppins';
+import { tokens } from '../../styles/tokens';
 import { fadeUpProps } from '../../styles/animations';
+import AccushieldBadge from '../shared/AccushieldBadge';
 
 const QualityRating = () => {
-  const rating = 5;
-
   return (
     <RatingWrapper>
-      <ContentContainer>
-        <motion.div {...fadeUpProps()}>
-          <RatingContainer>
-            <StarContainer>
-              {[...Array(5)].map((_, index) => (
-                <Star key={index}>★</Star>
-              ))}
-            </StarContainer>
-            <RatingText>{rating}.0</RatingText>
-            <SubText>Medicare Quality Rating • All 5 Offices</SubText>
-          </RatingContainer>
-        </motion.div>
-      </ContentContainer>
+      <motion.div {...fadeUpProps()}>
+        <RatingValue>5.0</RatingValue>
+        <StarRow>
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} size={28} fill={tokens.gold} stroke={tokens.gold} />
+          ))}
+        </StarRow>
+        <SubText>Medicare Quality Rating · all 5 offices</SubText>
+        <BadgeRow>
+          <AccushieldBadge size="sm" />
+        </BadgeRow>
+      </motion.div>
     </RatingWrapper>
   );
 };
 
 const RatingWrapper = styled.section`
-  width: 100%;
-  font-family: 'Poppins', sans-serif;
-  padding: 3rem 0 2.5rem 0;
-  border-bottom: 1px solid #e8eaed;
+  font-family: ${tokens.font};
+  padding: clamp(3rem, 8vw, 5rem) ${tokens.gutters};
+  text-align: center;
+  background: ${tokens.surface};
 `;
 
-const ContentContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-
-  @media (max-width: 768px) {
-    padding: 0 1rem;
-  }
-`;
-
-const RatingContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-`;
-
-const StarContainer = styled.div`
-  display: flex;
-  gap: 4px;
-`;
-
-const Star = styled.div`
-  font-size: 2rem;
-  color: #fee301;
-  line-height: 1;
-`;
-
-const RatingText = styled.span`
-  font-size: 2.5rem;
+const RatingValue = styled.div`
+  font-size: clamp(3.5rem, 10vw, ${tokens.fs.display});
   font-weight: 700;
-  color: #1a1a1a;
-  line-height: 1;
+  color: ${tokens.ink};
+  line-height: ${tokens.lh.tight};
+  margin-bottom: 0.75rem;
 `;
 
-const SubText = styled.span`
-  font-size: 0.95rem;
-  color: #5f6368;
-  font-weight: 400;
+const StarRow = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+`;
+
+const SubText = styled.p`
+  font-size: ${tokens.fs.md};
+  color: ${tokens.grey};
+  margin: 0;
+`;
+
+const BadgeRow = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
 `;
 
 export default QualityRating;

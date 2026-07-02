@@ -4,8 +4,8 @@ import withPageTransition from '../components/withPageTransition';
 import LocationsHero from '../components/Locations/LocationsHero';
 import LocationsList from '../components/Locations/LocationList';
 import LocationMap from '../components/Locations/LocationMap';
-import locations from '../components/Locations/locationData'
-import 'leaflet/dist/leaflet.js';
+import locations from '../components/Locations/locationData';
+import { tokens } from '../styles/tokens';
 import 'leaflet/dist/leaflet.css';
 
 const Locations = () => {
@@ -15,10 +15,6 @@ const Locations = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleLocationSelect = (location) => {
-    setSelectedLocation(location);
-  };
-
   return (
     <LocationsWrapper>
       <LocationsHero />
@@ -27,12 +23,12 @@ const Locations = () => {
           <LocationsList
             locations={locations}
             selectedLocation={selectedLocation}
-            onLocationSelect={handleLocationSelect}
+            onLocationSelect={setSelectedLocation}
           />
           <LocationMap
             locations={locations}
             selectedLocation={selectedLocation}
-            onLocationSelect={handleLocationSelect}
+            onLocationSelect={setSelectedLocation}
           />
         </LocationsContent>
       </ContentContainer>
@@ -41,17 +37,13 @@ const Locations = () => {
 };
 
 const LocationsWrapper = styled.div`
-  font-family: 'Poppins', sans-serif;
+  font-family: ${tokens.font};
 `;
 
 const ContentContainer = styled.div`
-  max-width: 1200px;
-  margin: 5rem auto;
-  padding: 1rem;
-
-  @media (min-width: 768px) {
-    padding: 2rem;
-  }
+  max-width: ${tokens.maxW};
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) ${tokens.gutters};
 `;
 
 const LocationsContent = styled.div`
@@ -62,6 +54,7 @@ const LocationsContent = styled.div`
   @media (min-width: 768px) {
     flex-direction: row;
     gap: 2rem;
+    align-items: flex-start;
   }
 `;
 

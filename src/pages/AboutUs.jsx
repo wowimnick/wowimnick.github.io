@@ -23,10 +23,7 @@ const AboutUs = () => {
 
         <MissionStatement />
       </ContentContainer>
-      
-      <ContentContainer>
-        <ContactCTA />
-      </ContentContainer>
+      <ContactCTA />
     </AboutUsWrapper>
   );
 };

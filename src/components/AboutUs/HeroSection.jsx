@@ -1,92 +1,82 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { tokens } from '../../styles/tokens';
 import { fadeUpProps } from '../../styles/animations';
+
+const HERO_IMAGE =
+  'https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80';
 
 const HeroSection = () => {
   return (
     <HeroWrapper>
-      <HeroContent>
-        <motion.h1 {...fadeUpProps(0, { inView: false })}>
-          About Us
-        </motion.h1>
-        <motion.p {...fadeUpProps(0.2, { inView: false })}>
-          Founded in 2001, we've grown to 5 offices covering 10 counties. 
-        </motion.p>
-      </HeroContent>
+      <HeroInner>
+        <TextCol>
+          <Eyebrow {...fadeUpProps(0, { inView: false })}>Since 2001</Eyebrow>
+          <Title {...fadeUpProps(0.1, { inView: false })}>
+            Caring for Florida,<br />one home at a time.
+          </Title>
+          <Subhead {...fadeUpProps(0.2, { inView: false })}>
+            Founded in 2001, we&apos;ve grown to 5 offices covering 10 counties — bringing skilled, compassionate care to families across the state.
+          </Subhead>
+        </TextCol>
+      </HeroInner>
     </HeroWrapper>
   );
 };
 
-const HeroWrapper = styled.div`
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
+const HeroWrapper = styled.section`
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.45)),
+    url('${HERO_IMAGE}');
   background-size: cover;
   background-position: center;
-  height: 500px;
+  font-family: ${tokens.font};
+  padding: calc(72px + 4rem) ${tokens.gutters} 4rem;
+  min-height: 420px;
   display: flex;
   align-items: center;
-  position: relative;
 
   @media (max-width: 768px) {
-    height: 350px;
-  }
-
-  @media (max-width: 480px) {
-    height: 300px;
+    min-height: 340px;
+    padding: calc(72px + 3rem) ${tokens.gutters} 3rem;
   }
 `;
 
-const HeroContent = styled.div`
-  max-width: 1200px;
+const HeroInner = styled.div`
+  max-width: ${tokens.maxW};
   margin: 0 auto;
-  padding: 2rem;
-  color: white;
-  position: relative;
-  z-index: 1;
   width: 100%;
+`;
 
-  h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-    text-align: center;
-  }
+const TextCol = styled.div`
+  max-width: 640px;
+`;
 
-  p {
-    font-size: 1.2rem;
-    max-width: 600px;
-    line-height: 1.6;
-    text-align: center;
-    margin: 0 auto;
-  }
+const Eyebrow = styled(motion.span)`
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: ${tokens.gold};
+  margin-bottom: 0.75rem;
+`;
 
-  @media (max-width: 768px) {
-    padding: 1.5rem 1rem;
+const Title = styled(motion.h1)`
+  font-size: clamp(2rem, 5vw, ${tokens.fs.h1});
+  font-weight: 700;
+  color: ${tokens.surface};
+  line-height: ${tokens.lh.tight};
+  margin: 0 0 1rem;
+`;
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0.75rem;
-    }
-
-    p {
-      font-size: 1.1rem;
-      line-height: 1.5;
-    }
-  }
-
-  @media (max-width: 480px) {
-    padding: 1rem 0.75rem;
-
-    h1 {
-      font-size: 1.75rem;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      font-size: 1rem;
-      line-height: 1.4;
-    }
-  }
+const Subhead = styled(motion.p)`
+  font-size: ${tokens.fs.lg};
+  color: rgba(255, 255, 255, 0.85);
+  line-height: ${tokens.lh.loose};
+  max-width: 520px;
+  margin: 0;
 `;
 
 export default HeroSection;

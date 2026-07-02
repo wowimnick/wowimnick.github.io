@@ -1,62 +1,125 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, CheckCircle, MapPin } from 'lucide-react';
-import { Drawer } from 'vaul';
-import { 
-  Modal, 
-  Form, 
-  DatePicker, 
-  Radio, 
-  Button, 
-  Input, 
-  Select, 
-  message, 
-  ConfigProvider,
-  Typography,
-  Row,
-  Col,
-  Divider
-} from 'antd';
-import { locations } from '../Locations/locationData';
-import { theme } from '../../styles/theme';
-import {
-  carouselFadeTransition,
-  carouselFadeVariants,
-  fadeUpProps,
-} from '../../styles/animations';
+import { useNavigate } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import '@fontsource/poppins';
+import { useReferralModal } from '../../context/ReferralModalContext';
+import { tokens } from '../../styles/tokens';
+import { fadeUpProps } from '../../styles/animations';
 
-const { Title, Text } = Typography;
-const { Option } = Select;
+const images = [
+  {
+    url: 'https://aihcp.net/main/wp-content/uploads/2024/02/Depositphotos_622838168_S-1-1.jpg',
+    alt: 'Educating family',
+  },
+  {
+    url: 'https://www.northeastspineandsports.com/wp-content/uploads/2021/09/shutterstock_1639731775-scaled.jpg',
+    alt: 'Rehabilitation',
+  },
+];
 
-// Reuse the API URL from ApplicationForm
-const API_URL = "https://ru2dx2s2w8.execute-api.us-east-2.amazonaws.com/default/ConfidentCare-Email";
+const slideVariants = {
+  enter: (direction) => ({ x: direction > 0 ? '100%' : '-100%', opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (direction) => ({ x: direction < 0 ? '100%' : '-100%', opacity: 0 }),
+};
 
-// --- STYLED COMPONENTS (Hero Specific) ---
+const slideTransition = {
+  x: { type: 'tween', duration: 1.2, ease: 'easeInOut' },
+  opacity: { duration: 1.2, ease: 'easeInOut' },
+};
+
+const Hero = () => {
+  const navigate = useNavigate();
+  const { openModal } = useReferralModal();
+  const direction = useRef(1);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      direction.current = 1;
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <HeroWrapper>
+      <AnimatePresence initial={false} custom={direction.current}>
+        <HeroImageWrapper
+          key={currentImageIndex}
+          custom={direction.current}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={slideTransition}
+        >
+          <motion.img
+            src={images[currentImageIndex].url}
+            alt={images[currentImageIndex].alt}
+            initial={{ scale: 1.08 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 10, ease: 'linear' }}
+          />
+          <ImageOverlay />
+        </HeroImageWrapper>
+      </AnimatePresence>
+      <GrainOverlay />
+      <HeroContent>
+        <Eyebrow {...fadeUpProps(0, { inView: false })}>
+          Medicare-Certified · CHAP-Accredited
+        </Eyebrow>
+        <Title {...fadeUpProps(0.1, { inView: false })}>
+          <TitleLine>
+            Compassionate <Accent>care,</Accent>
+          </TitleLine>
+          in the comfort of home.
+        </Title>
+        <Subhead {...fadeUpProps(0.25, { inView: false })}>
+          Confident Care of Florida is your Medicare-certified, CHAP-accredited home health care partner. We bring skilled nursing, occupational, physical, and speech therapy directly to you.
+        </Subhead>
+        <ButtonGroup {...fadeUpProps(0.4, { inView: false })}>
+          <PrimaryBtn onClick={() => openModal()} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+            Refer a Patient <ArrowRight size={18} />
+          </PrimaryBtn>
+          <SecondaryBtn onClick={() => navigate('/services')} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+            Explore Services
+          </SecondaryBtn>
+        </ButtonGroup>
+        <TextLink onClick={() => navigate('/insurances')} {...fadeUpProps(0.5, { inView: false })}>
+          View accepted insurances <ArrowRight size={14} />
+        </TextLink>
+      </HeroContent>
+      <ScrollCue
+        animate={{ opacity: [0.3, 0.8, 0.3] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+      />
+    </HeroWrapper>
+  );
+};
 
 const HeroWrapper = styled.section`
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
-  font-family: 'Poppins', sans-serif;
-  background-color: #000;
+  font-family: ${tokens.font};
+  background-color: ${tokens.ink};
+  padding-top: 72px;
 
   @media (max-width: 768px) {
-    height: auto;
-    min-height: 80vh;
+    min-height: 85vh;
     padding-top: 60px;
   }
 `;
 
 const HeroImageWrapper = styled(motion.div)`
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+  inset: 0;
+  z-index: 0;
 
   img {
     width: 100%;
@@ -67,410 +130,174 @@ const HeroImageWrapper = styled(motion.div)`
 
 const ImageOverlay = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: linear-gradient(
     to right,
-    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.72) 0%,
     rgba(0, 0, 0, 0.5) 50%,
-    rgba(0, 0, 0, 0.3) 100%
+    rgba(0, 0, 0, 0.35) 100%
   );
+`;
+
+const GrainOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 `;
 
 const HeroContent = styled.div`
   position: relative;
   z-index: 2;
-  max-width: 700px;
-  margin-left: 10%;
-  color: #ffffff;
-  padding: 2rem;
-
-  h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-
-    span {
-      color: #fee301;
-    }
-  }
-
-  p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    line-height: 1.6;
-  }
+  max-width: 780px;
+  margin-left: clamp(1.25rem, 10vw, 10%);
+  padding: 2rem ${tokens.gutters} 4rem 0;
+  color: ${tokens.surface};
 
   @media (max-width: 768px) {
+    max-width: 100%;
     margin: 0 auto;
     text-align: center;
-    padding: 2rem 1rem;
-
-    h1 { font-size: 2rem; }
-    p { font-size: 1rem; }
+    padding: 2rem ${tokens.gutters} 5rem;
   }
 `;
 
-const ButtonGroup = styled.div`
+const Eyebrow = styled(motion.span)`
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: ${tokens.gold};
+  margin-bottom: 1.25rem;
+`;
+
+const Title = styled(motion.h1)`
+  font-size: clamp(2rem, 4vw, ${tokens.fs.h1});
+  font-weight: 700;
+  line-height: ${tokens.lh.snug};
+  margin: 0 0 1.25rem;
+`;
+
+const TitleLine = styled.span`
+  display: block;
+
+  @media (min-width: 480px) {
+    white-space: nowrap;
+  }
+`;
+
+const Accent = styled.span`
+  color: ${tokens.brand};
+`;
+
+const Subhead = styled(motion.p)`
+  font-size: ${tokens.fs.lg};
+  line-height: ${tokens.lh.loose};
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 540px;
+  margin: 0 0 2rem;
+
+  @media (max-width: 768px) {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: ${tokens.fs.md};
+  }
+`;
+
+const ButtonGroup = styled(motion.div)`
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
+
   @media (max-width: 768px) {
+    justify-content: center;
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
 `;
 
-const ButtonBase = styled(motion.button)`
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 50px;
-  cursor: pointer;
-  display: flex;
+const PrimaryBtn = styled(motion.button)`
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.3s ease;
-  font-family: 'Poppins', sans-serif;
-  
+  background: ${tokens.brand};
+  color: ${tokens.surface};
+  border: none;
+  border-radius: ${tokens.rPill}px;
+  padding: 0.85rem 1.5rem;
+  font-family: ${tokens.font};
+  font-size: ${tokens.fs.md};
+  font-weight: 600;
+  cursor: pointer;
+
   @media (max-width: 768px) {
     width: 100%;
-    max-width: 280px;
+    max-width: 300px;
     justify-content: center;
   }
-`;
 
-const PrimaryButton = styled(ButtonBase)`
-  background-color: #ef1c1fad;
-  color: white;
-  border: none;
-`;
-
-const SecondaryButton = styled(ButtonBase)`
-  background-color: transparent;
-  color: white;
-  border: 2px solid white;
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background: ${tokens.brandDeep};
   }
 `;
 
-// --- VAUL DRAWER STYLES ---
+const SecondaryBtn = styled(motion.button)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: ${tokens.surface};
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: ${tokens.rPill}px;
+  padding: 0.85rem 1.5rem;
+  font-family: ${tokens.font};
+  font-size: ${tokens.fs.md};
+  font-weight: 600;
+  cursor: pointer;
 
-const DrawerOverlay = styled(Drawer.Overlay)`
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 999;
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
 `;
 
-const DrawerContent = styled(Drawer.Content)`
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  height: 90vh;
-  margin-top: 24px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  outline: none;
+const TextLink = styled(motion.button)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: ${tokens.font};
+  font-size: ${tokens.fs.sm};
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 1.25rem;
+  padding: 0;
+
+  &:hover {
+    color: ${tokens.surface};
+  }
 `;
 
-const DrawerHandle = styled.div`
-  width: 40px;
-  height: 6px;
-  background-color: #e5e7eb;
-  border-radius: 9999px;
-  margin: 16px auto;
-  flex-shrink: 0;
+const ScrollCue = styled(motion.div)`
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 2;
 `;
-
-const ScrollableContainer = styled.div`
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-  padding-bottom: 40px;
-`;
-
-const images = [
-  { url: "https://aihcp.net/main/wp-content/uploads/2024/02/Depositphotos_622838168_S-1-1.jpg", alt: "Educating family" },
-  { url: "https://www.northeastspineandsports.com/wp-content/uploads/2021/09/shutterstock_1639731775-scaled.jpg", alt: "Rehabilitation" },
-];
-
-// --- MAIN COMPONENT ---
-
-const Hero = () => {
-  const [form] = Form.useForm();
-  const ref = useRef(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  
-  // Modal State
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Responsive Helper
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.matchMedia('(max-width: 768px)').matches);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  // Carousel Logic
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % images.length);
-    }, 10000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Scroll Locking Logic
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isModalOpen]);
-
-  const openModal = () => setIsModalOpen(true);
-  
-  const closeModal = () => {
-    setIsModalOpen(false);
-    form.resetFields();
-  };
-
-  const navigateToInsurances = () => {
-    window.location.href = '/insurances';
-  };
-
-  // --- SUBMISSION LOGIC ---
-
-  const onFinish = async (values) => {
-    setIsSubmitting(true);
-    
-    try {
-      const selectedLocation = locations.find(loc => loc.id === values.locationId);
-      const targetEmail = selectedLocation ? selectedLocation.email : null;
-      const locationName = selectedLocation ? selectedLocation.name : "Unknown Location";
-
-      if (!selectedLocation) {
-        message.error("Please select a valid location.");
-        setIsSubmitting(false);
-        return;
-      }
-
-      const payload = {
-        referral: {
-          ...values,
-          dob: values.dateOfBirth?.format('YYYY-MM-DD'),
-          locationName,
-          targetEmail
-        }
-      };
-
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) throw new Error('Network response was not ok');
-
-      message.success('Referral submitted successfully!');
-      closeModal();
-
-    } catch (error) {
-      console.error('Error submitting referral:', error);
-      message.error('Failed to submit. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  // Reusable Form Content
-  const renderFormContent = () => (
-    <>
-      <Text type="secondary" style={{ display: 'block', marginBottom: 20 }}>
-        Enter the patient's details below to start the intake process.
-      </Text>
-
-      <Form 
-        form={form} 
-        layout="vertical" 
-        onFinish={onFinish}
-        initialValues={{ doctorOrder: 'yes' }}
-      >
-        <Title level={5} style={{ marginTop: 0, color: '#ff5722' }}>Patient Details</Title>
-        <Row gutter={16}>
-          <Col xs={24} sm={12}>
-            <Form.Item name="firstName" label="First Name" rules={[{ required: true }]}>
-              <Input placeholder="Jane" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} sm={12}>
-            <Form.Item name="lastName" label="Last Name" rules={[{ required: true }]}>
-              <Input placeholder="Doe" />
-            </Form.Item>
-          </Col>
-        </Row>
-
-        <Row gutter={16}>
-          <Col xs={24} sm={12}>
-            <Form.Item name="dateOfBirth" label="Date of Birth" rules={[{ required: true }]}>
-              <DatePicker style={{ width: '100%' }} format="YYYY-MM-DD" placeholder="Select Date" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} sm={12}>
-            <Form.Item name="locationId" label="Preferred Location" rules={[{ required: true }]}>
-              <Select placeholder="Select Office" suffixIcon={<MapPin size={14} />}>
-                {locations.map(loc => (
-                  <Option key={loc.id} value={loc.id}>{loc.name}</Option>
-                ))}
-              </Select>
-            </Form.Item>
-          </Col>
-        </Row>
-
-        <Divider style={{ margin: '10px 0 20px' }} />
-        
-        <Title level={5} style={{ color: '#ff5722' }}>Insurance & Contact</Title>
-
-        <Form.Item name="insuranceName" label="Insurance Provider" rules={[{ required: true }]}>
-          <Input placeholder="e.g. Blue Cross Blue Shield" />
-        </Form.Item>
-
-        <Form.Item name="insuranceNumber" label="Insurance Policy Number">
-          <Input placeholder="Policy ID (Optional)" />
-        </Form.Item>
-
-        <Form.Item name="doctorOrder" label="Do you have a doctor's order?">
-          <Radio.Group buttonStyle="solid">
-            <Radio.Button value="yes">Yes</Radio.Button>
-            <Radio.Button value="no">No</Radio.Button>
-            <Radio.Button value="notSure">Not Sure</Radio.Button>
-          </Radio.Group>
-        </Form.Item>
-
-        <Row gutter={16}>
-          <Col xs={24} sm={12}>
-            <Form.Item name="phoneNumber" label="Phone Number" rules={[{ required: true }]}>
-              <Input type="tel" placeholder="(555) 555-5555" />
-            </Form.Item>
-          </Col>
-          <Col xs={24} sm={12}>
-            <Form.Item name="email" label="Email Address" rules={[{ required: true, type: 'email' }]}>
-              <Input placeholder="jane@example.com" />
-            </Form.Item>
-          </Col>
-        </Row>
-
-        <div style={{ marginTop: 20 }}>
-          <Button type="primary" htmlType="submit" block loading={isSubmitting} size="large">
-            Send Referral
-          </Button>
-        </div>
-      </Form>
-    </>
-  );
-
-  return (
-    <HeroWrapper ref={ref}>
-      {/* Background Carousel */}
-      <AnimatePresence initial={false}>
-        <HeroImageWrapper
-          key={currentImageIndex}
-          variants={carouselFadeVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={carouselFadeTransition}
-        >
-          <motion.img
-            src={images[currentImageIndex].url}
-            alt={images[currentImageIndex].alt}
-            initial={{ scale: 1.05 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 10, ease: 'easeOut' }}
-          />
-          <ImageOverlay />
-        </HeroImageWrapper>
-      </AnimatePresence>
-
-      {/* Hero Text Content */}
-      <HeroContent>
-        <motion.h1 {...fadeUpProps(0.2, { inView: false })}>
-          Compassionate Care<br />
-          <span>in the Comfort <br />of Your Own Home</span>
-        </motion.h1>
-        <motion.p {...fadeUpProps(0.4, { inView: false })}>
-          Confident Care of Florida is your Medicare-certified, CHAP-accredited home health care partner. We bring skilled nursing, occupational, physical, and speech therapy directly to you.
-        </motion.p>
-        <ButtonGroup>
-          <PrimaryButton
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={openModal}
-          >
-            Refer a Patient <ArrowRight size={20} />
-          </PrimaryButton>
-          <SecondaryButton
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={navigateToInsurances}
-          >
-            Insurances
-          </SecondaryButton>
-        </ButtonGroup>
-      </HeroContent>
-
-      <ConfigProvider theme={theme}>
-        {isMobile ? (
-          // --- MOBILE DRAWER (VAUL) ---
-          <Drawer.Root open={isModalOpen} onOpenChange={setIsModalOpen} shouldScaleBackground>
-            <Drawer.Portal>
-              <DrawerOverlay />
-              <DrawerContent>
-                <DrawerHandle />
-                <div style={{ padding: '0 20px 10px 20px', borderBottom: '1px solid #f0f0f0' }}>
-                  <Title level={4} style={{ margin: 0 }}>Refer a Patient</Title>
-                </div>
-                <ScrollableContainer>
-                  {renderFormContent()}
-                </ScrollableContainer>
-              </DrawerContent>
-            </Drawer.Portal>
-          </Drawer.Root>
-        ) : (
-          // --- DESKTOP MODAL (ANTD) ---
-          <Modal
-            title={<div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>Refer a Patient</div>}
-            open={isModalOpen}
-            onCancel={closeModal}
-            footer={null}
-            width={600}
-            centered
-            destroyOnClose
-            maskClosable={false}
-            style={{ top: 20 }}
-          >
-            {renderFormContent()}
-          </Modal>
-        )}
-      </ConfigProvider>
-    </HeroWrapper>
-  );
-};
 
 export default Hero;

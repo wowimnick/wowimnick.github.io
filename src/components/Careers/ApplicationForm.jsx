@@ -229,13 +229,6 @@ const ApplicationForm = () => {
         setCurrentStep(currentStep + 1);
         scrollToFormTop();
       } else {
-        console.log("%c 🔍 DATA CHECK - VERIFYING STEP 1 & 2 PRESERVATION", "background: #222; color: #bada55; font-size: 14px; padding: 5px;");
-        console.log("Step 1 (Personal) Name:", accumulatedData.name || "❌ MISSING");
-        console.log("Step 1 (Personal) Email:", accumulatedData.email || "❌ MISSING");
-        console.log("Step 2 (Position) Job:", accumulatedData.position || "❌ MISSING");
-        console.log("Step 3 (History) Ref:", accumulatedData.referenceName || "❌ MISSING");
-        console.log("FULL PAYLOAD READY FOR MODAL:", accumulatedData);
-
         setShowAttestationModal(true);
       }
     } catch (error) {

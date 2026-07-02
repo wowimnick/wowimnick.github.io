@@ -3,80 +3,46 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { collapseTransition, fadeUpInitial, fadeUpAnimate, fadeUpTransition } from '../../styles/animations';
 import '@fontsource/poppins';
-import { Heart, Activity, Puzzle, MessageSquare, Home, UserPlus, ChevronDown, ChevronUp } from 'lucide-react';
+import { Heart, Activity, Puzzle, MessageSquare, Home, UserPlus, Plus } from 'lucide-react';
+import SectionHeader from '../shared/SectionHeader';
+import { tokens } from '../../styles/tokens';
 
 const services = [
   {
-    icon: <Heart size={32} />,
+    icon: Heart,
     title: 'Skilled Nursing',
     description: 'Registered Nurses and Licensed Practical Nurses assist with medication management, perform wound care, IV care, and much more.',
-    details: [
-      'Comprehensive medication management and administration',
-      'Advanced wound, catheter, and ostomy care',
-      'IV therapy and infusion services',
-      'Chronic disease management and patient education',
-      'Post-surgical care and recovery support'
-    ]
+    details: ['Comprehensive medication management and administration', 'Advanced wound, catheter, and ostomy care', 'IV therapy and infusion services', 'Chronic disease management and patient education', 'Post-surgical care and recovery support'],
   },
   {
-    icon: <Activity size={32} />,
+    icon: Activity,
     title: 'Physical Therapy',
     description: 'Our therapists establish home exercise programs, improve functional ability, balance, strength, and conditioning.',
-    details: [
-      'Customized home exercise programs for rehabilitation',
-      'Balance and coordination improvement techniques',
-      'Strength training and muscle conditioning',
-      'Pain management strategies and therapies',
-      'Mobility enhancement and gait training'
-    ]
+    details: ['Customized home exercise programs for rehabilitation', 'Balance and coordination improvement techniques', 'Strength training and muscle conditioning', 'Pain management strategies and therapies', 'Mobility enhancement and gait training'],
   },
   {
-    icon: <Puzzle size={32} />,
+    icon: Puzzle,
     title: 'Occupational Therapy',
     description: 'Certified OTs and COTAs improve fine motor movements, coordination, and assist with improving activities of daily living (ADLs).',
-    details: [
-      'Fine motor skills development and hand therapy',
-      'Coordination enhancement exercises',
-      'ADL training for increased independence',
-      'Lymphedema and compression therapy',
-      'Adaptive equipment recommendations and usage training'
-    ]
+    details: ['Fine motor skills development and hand therapy', 'Coordination enhancement exercises', 'ADL training for increased independence', 'Lymphedema and compression therapy', 'Adaptive equipment recommendations and usage training'],
   },
   {
-    icon: <MessageSquare size={32} />,
+    icon: MessageSquare,
     title: 'Speech Therapy',
     description: 'Highly-trained speech therapists and pathologists evaluate speech and swallowing, and improve communication and cognitive function.',
-    details: [
-      'Comprehensive speech and language evaluations',
-      'Swallowing assessments and therapy',
-      'Communication skills improvement strategies',
-      'Cognitive function enhancement exercises',
-      'Voice therapy and rehabilitation'
-    ]
+    details: ['Comprehensive speech and language evaluations', 'Swallowing assessments and therapy', 'Communication skills improvement strategies', 'Cognitive function enhancement exercises', 'Voice therapy and rehabilitation'],
   },
   {
-    icon: <UserPlus size={32} />,
+    icon: UserPlus,
     title: 'Medical Social Work',
     description: 'These compassionate individuals assist with obtaining community resources, long-term care, meals, and much more.',
-    details: [
-      'Connection to local community resources and support',
-      'Long-term care planning and advice',
-      'Meal assistance program coordination',
-      'Emotional support and counseling services',
-      'Crisis intervention and management'
-    ]
+    details: ['Connection to local community resources and support', 'Long-term care planning and advice', 'Meal assistance program coordination', 'Emotional support and counseling services', 'Crisis intervention and management'],
   },
   {
-    icon: <Home size={32} />,
+    icon: Home,
     title: 'Home Health Aide',
     description: 'Personal care including showering, bathing, and grooming to ensure safety and promote independence.',
-    details: [
-      'Assisted showering and personal hygiene support',
-      'Safe bathing techniques and assistance',
-      'Grooming and dressing assistance',
-      'Continuous safety monitoring and fall prevention',
-      'Promotion of independence in daily activities'
-    ]
+    details: ['Assisted showering and personal hygiene support', 'Safe bathing techniques and assistance', 'Grooming and dressing assistance', 'Continuous safety monitoring and fall prevention', 'Promotion of independence in daily activities'],
   },
 ];
 
@@ -86,74 +52,76 @@ const ServicesList = () => {
   const [openDropdowns, setOpenDropdowns] = useState({});
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const toggleDropdown = (index) => {
-    setOpenDropdowns(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }));
+    setOpenDropdowns((prev) => ({ ...prev, [index]: !prev[index] }));
     setActiveService(index);
   };
 
   return (
     <ServicesWrapper>
-      <h2>Our Comprehensive Services</h2>
+      <SectionHeader eyebrow="Services" title="Our Comprehensive Services" />
       <ServicesContainer>
         {isMobile ? (
           <MobileContainer>
-            {services.map((service, index) => (
-              <MobileDropdown key={index}>
-                <DropdownButton onClick={() => toggleDropdown(index)}>
-                  <ButtonContent>
-                    <IconWrapper>{service.icon}</IconWrapper>
-                    <span>{service.title}</span>
-                  </ButtonContent>
-                  {openDropdowns[index] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                </DropdownButton>
-                <AnimatePresence>
-                  {openDropdowns[index] && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={collapseTransition}
-                    >
-                      <DropdownContent>
-                        <p>{service.description}</p>
-                        <DetailsList>
-                          {service.details.map((detail, idx) => (
-                            <DetailItem key={idx}>{detail}</DetailItem>
-                          ))}
-                        </DetailsList>
-                      </DropdownContent>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </MobileDropdown>
-            ))}
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              const isOpen = openDropdowns[index];
+              return (
+                <MobileItem key={service.title} $open={isOpen}>
+                  <DropdownButton onClick={() => toggleDropdown(index)}>
+                    <ButtonContent>
+                      <IconWrapper><Icon size={20} /></IconWrapper>
+                      <span>{service.title}</span>
+                    </ButtonContent>
+                    <PlusIcon $open={isOpen}><Plus size={18} /></PlusIcon>
+                  </DropdownButton>
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={collapseTransition}
+                      >
+                        <DropdownContent>
+                          <p>{service.description}</p>
+                          <DetailsList>
+                            {service.details.map((detail) => (
+                              <DetailItem key={detail}>{detail}</DetailItem>
+                            ))}
+                          </DetailsList>
+                        </DropdownContent>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </MobileItem>
+              );
+            })}
           </MobileContainer>
         ) : (
           <>
             <ServiceMenu>
-              {services.map((service, index) => (
-                <ServiceMenuItem
-                  key={index}
-                  onClick={() => setActiveService(index)}
-                  $active={activeService === index}
-                >
-                  <IconWrapper $active={activeService === index}>{service.icon}</IconWrapper>
-                  <ServiceTitle $active={activeService === index}>{service.title}</ServiceTitle>
-                </ServiceMenuItem>
-              ))}
+              {services.map((service, index) => {
+                const Icon = service.icon;
+                return (
+                  <ServiceMenuItem
+                    key={service.title}
+                    onClick={() => setActiveService(index)}
+                    $active={activeService === index}
+                  >
+                    <IconWrapper $active={activeService === index}><Icon size={20} /></IconWrapper>
+                    <ServiceTitle $active={activeService === index}>{service.title}</ServiceTitle>
+                  </ServiceMenuItem>
+                );
+              })}
             </ServiceMenu>
-            <ServiceDetails>
+            <ServiceDetails $open>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeService}
@@ -165,8 +133,8 @@ const ServicesList = () => {
                   <h3>{services[activeService].title}</h3>
                   <p>{services[activeService].description}</p>
                   <DetailsList>
-                    {services[activeService].details.map((detail, index) => (
-                      <DetailItem key={index}>{detail}</DetailItem>
+                    {services[activeService].details.map((detail) => (
+                      <DetailItem key={detail}>{detail}</DetailItem>
                     ))}
                   </DetailsList>
                 </motion.div>
@@ -180,194 +148,128 @@ const ServicesList = () => {
 };
 
 const ServicesWrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 4rem 0;
-  font-family: 'Poppins', sans-serif;
-  padding: 0 2rem;
-
-  h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #ff5722;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  @media (max-width: 768px) {
-    margin: 3rem 0;
-    padding: 0 1rem;
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    margin: 2rem 0;
-    padding: 0 0.75rem;
-
-    h2 {
-      font-size: 1.75rem;
-      margin-bottom: 1.25rem;
-    }
-  }
+  padding: clamp(2rem, 5vw, 4rem) ${tokens.gutters};
+  font-family: ${tokens.font};
+  max-width: ${tokens.maxW};
+  margin: 0 auto;
 `;
 
 const ServicesContainer = styled.div`
   display: flex;
-  gap: 2rem;
-  width: 100%;
-  max-width: 1200px;
-  
-  @media (max-width: 768px) {
-    gap: 0;
-  }
+  gap: 1.5rem;
 `;
 
 const MobileContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+`;
 
-  @media (max-width: 480px) {
-    gap: 0.75rem;
-  }
+const MobileItem = styled.div`
+  border-bottom: 1px solid ${tokens.hairline};
+  background: ${({ $open }) => ($open ? tokens.surfaceWarm : tokens.surface)};
+  border-radius: ${({ $open }) => ($open ? `${tokens.rMd}px` : '0')};
+  box-shadow: ${({ $open }) => ($open ? tokens.shadowSm : 'none')};
+  overflow: hidden;
+  transition: all ${tokens.dur.fast}s ease;
 `;
 
 const ServiceMenu = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.25rem;
   flex: 1;
 `;
 
 const ServiceMenuItem = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: ${props => props.$active ? '#ff5722' : '#fff9f0'};
-  border-radius: 10px;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: ${({ $active }) => ($active ? tokens.surfaceWarm : 'transparent')};
+  border-radius: ${tokens.rMd}px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  border-bottom: 1px solid ${tokens.hairline};
+  transition: all ${tokens.dur.fast}s ease;
 
   &:hover {
-    background-color: ${props => props.$active ? '#ff5722' : '#fff3e0'};
+    background: ${tokens.surfaceAlt};
   }
 `;
 
 const IconWrapper = styled.div`
-  color: ${props => props.$active ? 'white' : '#ff5722'};
-  transition: color 0.3s ease;
+  color: ${({ $active }) => ($active ? tokens.brand : tokens.grey)};
   display: flex;
-  align-items: center;
   flex-shrink: 0;
-
-  @media (max-width: 480px) {
-    svg {
-      width: 24px;
-      height: 24px;
-    }
-  }
 `;
 
 const ServiceTitle = styled.span`
-  font-size: 1.1rem;
-  color: ${props => props.$active ? 'white' : '#333'};
-  transition: color 0.3s ease;
-
-  @media (max-width: 480px) {
-    font-size: 1rem;
-  }
+  font-size: ${tokens.fs.sm};
+  font-weight: 600;
+  color: ${({ $active }) => ($active ? tokens.ink : tokens.inkSoft)};
 `;
 
 const ServiceDetails = styled.div`
   flex: 2;
-  background-color: #fff9f0;
-  border-radius: 10px;
+  background: ${tokens.surfaceWarm};
+  border-radius: ${tokens.rMd}px;
   padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: ${tokens.shadowSm};
 
   h3 {
-    font-size: 1.8rem;
-    color: #ff5722;
-    margin-bottom: 1rem;
-    font-weight: 600;
+    font-size: ${tokens.fs.xl};
+    color: ${tokens.ink};
+    margin: 0 0 0.75rem;
+    font-weight: 700;
   }
 
   p {
-    font-size: 1.1rem;
-    color: #333;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
+    font-size: ${tokens.fs.md};
+    color: ${tokens.grey};
+    line-height: ${tokens.lh.loose};
+    margin: 0 0 1.25rem;
   }
 `;
 
 const DetailsList = styled.ul`
-  list-style-type: none;
+  list-style: none;
   padding: 0;
+  margin: 0;
 `;
 
 const DetailItem = styled.li`
-  font-size: 1rem;
-  color: #333;
-  margin-bottom: 0.75rem;
-  padding-left: 1.5rem;
+  font-size: ${tokens.fs.sm};
+  color: ${tokens.grey};
+  margin-bottom: 0.6rem;
+  padding-left: 1.25rem;
   position: relative;
+  line-height: ${tokens.lh.base};
 
-  &:before {
-    content: '•';
-    color: #ff5722;
-    font-size: 1.2rem;
+  &::before {
+    content: '';
     position: absolute;
     left: 0;
-    top: -2px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.95rem;
-    margin-bottom: 0.65rem;
-    padding-left: 1.25rem;
-    line-height: 1.4;
-  }
-`;
-
-const MobileDropdown = styled.div`
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-  @media (max-width: 480px) {
-    border-radius: 8px;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: ${tokens.brand};
   }
 `;
 
 const DropdownButton = styled.button`
   width: 100%;
   padding: 1rem;
-  background-color: #fff9f0;
-  color: #333;
+  background: transparent;
+  color: ${tokens.ink};
   border: none;
-  font-size: 1.1rem;
+  font-size: ${tokens.fs.md};
+  font-weight: 600;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Poppins', sans-serif;
-
-  &:hover {
-    background-color: #fff3e0;
-  }
-
-  @media (max-width: 480px) {
-    padding: 0.875rem;
-    font-size: 1rem;
-  }
+  font-family: ${tokens.font};
 `;
 
 const ButtonContent = styled.div`
@@ -376,25 +278,21 @@ const ButtonContent = styled.div`
   gap: 0.75rem;
 `;
 
+const PlusIcon = styled.span`
+  color: ${tokens.brand};
+  display: flex;
+  transition: transform ${tokens.dur.fast}s ease;
+  transform: rotate(${({ $open }) => ($open ? '45deg' : '0deg')});
+`;
+
 const DropdownContent = styled.div`
-  background-color: white;
-  padding: 1rem;
+  padding: 0 1rem 1.25rem;
 
   p {
-    font-size: 1rem;
-    color: #333;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 0.875rem;
-
-    p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin-bottom: 0.875rem;
-    }
+    font-size: ${tokens.fs.sm};
+    color: ${tokens.grey};
+    line-height: ${tokens.lh.loose};
+    margin: 0 0 1rem;
   }
 `;
 

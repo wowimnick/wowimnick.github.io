@@ -92,8 +92,8 @@ const HeroSection = styled.div`
   height: 500px;
   display: flex;
   align-items: center;
-  justify-content: center;
   position: relative;
+  padding-top: 72px;
 
   @media (max-width: 768px) {
     height: 350px;
@@ -105,11 +105,10 @@ const HeroSection = styled.div`
 `;
 
 const HeroContent = styled.div`
-  max-width: 1200px;
+  max-width: 1180px;
   margin: 0 auto;
-  text-align: center;
   color: white;
-  padding: 2rem;
+  padding: 2rem clamp(1.25rem, 5vw, 4rem);
   position: relative;
   z-index: 1;
   width: 100%;
@@ -118,12 +117,13 @@ const HeroContent = styled.div`
     font-size: 3rem;
     margin-bottom: 1rem;
     font-weight: 600;
+    max-width: 640px;
   }
 
   p {
     font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 520px;
+    margin: 0;
     line-height: 1.6;
   }
 
@@ -185,7 +185,7 @@ const ContentSection = styled.div`
 
 const SectionTitle = styled.h2`
   font-size: 1.8rem;
-  color: #4a90e2;
+  color: #ef1c1f;
   margin-top: 2rem;
   margin-bottom: 1rem;
 
