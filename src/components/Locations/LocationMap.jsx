@@ -55,7 +55,7 @@ const LocationMap = ({ locations, selectedLocation, onLocationSelect }) => {
         style={{ height: '100%', width: '100%' }}
         attributionControl={false}
       >
-        <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <MapEvents />
         {locations.map((location) => (
           <Marker

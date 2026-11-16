@@ -20,11 +20,11 @@ export const locations = [
   {
     id: 3,
     name: 'West Palm Beach (Palm Beach)',
-    address: '6971 N. Federal Highway Suite 403, Boca Raton, FL 33487',
+    address: '6413 Congress Avenue, Suite 220, Boca Raton, FL 33487',
     phone: '(561) 886-6533',
     fax: '(561) 952-4164',
     email: 'sfoffice@confidentcare.com',
-    coordinates: { lat: 26.4127, lng: -80.0707 }
+    coordinates: { lat: 26.4024183, lng: -80.1025013 }
   },
   {
     id: 4,
